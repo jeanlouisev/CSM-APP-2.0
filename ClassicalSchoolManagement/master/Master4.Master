@@ -1,0 +1,460 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Master3.master.cs" Inherits="ClassicalSchoolManagement.master.Master3" %>
+
+<html lang="en">
+<head>
+    <title>
+        <asp:ContentPlaceHolder ID="TitleContentPlaceHolder" runat="server">
+        </asp:ContentPlaceHolder>
+    </title>
+    
+    <link rel="icon" href="../images/graduation_cap_icon.png">
+
+    <meta name="description" content="">
+    <!-- Twitter meta-->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:site" content="@pratikborsadiya">
+    <meta property="twitter:creator" content="@pratikborsadiya">
+    <!-- Open Graph Meta-->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="CSM">
+    <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
+    <%--<meta property="og:image" content="../images/saphir_logo.jpg">--%>
+    <meta property="og:description" content="">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Main CSS-->
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <!-- Font-icon css-->
+    <link rel="stylesheet" type="text/css" href="../css/Style1.css" />
+    <link rel="stylesheet" type="text/css" href="../bootstrap/css/font-awesome.min.css" />
+</head>
+
+<telerik:RadWindowManager ID="MessageAlert" ShowContentDuringLoad="false" VisibleStatusbar="false"
+    ReloadOnShow="true" BackColor="White" runat="server" EnableShadow="true" Skin="Office2007" DestroyOnClose="false">
+    <Windows>
+        <telerik:RadWindow ID="RadWindow1" runat="server" Modal="true"
+            Skin="Office2007">
+        </telerik:RadWindow>
+    </Windows>
+</telerik:RadWindowManager>
+
+<body class="app sidebar-mini rtl">
+    <form runat="server">
+        <!-- Navbar-->
+        <header class="app-header">
+            <asp:ScriptManager runat="server"></asp:ScriptManager>
+            <a class="app-header__logo" href="../Home.aspx">
+                <h3>CSM</h3>
+                
+                <%--<img runat="server" src="~/images/logoSSM.png" alt="Login-image" width="150" height="50" />--%>
+                <%--<img runat="server" src="~/images/logoSSM.png" alt="Login-image" width="100" height="50" />--%>
+            </a>
+            <!-- Sidebar toggle button-->
+            <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
+            <!-- Navbar Right Menu-->
+            <ul class="app-nav">
+                <span class="app-search">
+                    <asp:Label runat="server" ID="lblWelcomUser" ForeColor="White" Text="xxxxxxxxxxxxxxxxx"></asp:Label>
+                    <%--   <asp:Timer ID="Timer1" runat="server" Interval="1000" OnTick="Timer1_Tick">
+                    </asp:Timer>
+                    <asp:UpdatePanel ID="UpdatePanel1"
+                        runat="server">
+                        <ContentTemplate>
+                            <asp:Label ID="lblClockTicking" runat="server" ForeColor="White" Font-Size="Medium"></asp:Label>
+                            <br />
+                        </ContentTemplate>
+                        <Triggers>
+                            <asp:AsyncPostBackTrigger ControlID="tIMER1" EventName="Tick"></asp:AsyncPostBackTrigger>
+                        </Triggers>
+                    </asp:UpdatePanel>--%>
+                </span>
+                <%--       <li class="app-search">
+                <input class="app-search__input" type="search" placeholder="Search">
+                <button class="app-search__button"><i class="fa fa-search"></i></button>
+            </li>--%>
+                <!--Notification Menu-->
+                <li class="dropdown">
+                    <%--   <a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Show notifications">
+                        <i class="fa fa-bell-o fa-lg text-red"></i><span class="badge badge-light">
+                            <asp:Label runat="server" ID="lblBirthdayBadge"></asp:Label>
+                        </span></a>--%>
+                    <ul class="app-notification dropdown-menu dropdown-menu-right" style="width: 600px;">
+                        <li class="app-notification__title">
+                            <asp:Label runat="server" ID="lblBirthdayCounter"></asp:Label>
+                        </li>
+                        <%--<div class="app-notification__content" style="border: 2px solid red;">--%>
+                        <div class="divBirthDayDesign">
+                            <asp:GridView ID="gridListBirthday" runat="server" AutoGenerateColumns="False"
+                                Style="overflow: auto;" CellPadding="2"
+                                ForeColor="Black" BorderWidth="1px"
+                                AllowPaging="false" Width="100%" DataKeyNames="phone"
+                                OnRowCommand="gridListBirthday_RowCommand"
+                                BackColor="#ffffff" BorderColor="Tan"
+                                GridLines="Both"
+                                OnRowDataBound="gridListBirthday_RowDataBound">
+                                <RowStyle Height="10px" />
+                                <AlternatingRowStyle BackColor="#dfe3ee" />
+                                <Columns>
+                                    <asp:TemplateField HeaderText="No">
+                                        <ItemTemplate>
+                                            <%#Container.DataItemIndex+1%>
+                                        </ItemTemplate>
+                                        <HeaderStyle Width="35px" HorizontalAlign="Center" />
+                                        <ItemStyle HorizontalAlign="Left" Width="35px" />
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="SMS">
+                                        <ItemTemplate>
+                                            <asp:ImageButton runat="server" ImageUrl="~/images/SMS.png"
+                                                ToolTip="Send SMS" ID="btnSendSMS" CommandName="sendSMS"
+                                                Visible='<%# Eval("phone").ToString().Length <= 0 ? false : true %>'
+                                                CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" />
+                                        </ItemTemplate>
+                                        <HeaderStyle Width="35px" HorizontalAlign="Left" />
+                                        <ItemStyle HorizontalAlign="Left" Width="35px" />
+                                    </asp:TemplateField>
+                                    <asp:BoundField DataField="id" HeaderText="CODE">
+                                        <HeaderStyle Width="60px" HorizontalAlign="Left" />
+                                        <ItemStyle HorizontalAlign="Left" Width="60px" />
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="fullname" HeaderText="NOM COMPLET">
+                                        <HeaderStyle Width="200px" HorizontalAlign="Left" />
+                                        <ItemStyle HorizontalAlign="Left" Width="160px" />
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="phone" HeaderText="TELEPHONE">
+                                        <HeaderStyle Width="80px" HorizontalAlign="Left" />
+                                        <ItemStyle HorizontalAlign="Center" Width="160px" />
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="position" HeaderText="POSITION">
+                                        <HeaderStyle Width="80px" HorizontalAlign="Left" />
+                                        <ItemStyle HorizontalAlign="Left" Width="80px" />
+                                    </asp:BoundField>
+                                </Columns>
+                                <FooterStyle BackColor="Tan" Height="30px" HorizontalAlign="Center" />
+                                <HeaderStyle Height="22px" CssClass="gridHeaderDesign" Font-Size="Small" />
+                                <PagerSettings Mode="NumericFirstLast" />
+                                <PagerStyle BackColor="SkyBlue" ForeColor="WhiteSmoke"
+                                    HorizontalAlign="Center" />
+                                <RowStyle Height="5px" Font-Size="Smaller" BorderWidth="0.3" />
+                                <SelectedRowStyle BackColor="Aquamarine" ForeColor="GhostWhite" BorderColor="Silver"
+                                    BorderStyle="None" />
+                                <SortedAscendingCellStyle BackColor="SkyBlue" />
+                                <SortedAscendingHeaderStyle BackColor="#DAC09E" />
+                                <SortedDescendingCellStyle BackColor="#E1DB9C" />
+                                <SortedDescendingHeaderStyle BackColor="#C2A47B" />
+                            </asp:GridView>
+                        </div>
+                        <%--</div>--%>
+                        <li class="app-notification__footer">
+                            <telerik:RadButton runat="server" Text="Envoyer SMS à tous" Skin="Glow"
+                                ID="btnSendSMSToAll" OnClick="btnSendSMSToAll_Click">
+                            </telerik:RadButton>
+                        </li>
+                    </ul>
+                </li>
+                <!-- User Menu-->
+                <li class="dropdown">
+                    <a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu">
+                        <i class="fa fa-user fa-lg text-orange"></i></a>
+                    <ul class="dropdown-menu settings-menu dropdown-menu-right">
+                        <li><a class="dropdown-item" href="../pages/Profile.aspx"><i class="fa fa-user fa-lg text-orange"></i>Profile</a></li>
+                        <li><a class="dropdown-item" href="../pages/ManageUsers.aspx"><i class="fa fa-cog fa-lg text-aqua"></i>Paramètres</a></li>
+                        <li><a class="dropdown-item" href="../pages/login.aspx?action=logout"><i class="fa fa-sign-out fa-lg text-red"></i>Déconnexion</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </header>
+
+        <!-- Sidebar menu-->
+        <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+
+        <aside class="app-sidebar">
+         <%--   <div class="app-sidebar__user">
+                --<img runat="server" class="app-sidebar__user-avatar" src="../images/willSmith_id_pic2.jpg" id="imgLoginUser" width="50" height="50" alt="User Image">--
+                <div>
+                    <p class="app-sidebar__user-name">
+                        <asp:Label runat="server" ID="lblLoginUserFullname" ForeColor="GreenYellow" Font-Bold="true" Font-Size="Medium"></asp:Label>
+                    </p>
+                  <%--  <p class="app-sidebar__user-designation">
+                        <asp:Label runat="server" ID="lblLoginUserPosition" ForeColor="White" Font-Size="Medium"></asp:Label>
+                    </p>--
+                </div>
+            </div>--%>
+
+            <ul class="app-menu">
+                <li><a class="app-menu__item" href="../Home.aspx"><i class="app-menu__icon fa fa-home text-aqua"></i>
+                    <span class="app-menu__label menu_new_style">Acceuil</span></a></li>
+
+                <%-- **** MENU ELEVE ***********************************************************--%>
+                <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview">
+                    <i class="app-menu__icon fa fa-users text-aqua"></i><span class="app-menu__label menu_new_style">Elève</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li><a class="treeview-item sub_menu_style1" href="../pages/RegisterStudents.aspx" rel="noopener">
+                            <i class="icon fa fa-circle-o text-aqua"></i>Inscrire</a></li>
+                        <li><a class="treeview-item sub_menu_style1" href="../pages/SearchStudents.aspx">
+                            <i class="icon fa fa-circle-o text-aqua"></i>Rechercher</a></li>
+                        <li><a class="treeview-item sub_menu_style1" href="../pages/ParentManagement.aspx?action=eleve">
+                            <i class="icon fa fa-circle-o text-aqua"></i>Gestion Parent</a></li>
+                    </ul>
+                </li>
+
+                <%--**** MENU Professeur *********************************************************** --%>
+                <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview">
+                    <i class="app-menu__icon fa fa-user text-aqua"></i>
+                    <span class="app-menu__label menu_new_style">Professeur</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li><a class="treeview-item sub_menu_style1" href="../pages/RegisterTeachers.aspx" rel="noopener">
+                            <i class="icon fa fa-circle-o text-aqua"></i>Enregistrer</a></li>
+                        <li><a class="treeview-item sub_menu_style1" href="../pages/SearchTeachers.aspx">
+                            <i class="icon fa fa-circle-o text-aqua"></i>Rechercher</a></li>
+                        <li><a class="treeview-item sub_menu_style1" href="../pages/AffectCoursToTeacher.aspx">
+                            <i class="icon fa fa-circle-o text-aqua"></i>Affecter Cours</a></li>
+                        <li><a class="treeview-item sub_menu_style1" href="../pages/ParentManagement.aspx?action=professeur">
+                            <i class="icon fa fa-circle-o text-aqua"></i>Personne a Contacter</a></li>
+                    </ul>
+                </li>
+
+
+                <%-- **** MENU PERSONNAL *********************************************************** --%>
+                <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview">
+                    <i class="app-menu__icon fa fa-user text-aqua"></i>
+                    <span class="app-menu__label menu_new_style">Personnel</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li><a class="treeview-item sub_menu_style1" href="../pages/AddPersonal.aspx" rel="noopener">
+                            <i class="icon fa fa-circle-o text-aqua"></i>Ajouter</a></li>
+                        <li><a class="treeview-item sub_menu_style1" href="../pages/SearchPersonal.aspx">
+                            <i class="icon fa fa-circle-o text-aqua"></i>Rechercher</a></li>
+                        <li><a class="treeview-item sub_menu_style1" href="../pages/ParentManagement.aspx?action=personnel">
+                            <i class="icon fa fa-circle-o text-aqua"></i>Personne a Contacter</a></li>
+                    </ul>
+                </li>
+
+                <%--**** MENU GESTION DES DOCUMENTS *********************************************************** --%>
+                <li class="treeview"><a class="app-menu__item" href="../pages/DocumentsManagement.aspx">
+                    <i class="app-menu__icon fa fa-calendar text-aqua"></i><span class="app-menu__label menu_new_style">Gestion des documents</span><i class="treeview-indicator"></i></a>
+                </li>
+
+
+                <%-- **** MENU COURS ***********************************************************--%>                
+                  <li class="treeview"><a class="app-menu__item" href="../pages/AddCours.aspx">
+                    <i class="app-menu__icon fa fa-calendar text-aqua"></i>
+                      <span class="app-menu__label menu_new_style">Cours</span><i class="treeview-indicator"></i></a>
+                </li>
+
+
+
+<%--                <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview">
+                    <i class="app-menu__icon fa fa-book text-aqua"></i><span class="app-menu__label menu_new_style">Cours</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li><a class="treeview-item sub_menu_style1" href="../pages/AddCours.aspx" rel="noopener">
+                            <i class="icon fa fa-circle-o text-aqua"></i>Ajouter</a></li>
+                        <li><a class="treeview-item sub_menu_style1" href="../pages/ModifyCours.aspx">
+                            <i class="icon fa fa-circle-o text-aqua"></i>Fixer Prix</a></li>
+                    </ul>
+                </li>--%>
+
+                <%--**** MENU CLASSE *********************************************************** --%>
+                <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview">
+                    <i class="app-menu__icon fa fa-graduation-cap text-aqua"></i>
+                    <span class="app-menu__label menu_new_style">Classe</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li><a class="treeview-item sub_menu_style1" href="../pages/ClassroomManagement.aspx" rel="noopener">
+                            <i class="icon fa fa-circle-o text-aqua"></i>Gestion Des Classes</a></li>
+                        <li><a class="treeview-item sub_menu_style1" href="../pages/ChangingClassManagement.aspx">
+                            <i class="icon fa fa-circle-o text-aqua"></i>Changer de Classe</a></li>
+                    </ul>
+                </li>
+                
+
+                <%--**** MENU HORAIRE *********************************************************** --%>
+                <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview">
+                    <i class="app-menu__icon fa fa-calendar text-aqua"></i>
+                    <span class="app-menu__label menu_new_style">Horaire</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li><a class="treeview-item sub_menu_style1" href="../pages/DefineShedule.aspx" rel="noopener">
+                            <i class="icon fa fa-circle-o text-aqua"></i>Définir Horaire</a></li>
+                    </ul>
+                </li>
+
+                <%--**** MENU EXAMEN *********************************************************** --%>
+                <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview">
+                    <i class="app-menu__icon fa fa-book text-aqua"></i>
+                    <span class="app-menu__label menu_new_style">Examen</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li><a class="treeview-item sub_menu_style1" href="../pages/AddExams.aspx" rel="noopener">
+                            <i class="icon fa fa-circle-o text-aqua"></i>Gestion Examens</a></li>
+                    </ul>
+                </li>
+
+                <%--**** MENU NOTES *********************************************************** --%>
+                <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview">
+                    <i class="app-menu__icon fa fa-book text-aqua"></i>
+                    <span class="app-menu__label menu_new_style">Notes</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li><a class="treeview-item sub_menu_style1" href="../pages/InsertNotes.aspx" rel="noopener">
+                            <i class="icon fa fa-circle-o text-aqua"></i>Inserer</a></li>
+                        <li><a class="treeview-item sub_menu_style1" href="../pages/DownloadNotes.aspx">
+                            <i class="icon fa fa-circle-o text-aqua"></i>Download Palmarès</a></li>
+                        <li><a class="treeview-item sub_menu_style1" href="../pages/UploaderNotes.aspx">
+                            <i class="icon fa fa-circle-o text-aqua"></i>Upload Palmarès</a></li>
+                        <li><a class="treeview-item sub_menu_style1" href="../pages/BulletinManagement.aspx">
+                            <i class="icon fa fa-circle-o text-aqua"></i>Gestion Bulletin</a></li>
+                        <li><a class="treeview-item sub_menu_style1" href="../pages/AverageManagement.aspx">
+                            <i class="icon fa fa-circle-o text-aqua"></i>Gestion Moyenne Générale</a></li>
+                    </ul>
+                </li>
+
+                <%-- **** MENU FEUILLE DE CONTROLE ***********************************************************--%>
+                <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview">
+                <i class="app-menu__icon fa fa-leanpub text-aqua"></i>
+                    <span class="app-menu__label menu_new_style">Timesheet</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li><a class="treeview-item sub_menu_style1" href="../pages/PresenceSheets.aspx" rel="noopener">
+                            <i class="icon fa fa-circle-o text-aqua"></i>Enregistrement (Timesheet)</a></li>
+                        <li><a class="treeview-item sub_menu_style1" href="../pages/ReasonSheets.aspx">
+                            <i class="icon fa fa-circle-o text-aqua"></i>Definir Motifs Absence</a></li>
+                    </ul>
+                </li>
+
+                <%--  **** MENU ECONOMAT ***********************************************************--%>
+                <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview">
+                    <i class="app-menu__icon fa fa-usd text-aqua"></i>
+                    <span class="app-menu__label menu_new_style">Economat</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li><a class="treeview-item sub_menu_style1" href="../pages/TaxConfigurationManagement.aspx" rel="noopener">
+                            <i class="icon fa fa-circle-o text-aqua"></i>Configuration des taxes</a></li>
+                        <li><a class="treeview-item sub_menu_style1" href="../pages/SalaryClassConfiguration.aspx" rel="noopener">
+                            <i class="icon fa fa-circle-o text-aqua"></i>Configuration Salaire / Classe</a></li>
+                        <li><a class="treeview-item sub_menu_style1" href="../pages/PayrollPersonal.aspx" rel="noopener">
+                            <i class="icon fa fa-circle-o text-aqua"></i>Payroll Personnel</a></li>
+                        <li><a class="treeview-item sub_menu_style1" href="../pages/PayrollTeacher.aspx">
+                            <i class="icon fa fa-circle-o text-aqua"></i>Payroll Professeur</a></li>
+                        <li><a class="treeview-item sub_menu_style1" href="../pages/PaymentManagement.aspx">
+                            <i class="icon fa fa-circle-o text-aqua"></i>Gestion Paiement</a></li>
+                        <li><a class="treeview-item sub_menu_style1" href="../pages/Expenses.aspx">
+                            <i class="icon fa fa-circle-o text-aqua"></i>Gestion Depenses</a></li>
+                    </ul>
+                </li>
+
+                <%-- **** MENU PARAMETRES ***********************************************************--%>
+                <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview">
+                    <i class="app-menu__icon fa fa-cogs text-aqua"></i>
+                    <span class="app-menu__label menu_new_style">Paramètres</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li><a class="treeview-item sub_menu_style1" href="../pages/SMSBroadcasts.aspx">
+                            <i class="icon fa fa-circle-o text-aqua"></i>Broadcast SMS & Whatsapp</a></li>
+                        <li><a class="treeview-item sub_menu_style1" href="../pages/ManageGroupe.aspx" rel="noopener">
+                            <i class="icon fa fa-circle-o text-aqua"></i>Gestion Groupes</a></li>
+                        <li><a class="treeview-item sub_menu_style1" href="../pages/ManageUsers.aspx">
+                            <i class="icon fa fa-circle-o text-aqua"></i>Gestion Utilisateurs</a></li>
+                        <li><a class="treeview-item sub_menu_style1" href="../pages/AccademicYear.aspx">
+                            <i class="icon fa fa-circle-o text-aqua"></i>Année académique</a></li>
+                        <li><a class="treeview-item sub_menu_style1" href="../pages/LogsManagement.aspx">
+                            <i class="icon fa fa-circle-o text-aqua"></i>Gestion Logs</a></li>
+                        <li><a class="treeview-item sub_menu_style1" href="../pages/Profile.aspx">
+                            <i class="icon fa fa-circle-o text-aqua"></i>Profile</a></li>
+                    </ul>
+                </li>
+                <li><a class="app-menu__item" href="../pages/login.aspx?action=logout"><i class="fa fa-sign-out fa-lg text-red"></i>Déconnexion</a></li>
+            </ul>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+
+
+        </aside>
+
+
+        <main class="app-content">
+            <asp:ContentPlaceHolder ID="DynamicContainerContentPlaceHolder" runat="server">
+            </asp:ContentPlaceHolder>
+        </main>
+
+
+
+        <canvas id="canvas" width="640" height="0"></canvas>
+        <!-- Essential javascripts for application to work-->
+        <script src="../js/jquery-3.2.1.min.js"></script>
+        <script src="../js/popper.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/main.js"></script>
+        <!-- The javascript plugin to display page loading on top-->
+        <script src="../js/plugins/pace.min.js"></script>
+        <!-- Page specific javascripts-->
+        <script type="text/javascript" src="../js/plugins/chart.js"></script>
+        <script type="text/javascript">
+            var data = {
+                labels: ["January", "February", "March", "April", "May"],
+                datasets: [
+                    {
+                        label: "My First dataset",
+                        fillColor: "rgba(220,220,220,0.2)",
+                        strokeColor: "rgba(220,220,220,1)",
+                        pointColor: "rgba(220,220,220,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(220,220,220,1)",
+                        data: [65, 59, 80, 81, 56]
+                    },
+                    {
+                        label: "My Second dataset",
+                        fillColor: "rgba(151,187,205,0.2)",
+                        strokeColor: "rgba(151,187,205,1)",
+                        pointColor: "rgba(151,187,205,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(151,187,205,1)",
+                        data: [28, 48, 40, 19, 86]
+                    }
+                ]
+            };
+            var pdata = [
+                {
+                    value: 300,
+                    color: "#46BFBD",
+                    highlight: "#5AD3D1",
+                    label: "Complete"
+                },
+                {
+                    value: 50,
+                    color: "#F7464A",
+                    highlight: "#FF5A5E",
+                    label: "In-Progress"
+                }
+            ]
+
+            var ctxl = $("#lineChartDemo").get(0).getContext("2d");
+            var lineChart = new Chart(ctxl).Line(data);
+
+            var ctxp = $("#pieChartDemo").get(0).getContext("2d");
+            var pieChart = new Chart(ctxp).Pie(pdata);
+
+        </script>
+        <!-- Google analytics script-->
+        <script type="text/javascript">
+            //if (document.location.hostname == 'pratikborsadiya.in') {
+            //    (function (i, s, o, g, r, a, m) {
+            //        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            //            (i[r].q = i[r].q || []).push(arguments)
+            //        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            //            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+            //    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+            //    ga('create', 'UA-72504830-1', 'auto');
+            //    ga('send', 'pageview');
+            //}
+
+            if (document.location.pathname == aObj[i].href) {
+                var link = aObj;
+                while (link.tagName === 'a') {
+                    link.className = 'active';
+                    link = link.parentElement;
+                }
+            }
+
+        </script>
+
+    </form>
+</body>
+</html>

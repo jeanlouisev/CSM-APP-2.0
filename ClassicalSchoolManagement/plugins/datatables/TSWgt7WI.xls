@@ -1,0 +1,122 @@
+<table border='2px'><tr bgcolor='#87AFC6'><th aria-label="TRANSACTION ID: activate to sort column ascending" style="width: 117px;" colspan="1" rowspan="1" aria-controls="tblTransaction" tabindex="0" class="text-center sorting">TRANSACTION ID</th><th aria-label="CREATED DATE: activate to sort column ascending" aria-sort="descending" style="width: 107px;" colspan="1" rowspan="1" aria-controls="tblTransaction" tabindex="0" class="text-center sorting_desc">CREATED DATE</th><th aria-label="TRANSFER AGENT: activate to sort column ascending" style="width: 122px;" colspan="1" rowspan="1" aria-controls="tblTransaction" tabindex="0" class="text-center sorting">TRANSFER AGENT</th><th aria-label="TRANSFER AGENT CODE: activate to sort column ascending" style="width: 162px;" colspan="1" rowspan="1" aria-controls="tblTransaction" tabindex="0" class="text-center sorting">TRANSFER AGENT CODE</th><th aria-label="RECEIVE AGENT: activate to sort column ascending" style="width: 108px;" colspan="1" rowspan="1" aria-controls="tblTransaction" tabindex="0" class="text-center sorting">RECEIVE AGENT</th><th aria-label="RECEIVE AGENT CODE: activate to sort column ascending" style="width: 148px;" colspan="1" rowspan="1" aria-controls="tblTransaction" tabindex="0" class="text-center sorting">RECEIVE AGENT CODE</th><th aria-label="CURRENT BALANCE (HTG): activate to sort column ascending" style="width: 174px;" colspan="1" rowspan="1" aria-controls="tblTransaction" tabindex="0" class="text-center sorting">CURRENT BALANCE (HTG)</th><th aria-label="AMOUNT (HTG): activate to sort column ascending" style="width: 105px;" colspan="1" rowspan="1" aria-controls="tblTransaction" tabindex="0" class="text-center sorting">AMOUNT (HTG)</th><th aria-label="TYPE: activate to sort column ascending" style="width: 37px;" colspan="1" rowspan="1" aria-controls="tblTransaction" tabindex="0" class="text-center sorting">TYPE</th><th aria-label="STATUS: activate to sort column ascending" style="width: 57px;" colspan="1" rowspan="1" aria-controls="tblTransaction" tabindex="0" class="text-center sorting">STATUS</th><th aria-label=": activate to sort column ascending" style="width: 15px;" colspan="1" rowspan="1" aria-controls="tblTransaction" tabindex="0" class="text-center sorting"></th></tr>
+	<td>1097682989</td>
+	<td class="sorting_1" align="center">26/07/2016 18:09:13</td>
+	<td>32323232</td>
+	<td>SUDSS06125</td>
+	<td>33556666</td>
+	<td>OUESS104175</td>
+	<td align="right">71,486.32</td>
+	<td align="right">5.00</td>
+	<td>TRANS</td>
+	<td><span class="label label-danger">unsuccessful</span></td>
+	<td></td>
+</tr>
+	<td>1097682977</td>
+	<td class="sorting_1" align="center">26/07/2016 18:08:59</td>
+	<td>32323232</td>
+	<td>SUDSS06125</td>
+	<td>33556666</td>
+	<td>OUESS104175</td>
+	<td align="right">71,491.32</td>
+	<td align="right">5.00</td>
+	<td>TRANS</td>
+	<td><span class="label label-success">successful</span></td>
+	<td><a id="ctl00_SheetContentPlaceHolder_btnRollback1097682977" title="Cancel this transaction" class="btn btn-sm btn-warning" href="javascript:__doPostBack('ctl00$SheetContentPlaceHolder$btnRollback1097682977','')"><i class="fa fa-undo"></i></a></td>
+</tr>
+	<td>1097663069</td>
+	<td class="sorting_1" align="center">26/07/2016 17:27:32</td>
+	<td>32323232</td>
+	<td>SUDSS06125</td>
+	<td>33556666</td>
+	<td>OUESS104175</td>
+	<td align="right">71,491.32</td>
+	<td align="right">5.00</td>
+	<td>DTRANS</td>
+	<td><span class="label label-danger">unsuccessful</span></td>
+	<td></td>
+</tr>
+	<td>1097646555</td>
+	<td class="sorting_1" align="center">26/07/2016 16:47:25</td>
+	<td>32323232</td>
+	<td>SUDSS06125</td>
+	<td>33556666</td>
+	<td>OUESS104175</td>
+	<td align="right">71,486.32</td>
+	<td align="right">5.00</td>
+	<td>TRANS</td>
+	<td><span class="label label-danger">unsuccessful</span></td>
+	<td></td>
+</tr>
+	<td>1097642749</td>
+	<td class="sorting_1" align="center">26/07/2016 16:38:15</td>
+	<td>32323232</td>
+	<td>SUDSS06125</td>
+	<td>33556666</td>
+	<td>OUESS104175</td>
+	<td align="right">71,491.32</td>
+	<td align="right">5.00</td>
+	<td>TRANS</td>
+	<td><span class="label label-success">successful</span></td>
+	<td><a id="ctl00_SheetContentPlaceHolder_btnRollback1097642749" title="Cancel this transaction" class="btn btn-sm btn-warning" href="javascript:__doPostBack('ctl00$SheetContentPlaceHolder$btnRollback1097642749','')"><i class="fa fa-undo"></i></a></td>
+</tr>
+	<td>1097642619</td>
+	<td class="sorting_1" align="center">26/07/2016 16:37:45</td>
+	<td>32323232</td>
+	<td>SUDSS06125</td>
+	<td>33556666</td>
+	<td>OUESS104175</td>
+	<td align="right">71,496.32</td>
+	<td align="right">5.00</td>
+	<td>TRANS</td>
+	<td><span class="label label-success">successful</span></td>
+	<td><a id="ctl00_SheetContentPlaceHolder_btnRollback1097642619" title="Cancel this transaction" class="btn btn-sm btn-warning" href="javascript:__doPostBack('ctl00$SheetContentPlaceHolder$btnRollback1097642619','')"><i class="fa fa-undo"></i></a></td>
+</tr>
+	<td>1097642486</td>
+	<td class="sorting_1" align="center">26/07/2016 16:37:31</td>
+	<td>32323232</td>
+	<td>SUDSS06125</td>
+	<td>33556666</td>
+	<td>OUESS104175</td>
+	<td align="right">71,501.32</td>
+	<td align="right">5.00</td>
+	<td>TRANS</td>
+	<td><span class="label label-success">successful</span></td>
+	<td><a id="ctl00_SheetContentPlaceHolder_btnRollback1097642486" title="Cancel this transaction" class="btn btn-sm btn-warning" href="javascript:__doPostBack('ctl00$SheetContentPlaceHolder$btnRollback1097642486','')"><i class="fa fa-undo"></i></a></td>
+</tr>
+	<td>1097636086</td>
+	<td class="sorting_1" align="center">26/07/2016 16:22:10</td>
+	<td>32323232</td>
+	<td>SUDSS06125</td>
+	<td>33556666</td>
+	<td>OUESS104175</td>
+	<td align="right">71,506.32</td>
+	<td align="right">5.00</td>
+	<td>TRANS</td>
+	<td><span class="label label-danger">unsuccessful</span></td>
+	<td></td>
+</tr>
+	<td>1097635701</td>
+	<td class="sorting_1" align="center">26/07/2016 16:21:12</td>
+	<td>32323232</td>
+	<td>SUDSS06125</td>
+	<td>33556666</td>
+	<td>OUESS104175</td>
+	<td align="right">71,511.32</td>
+	<td align="right">5.00</td>
+	<td>TRANS</td>
+	<td><span class="label label-success">successful</span></td>
+	<td><a id="ctl00_SheetContentPlaceHolder_btnRollback1097635701" title="Cancel this transaction" class="btn btn-sm btn-warning" href="javascript:__doPostBack('ctl00$SheetContentPlaceHolder$btnRollback1097635701','')"><i class="fa fa-undo"></i></a></td>
+</tr>
+	<td>1097623257</td>
+	<td class="sorting_1" align="center">26/07/2016 15:50:10</td>
+	<td>32323232</td>
+	<td>SUDSS06125</td>
+	<td>33556666</td>
+	<td>OUESS104175</td>
+	<td align="right">71,516.32</td>
+	<td align="right">5.00</td>
+	<td>TRANS</td>
+	<td><span class="label label-success">successful</span></td>
+	<td><a id="ctl00_SheetContentPlaceHolder_btnRollback1097623257" title="Cancel this transaction" class="btn btn-sm btn-warning" href="javascript:__doPostBack('ctl00$SheetContentPlaceHolder$btnRollback1097623257','')"><i class="fa fa-undo"></i></a></td>
+</tr><th colspan="1" rowspan="1"></th><th colspan="1" rowspan="1"></th><th colspan="1" rowspan="1"></th><th colspan="1" rowspan="1"></th><th colspan="1" rowspan="1"></th><th colspan="1" rowspan="1"></th><th colspan="1" rowspan="1" class="text-right">TOTAL</th><th colspan="1" rowspan="1" class="text-right">
+                                        <span id="ctl00_SheetContentPlaceHolder_lblTotalAmount">-274,836.00</span></th><th colspan="1" rowspan="1"></th><th colspan="1" rowspan="1"></th><th colspan="1" rowspan="1"></th></tr></table>
