@@ -183,7 +183,7 @@ public partial class InsertNotes : System.Web.UI.Page
 
                     Notes n = new Notes();
                     n.student_id = hiddenStudentId.Value;
-                    n.class_id = int.Parse(hiddenClassId.Value);
+                    n.classroom_id = int.Parse(hiddenClassId.Value);
                     n.vacation = hiddenVacation.Value;
                     n.control = int.Parse(hiddenControl.Value);
                     n.academic_year_id = int.Parse(hiddenAcademicYearId.Value);
@@ -295,7 +295,7 @@ public partial class InsertNotes : System.Web.UI.Page
             List<Notes> listResult = new List<Notes>();
             //
             Notes note = new Notes();
-            note.class_id = ddlClassroom.SelectedValue == "-1" ? 0 : int.Parse(ddlClassroom.SelectedValue);
+            note.classroom_id = ddlClassroom.SelectedValue == "-1" ? 0 : int.Parse(ddlClassroom.SelectedValue);
             note.vacation = ddlVacation.SelectedValue == "-1" ? null : ddlVacation.SelectedValue;
             note.control = ddlControl.SelectedValue == "-1" ? 0 : int.Parse(ddlControl.SelectedValue);
             note.cours_id = int.Parse(ddlCourse.SelectedValue);

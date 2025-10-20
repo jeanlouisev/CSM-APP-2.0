@@ -223,7 +223,6 @@ public partial class Parents : System.Web.UI.Page
                 txtParentIdCard.Text = p.id_card;
                 ddlParentSex.SelectedValue = p.sex;
                 ddlParentMaritalStatus.SelectedValue = p.marital_status;
-                imageKeeperReference.ImageUrl = "/images/image_data/" + p.image_path;
             }
             catch (Exception ex)
             {
@@ -567,7 +566,6 @@ public partial class Parents : System.Web.UI.Page
                     txtParentAdress.Text = parent.address;
                     ddlParentMaritalStatus.SelectedValue = parent.marital_status;
                     ddlParentSex.SelectedValue = parent.sex;
-                    imageKeeperReference.ImageUrl = "/images/image_data/" + parent.image_path;
                 }
 
                 //if (chkCinReference.Checked)
@@ -681,7 +679,6 @@ public partial class Parents : System.Web.UI.Page
             p.sex = ddlParentSex.SelectedValue;
             p.phone = txtParentPhone.Text.Trim();
             p.address = txtParentAdress.Text.Trim();
-            p.image_path = Path.GetFileName(imageKeeperReference.ImageUrl).Replace("~/images/image_data/", "");
 
             StudentContactPerson parent = StudentContactPerson.getParentInfoByIdCard(txtParentIdCard.Text.Trim());
             if (parent != null)

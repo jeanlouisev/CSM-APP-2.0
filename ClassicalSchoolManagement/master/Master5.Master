@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>AKKHOR | Home 1</title>
+    <%--<title>AKKHOR | Home 1</title>--%>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- Favicon -->
@@ -54,7 +54,11 @@
     <!-- Select -->
     <link rel="stylesheet" href="../plugins/select2/select2.css">--%>
 
-
+      <title>
+      <asp:ContentPlaceHolder ID="TitleContentPlaceHolder" runat="server">
+          CSM
+      </asp:ContentPlaceHolder>
+  </title>
 
 
     <asp:ContentPlaceHolder ID="ScriptIncludePlaceHolder" runat="server">
@@ -78,7 +82,7 @@
                 <div class="nav-bar-header-one">
                     <div class="header-logo">
                         <a href="index.html">
-                            <img src="img/logo.png" alt="logo" />
+                            <img src="../akkhor/img/logo.png" alt="logo" />
                         </a>
                     </div>
                     <div class="toggle-button sidebar-toggle">
@@ -135,7 +139,7 @@
                                     <span>Admin</span>
                                 </div>
                                 <div class="admin-img">
-                                    <img src="img/figure/admin.jpg" alt="Admin" />
+                                    <img src="../akkhor/img/figure/admin.jpg" alt="Admin" />
                                 </div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
@@ -184,7 +188,7 @@
                                 <div class="item-content">
                                     <div class="media">
                                         <div class="item-img bg-skyblue author-online">
-                                            <img src="img/figure/student11.png" alt="img" />
+                                            <img src="../akkhor/img/figure/student11.png" alt="img" />
                                         </div>
                                         <div class="media-body space-sm">
                                             <div class="item-title">
@@ -201,7 +205,7 @@
                                     </div>
                                     <div class="media">
                                         <div class="item-img bg-yellow author-online">
-                                            <img src="img/figure/student12.png" alt="img" />
+                                            <img src="../akkhor/img/figure/student12.png" alt="img" />
                                         </div>
                                         <div class="media-body space-sm">
                                             <div class="item-title">
@@ -218,7 +222,7 @@
                                     </div>
                                     <div class="media">
                                         <div class="item-img bg-pink">
-                                            <img src="img/figure/student13.png" alt="img" />
+                                            <img src="../akkhor/img/figure/student13.png" alt="img" />
                                         </div>
                                         <div class="media-body space-sm">
                                             <div class="item-title">
@@ -235,7 +239,7 @@
                                     </div>
                                     <div class="media">
                                         <div class="item-img bg-violet-blue">
-                                            <img src="img/figure/student11.png" alt="img" />
+                                            <img src="../akkhor/img/figure/student11.png" alt="img" />
                                         </div>
                                         <div class="media-body space-sm">
                                             <div class="item-title">
@@ -330,7 +334,7 @@
                     <div class="mobile-sidebar-header d-md-none">
                         <div class="header-logo">
                             <a href="index.html">
-                                <img src="img/logo1.png" alt="logo" /></a>
+                                <img src="../akkhor/img/logo1.png" alt="logo" /></a>
                         </div>
                     </div>
                     <div class="sidebar-menu-content">
@@ -353,20 +357,26 @@
                                 </ul>
                             </li>
                             <li class="nav-item sidebar-nav-item">
-                                <a href="#" class="nav-link"><i class="flaticon-classmates"></i><span>Eleve</span></a>
+                                <a href="#" class="nav-link"><i class="flaticon-classmates"></i><span>Élèves</span></a>
                                 <ul class="nav sub-group-menu">
                                     <li class="nav-item">
                                         <a href="../Pages/RegisterStudents.aspx" class="nav-link"><i class="fas fa-angle-right"></i>Inscription</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="student-details.html" class="nav-link"><i class="fas fa-angle-right"></i>Student Details</a>
+                                        <a href="../Pages/SearchStudents.aspx" class="nav-link"><i class="fas fa-angle-right"></i>Liste des élèves</a>
                                     </li>
                                     <li class="nav-item">
+                                        <a href="../Pages/SudentContributionPayments.aspx" class="nav-link"><i class="fas fa-angle-right"></i>Paiement de contribution</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="../Pages/StudentContributionType.aspx" class="nav-link"><i class="fas fa-angle-right"></i>Types de contribution</a>
+                                    </li>
+                                   <%-- <li class="nav-item">
                                         <a href="admit-form.html" class="nav-link"><i class="fas fa-angle-right"></i>Admission Form</a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="student-promotion.html" class="nav-link"><i class="fas fa-angle-right"></i>Student Promotion</a>
-                                    </li>
+                                    </li>--%>
                                 </ul>
                             </li>
                             <li class="nav-item sidebar-nav-item">
@@ -400,7 +410,7 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li class="nav-item sidebar-nav-item">
+                          <%--  <li class="nav-item sidebar-nav-item">
                                 <a href="#" class="nav-link"><i class="flaticon-books"></i><span>Library</span></a>
                                 <ul class="nav sub-group-menu">
                                     <li class="nav-item">
@@ -410,9 +420,17 @@
                                         <a href="add-book.html" class="nav-link"><i class="fas fa-angle-right"></i>Add New Book</a>
                                     </li>
                                 </ul>
+                            </li>--%>
+                            <li class="nav-item sidebar-nav-item">
+                                <a href="#" class="nav-link"><i
+                                    class="flaticon-maths-class-materials-cross-of-a-pencil-and-a-ruler"></i><span>Classes</span></a>
+                                <ul class="nav sub-group-menu">
+                                    <li class="nav-item">
+                                        <a href="../Pages/ClassroomManagement.aspx" class="nav-link"><i class="fas fa-angle-right"></i>Liste des classes</a>
+                                </ul>
                             </li>
                             <li class="nav-item sidebar-nav-item">
-                                <a href="#" class="nav-link"><i class="flaticon-technological"></i><span>Acconunt</span></a>
+                                <a href="#" class="nav-link"><i class="flaticon-technological"></i><span>Economat</span></a>
                                 <ul class="nav sub-group-menu">
                                     <li class="nav-item">
                                         <a href="all-fees.html" class="nav-link"><i class="fas fa-angle-right"></i>All Fees Collection</a>
@@ -425,19 +443,7 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li class="nav-item sidebar-nav-item">
-                                <a href="#" class="nav-link"><i
-                                    class="flaticon-maths-class-materials-cross-of-a-pencil-and-a-ruler"></i><span>Class</span></a>
-                                <ul class="nav sub-group-menu">
-                                    <li class="nav-item">
-                                        <a href="all-class.html" class="nav-link"><i class="fas fa-angle-right"></i>All Classes</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="add-class.html" class="nav-link"><i class="fas fa-angle-right"></i>Add New Class</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
+                           <%-- <li class="nav-item">
                                 <a href="all-subject.html" class="nav-link"><i class="flaticon-open-book"></i><span>Subject</span></a>
                             </li>
                             <li class="nav-item">
@@ -445,7 +451,7 @@
                             </li>
                             <li class="nav-item">
                                 <a href="student-attendence.html" class="nav-link"><i class="flaticon-checklist"></i><span>Attendence</span></a>
-                            </li>
+                            </li>--%>
                             <li class="nav-item sidebar-nav-item">
                                 <a href="#" class="nav-link"><i class="flaticon-shopping-list"></i><span>Exam</span></a>
                                 <ul class="nav sub-group-menu">
@@ -457,7 +463,22 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li class="nav-item">
+
+                            
+                            <li class="nav-item sidebar-nav-item">
+                                <a href="#" class="nav-link"><i class="flaticon-settings"></i><span>Paramètres Système</span></a>
+                                <ul class="nav sub-group-menu">
+                                    <li class="nav-item">
+                                        <a href="exam-schedule.html" class="nav-link"><i class="fas fa-angle-right"></i>xxxxxxxxxxxx</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="exam-grade.html" class="nav-link"><i class="fas fa-angle-right"></i>yyyyyyyyyyy</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+
+<%--                            <li class="nav-item">
                                 <a href="transport.html" class="nav-link"><i class="flaticon-bus-side-view"></i><span>Transport</span></a>
                             </li>
                             <li class="nav-item">
@@ -500,7 +521,7 @@
                             </li>
                             <li class="nav-item">
                                 <a href="account-settings.html" class="nav-link"><i class="flaticon-settings"></i><span>Account</span></a>
-                            </li>
+                            </li>--%>
                         </ul>
                     </div>
                 </div>
@@ -524,8 +545,7 @@
                     <!-- Footer Area Start Here -->
                     <footer class="footer-wrap-layout1">
                         <div class="copyright">
-                            © Copyrights <a href="#">akkhor</a> 2019. All rights reserved.
-              Designed by <a href="#">PsdBosS</a>
+                            © Copyrights <a href="https://sagiatech.com/">Saphir Giant Technology</a> 2019. All rights reserved.
                         </div>
                     </footer>
                     <!-- Footer Area End Here -->

@@ -171,7 +171,7 @@ public partial class SearchPersonal : System.Web.UI.Page
         st.fullName = txtFullName.Text.Trim().Length <= 0 ? null : txtFullName.Text.Trim();
         st.sex = ddlSex.SelectedValue;
         st.marital_status = ddlMaritalStatus.SelectedValue;
-        st.position_id = int.Parse(ddlPosition.SelectedValue);
+        //st.position_id = int.Parse(ddlPosition.SelectedValue);
         st.status = int.Parse(ddlStatus.SelectedValue);
 
         //get list of staff

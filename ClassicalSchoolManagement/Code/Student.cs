@@ -18,11 +18,7 @@ public class Student
     public string first_name { get; set; }
     public string last_name { get; set; }
     public string sex { get; set; }
-    public string sex_code { get; set; }
-    public string sex_definition { get; set; }
     public string age { get; set; }
-    public string marital_status { get; set; }
-    public string marital_status_code { get; set; }
     public string id_card { get; set; }
     public string fullName { get; set; }
     public DateTime birth_date { get; set; }
@@ -30,7 +26,6 @@ public class Student
     public string address { get; set; }
     public string phone { get; set; }
     public string vacation { get; set; }
-    public string vacation_code { get; set; }
     public string email { get; set; }
     public string staff_code { get; set; }
     public string id_reference { get; set; }
@@ -41,7 +36,7 @@ public class Student
     public String toDate { get; set; }
     public string image_path { get; set; }
     public string documentPath { get; set; }
-    public int class_id { get; set; }
+    public int classroom_id { get; set; }
     public string cours_counter { get; set; }
     public DateTime register_date_timesheet { get; set; }
     public int presence_status { get; set; }
@@ -75,7 +70,7 @@ public class Student
     public string final_result { get; set; }
     public int final_result_status { get; set; }
     public int role_id { get; set; }
-    public string class_name { get; set; }
+    public string classroom_name { get; set; }
     public int login_user_id { get; set; }
     public DateTime sheet_date { get; set; }
     //
@@ -139,62 +134,14 @@ public class Student
                         try { student.last_name = reader.GetValue(i).ToString(); }
                         catch { }
                     }
-                    if (reader.GetName(i).ToUpper() == "SEXE")
+                    if (reader.GetName(i).ToUpper() == "SEX")
                     {
-                        try
-                        {
-                            switch (reader.GetValue(i).ToString())
-                            {
-                                case "M": student.sex = "Masculin"; break;
-                                case "F": student.sex = "Feminin"; break;
-                                default: student.sex = ""; break;
-                            }
-                        }
-
-                        catch { }
-                    }
-                    if (reader.GetName(i).ToUpper() == "SEXE")
-                    {
-                        try { student.sex_code = reader.GetValue(i).ToString(); }
-                        catch { }
-                    }
-                    if (reader.GetName(i).ToUpper() == "SEXE")
-                    {
-                        try
-                        {
-                            switch (reader.GetValue(i).ToString())
-                            {
-                                case "M": student.sex_definition = "Masculin"; break;
-                                case "F": student.sex_definition = "Feminin"; break;
-                            }
-                        }
+                        try { student.sex = reader.GetValue(i).ToString(); }
                         catch { }
                     }
                     if (reader.GetName(i).ToUpper() == "AGE")
                     {
                         try { student.age = reader.GetValue(i).ToString(); }
-                        catch { }
-                    }
-                    if (reader.GetName(i).ToUpper() == "MARITAL_STATUS")
-                    {
-                        try
-                        {
-                            switch (reader.GetValue(i).ToString())
-                            {
-                                case "C": student.marital_status = "Célibataire"; break;
-                                case "M": student.marital_status = "Marié(e)"; break;
-                                case "D": student.marital_status = "Divorcé(e)"; break;
-                                case "V": student.marital_status = "Veuf(ve)"; break;
-                                case "U": student.marital_status = "Union Libre"; break;
-
-                            }
-                        }
-
-                        catch { }
-                    }
-                    if (reader.GetName(i).ToUpper() == "MARITAL_STATUS")
-                    {
-                        try { student.marital_status_code = reader.GetValue(i).ToString(); }
                         catch { }
                     }
                     if (reader.GetName(i).ToUpper() == "ID_CARD")
@@ -217,34 +164,19 @@ public class Student
                         try { student.birth_place = reader.GetValue(i).ToString(); }
                         catch { }
                     }
-                    if (reader.GetName(i).ToUpper() == "ADRESS")
+                    if (reader.GetName(i).ToUpper() == "ADDRESS")
                     {
                         try { student.address = reader.GetValue(i).ToString(); }
                         catch { }
                     }
-                    if (reader.GetName(i).ToUpper() == "PHONE1")
+                    if (reader.GetName(i).ToUpper() == "PHONE")
                     {
                         try { student.phone = reader.GetValue(i).ToString(); }
                         catch { }
                     }
                     if (reader.GetName(i).ToUpper() == "VACATION")
                     {
-                        try
-                        {
-                            switch (reader.GetValue(i).ToString())
-                            {
-                                case "AM": student.vacation = "Matin"; break;
-                                case "PM": student.vacation = "Median"; break;
-                                case "NG": student.vacation = "Soir"; break;
-                                case "WK": student.vacation = "Weekend"; break;
-                                default: student.vacation = ""; break;
-                            }
-                        }
-                        catch { }
-                    }
-                    if (reader.GetName(i).ToUpper() == "VACATION")
-                    {
-                        try { student.vacation_code = reader.GetValue(i).ToString(); }
+                        try { student.vacation = reader.GetValue(i).ToString(); }
                         catch { }
                     }
                     if (reader.GetName(i).ToUpper() == "EMAIL")
@@ -297,9 +229,9 @@ public class Student
                         try { student.documentPath = reader.GetValue(i).ToString(); }
                         catch { }
                     }
-                    if (reader.GetName(i).ToUpper() == "CLASS_ID")
+                    if (reader.GetName(i).ToUpper() == "CLASSROOM_ID")
                     {
-                        try { student.class_id = int.Parse(reader.GetValue(i).ToString()); }
+                        try { student.classroom_id = int.Parse(reader.GetValue(i).ToString()); }
                         catch { }
                     }
                     if (reader.GetName(i).ToUpper() == "PRESENCE_STATUS")
@@ -470,9 +402,9 @@ public class Student
                         try { student.role_id = int.Parse(reader.GetValue(i).ToString()); }
                         catch { }
                     }
-                    if (reader.GetName(i).ToUpper() == "CLASS_NAME")
+                    if (reader.GetName(i).ToUpper() == "CLASSROOM_NAME")
                     {
-                        try { student.class_name = reader.GetValue(i).ToString(); }
+                        try { student.classroom_name = reader.GetValue(i).ToString(); }
                         catch { }
                     }
                     if (reader.GetName(i).ToUpper() == "LOGIN_USER_ID")
@@ -507,7 +439,6 @@ public class Student
                                         ?, -- firstName,
                                         ?, -- lastName,
                                         ?, -- sex,
-                                        ?, -- maritalStatus,
                                         ?, -- id_card,
                                         ?, -- birth_date,
                                         ?, -- birth_place,
@@ -522,7 +453,7 @@ public class Student
 
 
         SqlStatement stmt = SqlStatement.FromString(sql, SqlConnString.CSM_APP);
-        stmt.SetParameters(st.id, st.first_name, st.last_name, st.sex, st.marital_status,
+        stmt.SetParameters(st.id, st.first_name, st.last_name, st.sex,
                             st.id_card, st.birth_date.ToString("yyyyMMdd"), st.birth_place, st.address,
                             st.phone, st.email, st.image_path, st.status,
                             st.login_user_id
@@ -538,34 +469,29 @@ public class Student
             string sql = @"UPDATE STUDENT
                                set first_name = ?,
                                 last_name = ?,
-                                sexe = ?,
-                                marital_status = ?,
+                                sex = ?,
                                 id_card = ?,
                                 birth_date = ?,
                                 birth_place = ?,
-                                adress = ?,
-                                phone1 = ?,
+                                address = ?,
+                                phone = ?,
                                 email = ?,
                                 image_path = ?,
-                                ref_first_name = ?,
-                                ref_last_name = ?,
-                                ref_sex = ?,
-                                ref_phone = ?,
-                                ref_adress = ?,
-                                ref_relationship = ?
+                                status = ?,
                             WHERE id = ?";
 
             SqlStatement stmt = SqlStatement.FromString(sql, SqlConnString.CSM_APP);
             stmt.SetParameters(st.first_name,
                                 st.last_name,
                                 st.sex,
-                                st.marital_status,
                                 st.id_card,
                                 st.birth_date.ToString("yyyyMMdd"),
                                 st.birth_place,
                                 st.address,
                                 st.phone,
                                 st.email,
+                                st.image_path,
+                                st.status,
                                 st.id);
 
             stmt.ExecuteNonQuery();
@@ -584,21 +510,21 @@ public class Student
 
         string sql = @"SELECT  a.*,
                                     concat(a.first_name,' ',a.last_name) as fullname,
-                                    c.name as class_name,
-                                    c.id as class_id,
+                                    c.name as classroom_name,
+                                    c.id as classroom_id,
 									b.vacation,
                                     (select concat(EXTRACT(year FROM start_date),'-',EXTRACT(year FROM end_date))
 								             from academic_year where id = b.academic_year_id) as years,
                                     b.academic_year_id as academic_year_id
                                 FROM STUDENT a
-								inner join classroom_staff_management b on b.staff_code = a.Id
-								inner join classroom c on c.id = b.class_id
+								inner join student_classroom_attach b on b.student_id = a.Id
+								inner join classroom c on c.id = b.classroom_id
                                 WHERE a.Status = 1
                                     [ and a.id = ? ]    -- 0
                                     [ and concat(lower(a.first_name),' ',lower(a.last_name)) like ? ]   -- 1
                                     [ and b.vacation = ? ]  -- 2
-                                    [ and b.class_id = ? ] -- 3
-                                    [ and a.Sexe = ? ]  -- 4
+                                    [ and b.classroom_id = ? ] -- 3
+                                    [ and a.Sex = ? ]  -- 4
                                     [ and b.academic_year_id = ? ]   -- 5
                                  ORDER BY c.name";
 
@@ -616,9 +542,9 @@ public class Student
         {
             stmt.SetParameter(2, st.vacation);
         }
-        if (st.class_id > 0)
+        if (st.classroom_id > 0)
         {
-            stmt.SetParameter(3, st.class_id);
+            stmt.SetParameter(3, st.classroom_id);
         }
         if (st.sex != null)
         {
@@ -674,14 +600,9 @@ public class Student
             sql += @" AND b.vacation = '" + st.vacation + "' ";
         }
 
-        if (st.marital_status != null)
+        if (st.classroom_id > 0)
         {
-            sql += @" AND a.Marital_status = '" + st.marital_status + "' ";
-        }
-
-        if (st.class_id > 0)
-        {
-            sql += @" AND b.class_id = " + st.class_id + " ";
+            sql += @" AND b.class_id = " + st.classroom_id + " ";
         }
 
         if (st.sex != null)
@@ -792,9 +713,9 @@ public class Student
         }
 
         stmt.SetParameter(2, st.vacation);
-        if (st.class_id > 0)
+        if (st.classroom_id > 0)
         {
-            stmt.SetParameter(3, st.class_id);
+            stmt.SetParameter(3, st.classroom_id);
         }
         stmt.SetParameter(4, st.academic_year_id);
         stmt.SetParameter(5, st.control);
@@ -934,24 +855,25 @@ public class Student
         return Parse(stmt.ExecuteReader())[0];
     }
 
-    public static Student getStudentFullDetailsByCode(string studentCode)
+    public static Student getStudentFullDetailsById(string studentId)
     {
         string sql = @"SELECT  a.*,
-                                    concat(a.first_name,' ',a.last_name) as fullname,
-                                    c.name as class_name,
-                                    c.id as class_id,
-									b.vacation,
-                                    (select concat(EXTRACT(year FROM start_date),'-',EXTRACT(year FROM end_date))
-								             from academic_year where id = b.academic_year_id) as years,
-                                    b.academic_year_id as academic_year_id
-                                FROM STUDENT a
-								inner join classroom_staff_management b on b.staff_code = a.Id
-								inner join classroom c on c.id = b.class_id
-                                WHERE a.Status = 1
-                                and a.id = ?";
+                        concat(a.first_name,' ',a.last_name) as fullname,
+                        c.name as classroom_name,
+                        c.id as classroom_id,
+						b.vacation,
+                        (select concat(EXTRACT(year FROM start_date),'-',EXTRACT(year FROM end_date))
+								    from academic_year where id = b.academic_year_id) as years,
+                        b.academic_year_id as academic_year_id
+                        FROM STUDENT a
+						inner join student_classroom_attach b on b.student_id = a.Id
+						inner join classroom c on c.id = b.classroom_id
+                        WHERE a.Status = 1
+                        and a.id = ?";
+
 
         SqlStatement stmt = SqlStatement.FromString(sql, SqlConnString.CSM_APP);
-        stmt.SetParameters(studentCode);
+        stmt.SetParameters(studentId);
         return Parse(stmt.ExecuteReader())[0];
     }
 
@@ -1207,7 +1129,7 @@ public class Student
                                     AND b.status = 1";
 
         SqlStatement stmt = SqlStatement.FromString(sql, SqlConnString.CSM_APP);
-        stmt.SetParameters(st.id, st.fullName.ToUpper(), st.class_id, st.sex);
+        stmt.SetParameters(st.id, st.fullName.ToUpper(), st.classroom_id, st.sex);
         return Parse(stmt.ExecuteReader());
     }
 
@@ -1243,7 +1165,7 @@ public class Student
                                     AND b.status = 1";
 
         SqlStatement stmt = SqlStatement.FromString(sql, SqlConnString.CSM_APP);
-        stmt.SetParameters(st.id, st.fullName.ToUpper(), st.class_id, st.sex, studentCode);
+        stmt.SetParameters(st.id, st.fullName.ToUpper(), st.classroom_id, st.sex, studentCode);
         return Parse(stmt.ExecuteReader());
     }
 
@@ -1519,6 +1441,28 @@ public class Student
 
         SqlStatement stmt = SqlStatement.FromString(sql, SqlConnString.CSM_APP);
         stmt.SetParameters(idCard);
+        IDataReader reader = stmt.ExecuteReader();
+        if (reader != null)
+        {
+            while (reader.Read())
+            {
+                if (reader.GetInt32(0) > 0)
+                {
+                    result = true;
+                }
+            }
+        }
+        return result;
+    }
+
+    public static bool StudentExist(string id)
+    {
+        bool result = false;
+
+        string sql = @"SELECT COUNT(*) FROM student  WHERE id = ? ";
+
+        SqlStatement stmt = SqlStatement.FromString(sql, SqlConnString.CSM_APP);
+        stmt.SetParameters(id);
         IDataReader reader = stmt.ExecuteReader();
         if (reader != null)
         {

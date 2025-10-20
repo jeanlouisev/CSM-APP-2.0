@@ -521,7 +521,6 @@
     <Content Include="pages\DialogSalaryConfigClass.aspx" />
     <Content Include="pages\DialogSalaryTeacherConfiguration.aspx" />
     <Content Include="pages\DialogScolariteFeeConfiguration.aspx" />
-    <Content Include="pages\DocumentsManagement.aspx" />
     <Content Include="pages\DownloadNotes.aspx" />
     <Content Include="pages\Economat.aspx" />
     <Content Include="pages\Exams.aspx" />
@@ -556,7 +555,8 @@
     <Content Include="pages\SearchTeachers.aspx" />
     <Content Include="pages\sendBirthdaySMS.aspx" />
     <Content Include="pages\SMSBroadcasts.aspx" />
-    <Content Include="pages\Students.aspx" />
+    <Content Include="pages\StudentContributionType.aspx" />
+    <Content Include="pages\SudentContributionPayments.aspx" />
     <Content Include="pages\TaxConfigurationManagement.aspx" />
     <Content Include="pages\Teachers.aspx" />
     <Content Include="pages\TeacherScheduleDetails.aspx" />
@@ -3249,7 +3249,11 @@
     <Content Include="WrongServerError.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Code\ExamDocuments.cs" />
+    <Compile Include="Code\StaffDocuments.cs" />
     <Compile Include="Code\StudentContactPerson.cs" />
+    <Compile Include="Code\StudentContribution.cs" />
+    <Compile Include="Code\StudentDocuments.cs" />
     <Compile Include="design\DefaultHeader.ascx.cs">
       <DependentUpon>DefaultHeader.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3336,7 +3340,6 @@
     </Compile>
     <Compile Include="Code\ClassRoom.cs" />
     <Compile Include="Code\Course.cs" />
-    <Compile Include="Code\Documents.cs" />
     <Compile Include="Code\Exam.cs" />
     <Compile Include="Code\Expenditure.cs" />
     <Compile Include="Code\Notes.cs" />
@@ -3649,13 +3652,6 @@
     <Compile Include="pages\DialogScolariteFeeConfiguration.aspx.designer.cs">
       <DependentUpon>DialogScolariteFeeConfiguration.aspx</DependentUpon>
     </Compile>
-    <Compile Include="pages\DocumentsManagement.aspx.cs">
-      <DependentUpon>DocumentsManagement.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="pages\DocumentsManagement.aspx.designer.cs">
-      <DependentUpon>DocumentsManagement.aspx</DependentUpon>
-    </Compile>
     <Compile Include="pages\DownloadNotes.aspx.cs">
       <DependentUpon>DownloadNotes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3894,12 +3890,19 @@
     <Compile Include="pages\SMSBroadcasts.aspx.designer.cs">
       <DependentUpon>SMSBroadcasts.aspx</DependentUpon>
     </Compile>
-    <Compile Include="pages\Students.aspx.cs">
-      <DependentUpon>Students.aspx</DependentUpon>
+    <Compile Include="pages\StudentContributionType.aspx.cs">
+      <DependentUpon>StudentContributionType.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="pages\Students.aspx.designer.cs">
-      <DependentUpon>Students.aspx</DependentUpon>
+    <Compile Include="pages\StudentContributionType.aspx.designer.cs">
+      <DependentUpon>StudentContributionType.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\SudentContributionPayments.aspx.cs">
+      <DependentUpon>SudentContributionPayments.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\SudentContributionPayments.aspx.designer.cs">
+      <DependentUpon>SudentContributionPayments.aspx</DependentUpon>
     </Compile>
     <Compile Include="pages\TaxConfigurationManagement.aspx.cs">
       <DependentUpon>TaxConfigurationManagement.aspx</DependentUpon>
@@ -4595,6 +4598,8 @@
     <Content Include="plugins\jQuery\jQuery-2.1.4.min.js.3.1" />
     <Content Include="plugins\jQuery\jQuery-2.1.4.min.js.bk" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <Content Include="student_uploaded_documents\st_16102025221546_CSM Diagram 1.pdf" />
+    <Content Include="student_uploaded_documents\st_16102025222233_CSM Diagram 1.pdf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -4613,7 +4618,6 @@
     <Folder Include="DynamicData\FieldTemplates\" />
     <Folder Include="images\Data\" />
     <Folder Include="uploaded\" />
-    <Folder Include="Uploaded_Documents\" />
     <Folder Include="Uploaded_Exams\" />
     <Folder Include="videos\" />
     <Folder Include="xml\" />

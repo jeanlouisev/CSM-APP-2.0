@@ -444,7 +444,7 @@ public partial class BulletinManagement : System.Web.UI.Page
 
 
             // txtClasse
-            cell = new PdfPCell(new Phrase(": " + stInfo.class_name, fontUnitSign));
+            cell = new PdfPCell(new Phrase(": " + stInfo.classroom_name, fontUnitSign));
             cell.HorizontalAlignment = Element.ALIGN_LEFT;
             cell.VerticalAlignment = Element.ALIGN_TOP;
             cell.Rowspan = 0;
@@ -505,7 +505,7 @@ public partial class BulletinManagement : System.Web.UI.Page
             Notes n = new Notes();
             n.student_id = st.id;
             n.vacation = st.vacation;
-            n.class_id = st.class_id;
+            n.classroom_id = st.classroom_id;
             n.academic_year_id = st.academic_year_id;
             n.control = st.control;
 
@@ -631,7 +631,7 @@ public partial class BulletinManagement : System.Web.UI.Page
             table.AddCell(cell);
 
             string result = "";
-            ClassRoom c = ClassRoom.getListClassroomAverage(st.academic_year_id, st.class_id)[0];
+            ClassRoom c = ClassRoom.getListClassroomAverage(st.academic_year_id, st.classroom_id)[0];
             if (c != null)
             {
                 totalAverage = totalAverage * 10;
@@ -792,7 +792,7 @@ public partial class BulletinManagement : System.Web.UI.Page
         st.id = txtCode.Text.Trim().Length <= 0 ? null : txtCode.Text.Trim();
         st.fullName = txtFullName.Text.Trim().Length <= 0 ? null : "%" + txtFullName.Text.Trim().ToLower() + "%";
         st.vacation = ddlVacation.SelectedValue;
-        st.class_id = int.Parse(ddlClassroom.SelectedValue);
+        st.classroom_id = int.Parse(ddlClassroom.SelectedValue);
         st.academic_year_id = int.Parse(ddlAcademicYear.SelectedValue);
         st.control = int.Parse(ddlControl.SelectedValue);
 
@@ -847,7 +847,7 @@ public partial class BulletinManagement : System.Web.UI.Page
         Student st = new Student();
         st.id = hiddenStudentId.Value;
         st.vacation = hiddenVacationCode.Value;
-        st.class_id = int.Parse(hiddenClassId.Value);
+        st.classroom_id = int.Parse(hiddenClassId.Value);
         st.academic_year_id = int.Parse(hiddenAcademicYearId.Value);
         st.control = int.Parse(hiddenControl.Value);
         st.years = hiddenYears.Value;

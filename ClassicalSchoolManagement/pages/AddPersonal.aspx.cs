@@ -30,7 +30,7 @@ public partial class AddPersonal : System.Web.UI.Page
     int menu_code = (int)Users.MENU.HR;
     string msgContent = "";
 
-    List<Documents> listDocumentsAttach = new List<Documents>();
+    List<StaffDocuments> listDocumentsAttach = new List<StaffDocuments>();
 
     //string sqlStaffCurval = @"select currval_staff('codeSeq') as staff_curval";
     string sqlStafftNextval = @"select nextval_staff('codeSeq') as staff_nextval";
@@ -242,7 +242,7 @@ public partial class AddPersonal : System.Web.UI.Page
 
 
             // documents
-            Session["list_documents_attach"] = Documents.getListDocumentsByStaffCode(staffCode);
+            Session["list_documents_attach"] = StaffDocuments.getListDocumentsByStaffCode(staffCode);
             gridAttachDocuments.Rebind();
             pnlDocuments.Visible = true;
 
@@ -388,8 +388,8 @@ public partial class AddPersonal : System.Web.UI.Page
                     // attach documents
                     if (Session["list_documents_attach"] != null)
                     {
-                        listDocumentsAttach = Session["list_documents_attach"] as List<Documents>;
-                        Documents.uploadDocument(listDocumentsAttach);
+                        listDocumentsAttach = Session["list_documents_attach"] as List<StaffDocuments>;
+                        StaffDocuments.uploadStaffDocuments(listDocumentsAttach, st.id);
                     }
                     // clear fields
                     emptyFields();
@@ -422,7 +422,7 @@ public partial class AddPersonal : System.Web.UI.Page
 
     private void loadDocumentCategories()
     {
-        List<Documents> listResult = Documents.getListDocumentCategory();
+        List<StaffDocuments> listResult = StaffDocuments.getListDocumentType();
         ddlDocumentCategory.DataValueField = "description";
         ddlDocumentCategory.DataTextField = "description";
         ddlDocumentCategory.DataSource = listResult;
@@ -464,7 +464,7 @@ public partial class AddPersonal : System.Web.UI.Page
                 {
                     if (Session["list_documents_attach"] != null)
                     {
-                        listDocumentsAttach = Session["list_documents_attach"] as List<Documents>;
+                        listDocumentsAttach = Session["list_documents_attach"] as List<StaffDocuments>;
                     }
 
                     HttpPostedFile userPostedFile = documentsAttachFile.PostedFile;
@@ -475,9 +475,8 @@ public partial class AddPersonal : System.Web.UI.Page
                             string fileName = DateTime.Now.ToString("ddMMyyyyHHmmss") + "_" + Path.GetFileName(userPostedFile.FileName);
                             string filepath = "~/Uploaded_Documents/" + _code + "/" + fileName;
                             userPostedFile.SaveAs(Server.MapPath(filepath)); //save file to folder
-                            Documents doc = new Documents();
-                            doc.staff_code = _code;
-                            doc.document_path = filepath;
+                            StaffDocuments doc = new StaffDocuments();
+                            doc.staff_id = _code;
                             doc.document_name = ddlDocumentCategory.SelectedValue;
                             doc.upload_time = DateTime.Now;
                             listDocumentsAttach.Add(doc);
@@ -809,7 +808,7 @@ public partial class AddPersonal : System.Web.UI.Page
     {
         if (Session["list_documents_attach"] != null)
         {
-            listDocumentsAttach = Session["list_documents_attach"] as List<Documents>;
+            listDocumentsAttach = Session["list_documents_attach"] as List<StaffDocuments>;
         }
         gridAttachDocuments.DataSource = listDocumentsAttach;
     }

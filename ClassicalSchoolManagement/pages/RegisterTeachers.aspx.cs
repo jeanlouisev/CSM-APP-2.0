@@ -31,7 +31,7 @@ public partial class RegisterTeacher : System.Web.UI.Page
     int menu_code = (int)Users.MENU.HR;
     string msgContent = "";
 
-    List<Documents> listDocumentsAttach = new List<Documents>();
+    List<StaffDocuments> listDocumentsAttach = new List<StaffDocuments>();
 
     string sqlTeacherNextval = @"select nextval_teacher('codeSeq') as student_nextval";
 
@@ -199,8 +199,8 @@ public partial class RegisterTeacher : System.Web.UI.Page
                 // attach documents
                 if (Session["list_documents_attach"] != null)
                 {
-                    listDocumentsAttach = Session["list_documents_attach"] as List<Documents>;
-                    Documents.uploadDocument(listDocumentsAttach);
+                    listDocumentsAttach = Session["list_documents_attach"] as List<StaffDocuments>;
+                    //StaffDocuments.uploadDocument(listDocumentsAttach);
                 }
 
                 // clear fields
@@ -268,7 +268,7 @@ public partial class RegisterTeacher : System.Web.UI.Page
 
 
                 // documents
-                Session["list_documents_attach"] = Documents.getListDocumentsByStaffCode(t.id);
+                Session["list_documents_attach"] = StaffDocuments.getListDocumentsByStaffCode(t.id);
                 gridAttachDocuments.Rebind();
                 pnlDocuments.Visible = true;
 
@@ -283,7 +283,7 @@ public partial class RegisterTeacher : System.Web.UI.Page
 
     private void loadDocumentCategories()
     {
-        List<Documents> listResult = Documents.getListDocumentCategory();
+        List<StaffDocuments> listResult = null; // StaffDocuments.getListDocumentCategory();
         ddlDocumentCategory.DataValueField = "description";
         ddlDocumentCategory.DataTextField = "description";
         ddlDocumentCategory.DataSource = listResult;
@@ -575,7 +575,7 @@ public partial class RegisterTeacher : System.Web.UI.Page
                 {
                     if (Session["list_documents_attach"] != null)
                     {
-                        listDocumentsAttach = Session["list_documents_attach"] as List<Documents>;
+                        listDocumentsAttach = Session["list_documents_attach"] as List<StaffDocuments>;
                     }
 
                     HttpPostedFile userPostedFile = documentsAttachFile.PostedFile;
@@ -586,9 +586,9 @@ public partial class RegisterTeacher : System.Web.UI.Page
                             string fileName = DateTime.Now.ToString("ddMMyyyyHHmmss") + "_" + Path.GetFileName(userPostedFile.FileName);
                             string filepath = "~/Uploaded_Documents/" + teacherCode + "/" + fileName;
                             userPostedFile.SaveAs(Server.MapPath(filepath)); //save file to folder
-                            Documents doc = new Documents();
-                            doc.staff_code = teacherCode;
-                            doc.document_path = filepath;
+                            StaffDocuments doc = new StaffDocuments();
+                            //doc.staff_code = teacherCode;
+                            //doc.document_path = filepath;
                             doc.document_name = ddlDocumentCategory.SelectedValue;
                             doc.upload_time = DateTime.Now;
                             listDocumentsAttach.Add(doc);
@@ -611,7 +611,7 @@ public partial class RegisterTeacher : System.Web.UI.Page
 
         if (Session["list_documents_attach"] != null)
         {
-            listDocumentsAttach = Session["list_documents_attach"] as List<Documents>;
+            listDocumentsAttach = Session["list_documents_attach"] as List<StaffDocuments>;
         }
         gridAttachDocuments.DataSource = listDocumentsAttach;
     }
@@ -643,10 +643,10 @@ public partial class RegisterTeacher : System.Web.UI.Page
         //
         if (Session["list_documents_attach"] != null)
         {
-            listDocumentsAttach = Session["list_documents_attach"] as List<Documents>;
+            listDocumentsAttach = Session["list_documents_attach"] as List<StaffDocuments>;
         }
 
-        List<Documents> listTemp = new List<Documents>();
+        List<StaffDocuments> listTemp = new List<StaffDocuments>();
         //foreach (Documents doc in listDocumentsAttach)
         //{
         //    if (doc.rand_code != randCode)
@@ -655,7 +655,7 @@ public partial class RegisterTeacher : System.Web.UI.Page
         //    }
         //}
         // udpate old list to temporary list
-        listDocumentsAttach = new List<Documents>();
+        listDocumentsAttach = new List<StaffDocuments>();
         listDocumentsAttach = listTemp;
         Session["list_documents_attach"] = listTemp;
         // refresh grid

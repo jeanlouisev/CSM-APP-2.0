@@ -325,7 +325,7 @@ public partial class SearchStudents : System.Web.UI.Page
             st.fullName = txtFullName.Text.Trim().Length <= 0 ? null : "%" + txtFullName.Text.Trim().ToLower() + "%";
             st.sex = ddlSex.SelectedValue.ToString() == "-1" ? null : ddlSex.SelectedValue;
             st.vacation = ddlVacation.SelectedValue.ToString() == "-1" ? null : ddlVacation.SelectedValue;
-            st.class_id = int.Parse(ddlClassroom.SelectedValue);
+            st.classroom_id = int.Parse(ddlClassroom.SelectedValue);
             st.academic_year = ddlAcademicYear.SelectedValue == "-1" ? 0 : int.Parse(ddlAcademicYear.SelectedValue);
 
             //get list of students
@@ -418,7 +418,7 @@ public partial class SearchStudents : System.Web.UI.Page
         st.fullName = txtFullName.Text.Trim().Length <= 0 ? null : "%" + txtFullName.Text.Trim().ToLower() + "%";
         st.sex = ddlSex.SelectedValue.ToString() == "-1" ? null : ddlSex.SelectedValue;
         st.vacation = ddlVacation.SelectedValue.ToString() == "-1" ? null : ddlVacation.SelectedValue;
-        st.class_id = int.Parse(ddlClassroom.SelectedValue);
+        st.classroom_id = int.Parse(ddlClassroom.SelectedValue);
         st.academic_year = ddlAcademicYear.SelectedValue == "-1" ? 0 : int.Parse(ddlAcademicYear.SelectedValue);
 
         //get list of students

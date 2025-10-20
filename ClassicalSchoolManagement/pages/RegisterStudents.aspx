@@ -8,11 +8,13 @@
 <%--<%@ Register TagPrefix="art" TagName="bodyContainer" Src="~/design/BodyContainer/BC_RegisterStudents.ascx" %>--%>
 
 
-<%--<asp:Content ID="titleContent" ContentPlaceHolderID="TitleContentPlaceHolder" runat="Server">
+
+<asp:Content ID="titleContent" ContentPlaceHolderID="TitleContentPlaceHolder" runat="Server">
     Inscription
 </asp:Content>
 
-<asp:Content ID="HeaderContent" ContentPlaceHolderID="HeaderContentPlaceHolder" runat="Server">
+
+<%--<asp:Content ID="HeaderContent" ContentPlaceHolderID="HeaderContentPlaceHolder" runat="Server">
     <art:DefaultHeader ID="DefaultHeader" runat="server" />
 </asp:Content>
 
@@ -141,6 +143,12 @@
             color: gray;
             font-weight: bold;
             font-size: medium;
+        }
+
+
+        .currencyDesign {
+            text-align: right;
+            font-weight: bold;
         }
     </style>
 
@@ -292,7 +300,7 @@
         <div class="card-body">
             <div class="heading-layout1">
                 <div class="item-title">
-                    <h3>Ajouter Nouveau Élève</h3>
+                    <h3><span class="fa fa-file"></span>&nbsp;Ajouter Nouveau Élève</h3>
                 </div>
             </div>
             <div class="row">
@@ -321,8 +329,8 @@
                             <telerik:RadDropDownList ID="ddlSex" runat="server" Skin="Bootstrap" Width="100%">
                                 <Items>
                                     <telerik:DropDownListItem Value="-1" Text="-- Sélectionner --" Selected="true" />
-                                    <telerik:DropDownListItem Value="M" Text="Masculin" />
-                                    <telerik:DropDownListItem Value="F" Text="Feminin" />
+                                    <telerik:DropDownListItem Value="Masculin" Text="Masculin" />
+                                    <telerik:DropDownListItem Value="Féminin" Text="Féminin" />
                                 </Items>
                             </telerik:RadDropDownList>
                         </div>
@@ -354,7 +362,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <asp:Label ID="lblPhone1" runat="server" Text="Téléphone" Skin="Bootstrap" CssClass="app-label-design"></asp:Label>
-                            <telerik:RadNumericTextBox ID="txtPhone1" runat="server"
+                            <telerik:RadNumericTextBox ID="txtPhone" runat="server"
                                 Font-Size="Small" MaxLength="8" Width="100%" Skin="Bootstrap"
                                 ForeColor="Black" Type="Number"
                                 EmptyMessageStyle-Font-Italic="true">
@@ -397,10 +405,10 @@
                                 Skin="Bootstrap" Width="100%">
                                 <Items>
                                     <telerik:DropDownListItem Value="-1" Text="--Sélectionner--" Selected="true" />
-                                    <telerik:DropDownListItem Value="AM" Text="Matin" />
-                                    <telerik:DropDownListItem Value="PM" Text="Median" />
-                                    <telerik:DropDownListItem Value="NG" Text="Soir" />
-                                    <telerik:DropDownListItem Value="WK" Text="Weekend" />
+                                    <telerik:DropDownListItem Value="Matin" Text="Matin" />
+                                    <telerik:DropDownListItem Value="Médian" Text="Médian" />
+                                    <telerik:DropDownListItem Value="Soir" Text="Soir" />
+                                    <telerik:DropDownListItem Value="Weekend" Text="Weekend" />
                                 </Items>
                             </telerik:RadDropDownList>
                         </div>
@@ -438,19 +446,33 @@
         <div class="card-body">
             <div class="heading-layout1">
                 <div class="item-title">
-                    <h3>Documents Administratifs</h3>
+                    <h3><span class="fa fa-file-archive"></span>&nbsp;Documents et Frais Administratifs</h3>
                 </div>
             </div>
-            <%--     <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h4><span class="fa fa-file-archive-o"></span>&nbsp;Documents Administratifs</h4>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <telerik:RadTextBox ID="txtContributionPaymentType" ReadOnly="true" Font-Bold="true" runat="server" Width="100%" Skin="Bootstrap">
+                    </telerik:RadTextBox>
+                    <asp:HiddenField runat="server" ID="hiddenContributionTypeId" />
                 </div>
-                <div class="panel-body">--%>
+                <div class="col-md-2">
+                    <telerik:RadNumericTextBox runat="server" ID="txtContributionPaidAmount" EmptyMessage="0" ReadOnly="true"
+                        CssClass="currencyDesign" Width="100%" Skin="Bootstrap" ForeColor="Red" Font-Bold="true">
+                        <NumberFormat DecimalDigits="2" GroupSeparator="" />
+                    </telerik:RadNumericTextBox>
+                </div>
+                <div class="col-md-2">
+                    <telerik:RadCheckBox runat="server" ID="chkRegPaymentStatus" 
+                        Checked="true" Text="Payé" Enabled="false"></telerik:RadCheckBox>
+                </div>
+            </div>
+            <br />
+            <br />
             <div class="row">
                 <div class="col-md-5">
-                    <asp:Label ID="Label7" runat="server" Text="Description" CssClass="app-label-design">
-                    </asp:Label>
-                    <telerik:RadDropDownList ID="ddlDocumentCategory" Width="100%" runat="server" Skin="Bootstrap">
+                    <asp:Label ID="Label7" runat="server" Text="Type de document" CssClass="app-label-design"></asp:Label>
+                    <telerik:RadDropDownList ID="ddlDocumentType" Width="100%" runat="server" Skin="Bootstrap">
                     </telerik:RadDropDownList>
                 </div>
                 <div class="col-md-3">
@@ -461,7 +483,7 @@
                 <div class="col-md-3">
                     <span runat="server">
                         <br />
-                        <button type="button" class="btn btn-primary btn-lg" id="btnAttachDocuments" runat="server"
+                        <button type="button" class="btn btn-success btn-lg" id="btnAttachDocuments" runat="server"
                             onserverclick="btnAttachDocuments_ServerClick">
                             <span class="fa fa-plus"></span>
                             <asp:Literal runat="server" Text="Ajouter"></asp:Literal></button>
@@ -495,10 +517,10 @@
                                         </button>
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>--%>
-                                <telerik:GridBoundColumn HeaderText="Description" DataField="document_name">
+                                <telerik:GridBoundColumn HeaderText="Type de document" DataField="document_type_def">
                                     <HeaderStyle Width="150px" />
                                 </telerik:GridBoundColumn>
-                                <telerik:GridBoundColumn HeaderText="Pièces Jointes" DataField="document_path">
+                                <telerik:GridBoundColumn HeaderText="Pièces Jointes" DataField="document_name">
                                     <HeaderStyle Width="150px" />
                                 </telerik:GridBoundColumn>
                                 <telerik:GridBoundColumn HeaderText="Date d'ajout" DataField="upload_time">
@@ -517,7 +539,7 @@
         <div class="card-body">
             <div class="heading-layout1">
                 <div class="item-title">
-                    <h3>Personne à contacter en cas d'urgence</h3>
+                    <h3><span class="fa fa-users"></span>&nbsp;Personne à contacter en cas d'urgence</h3>
                 </div>
             </div>
 
@@ -545,8 +567,8 @@
                     <telerik:RadDropDownList ID="ddlParentSex" Width="100%" runat="server" Skin="Bootstrap">
                         <Items>
                             <telerik:DropDownListItem Value="-1" Text="-- Sélectionner --" Selected="true" />
-                            <telerik:DropDownListItem Value="M" Text="Masculin" />
-                            <telerik:DropDownListItem Value="F" Text="Feminin" />
+                            <telerik:DropDownListItem Value="Masculin" Text="Masculin" />
+                            <telerik:DropDownListItem Value="Féminin" Text="Féminin" />
                         </Items>
                     </telerik:RadDropDownList>
                 </div>
@@ -578,16 +600,16 @@
                 <div class="col-md-3">
                     <asp:Label ID="Label8" runat="server" Text="État Civil" CssClass="app-label-design"></asp:Label>
                     <span class="asterix">*</span>
-                            <telerik:RadDropDownList ID="ddlParentMaritalStatus" runat="server" Skin="Office2007" Width="100%">
-                                <Items>
-                                    <telerik:DropDownListItem Value="-1" Text="-- Sélectionner --" Selected="true" />
-                                    <telerik:DropDownListItem Value="C" Text="Célibataire" />
-                                    <telerik:DropDownListItem Value="M" Text="Marié(e)" />
-                                    <telerik:DropDownListItem Value="D" Text="Divorcé(e)" />
-                                    <telerik:DropDownListItem Value="V" Text="Veuf(ve)" />
-                                    <telerik:DropDownListItem Value="UL" Text="Union libre" />
-                                </Items>
-                            </telerik:RadDropDownList>
+                    <telerik:RadDropDownList ID="ddlParentMaritalStatus" runat="server" Skin="Bootstrap" Width="100%">
+                        <Items>
+                            <telerik:DropDownListItem Value="-1" Text="-- Sélectionner --" Selected="true" />
+                            <telerik:DropDownListItem Value="Célibataire" Text="Célibataire" />
+                            <telerik:DropDownListItem Value="Marié(e)" Text="Marié(e)" />
+                            <telerik:DropDownListItem Value="Divorcé(e)" Text="Divorcé(e)" />
+                            <telerik:DropDownListItem Value="Veuf(ve)" Text="Veuf(ve)" />
+                            <telerik:DropDownListItem Value="Union libre" Text="Union libre" />
+                        </Items>
+                    </telerik:RadDropDownList>
                 </div>
 
                 <div class="col-md-3">
@@ -631,24 +653,24 @@
                 <div class="col-md-3">
                     <asp:Label ID="Label2" runat="server" Text="Lien de parenté" CssClass="app-label-design"></asp:Label>
                     <span class="asterix">*</span>
-                    <telerik:RadDropDownList ID="ddlParentRelationship" Width="100%" runat="server" Skin="Bootstrap" DropDownHeight="100px">
+                    <telerik:RadDropDownList ID="ddlParentRelationship" Width="100%" runat="server" Skin="Bootstrap" DropDownHeight="250px">
                         <Items>
                             <telerik:DropDownListItem Value="-1" Text="-- Sélectionner --" Selected="true" />
-                            <telerik:DropDownListItem Value="FATHER" Text="Père" />
-                            <telerik:DropDownListItem Value="MOTHER" Text="Mère" />
-                            <telerik:DropDownListItem Value="UNCLE" Text="Oncle" />
-                            <telerik:DropDownListItem Value="AUNTIE" Text="Tante" />
-                            <telerik:DropDownListItem Value="BROTHER" Text="Frere" />
-                            <telerik:DropDownListItem Value="SISTER" Text="Soeur" />
-                            <telerik:DropDownListItem Value="COUSIN" Text="Cousin(e)" />
-                            <telerik:DropDownListItem Value="GOD_FATHER" Text="Parrain" />
-                            <telerik:DropDownListItem Value="GOD_MOTHER" Text="Marraine" />
-                            <telerik:DropDownListItem Value="HUSBAND" Text="Epoux" />
-                            <telerik:DropDownListItem Value="WIFE" Text="Epouse" />
-                            <telerik:DropDownListItem Value="BOYFRIEND" Text="Copain" />
-                            <telerik:DropDownListItem Value="GIRLFRIEND" Text="Copine" />
-                            <telerik:DropDownListItem Value="NEIGHBOR" Text="Voisin(e)" />
-                            <telerik:DropDownListItem Value="OTHER" Text="Autre" />
+                            <telerik:DropDownListItem Value="Père" Text="Père" />
+                            <telerik:DropDownListItem Value="Mère" Text="Mère" />
+                            <telerik:DropDownListItem Value="Oncle" Text="Oncle" />
+                            <telerik:DropDownListItem Value="Tante" Text="Tante" />
+                            <telerik:DropDownListItem Value="Frère" Text="Frère" />
+                            <telerik:DropDownListItem Value="Soeur" Text="Soeur" />
+                            <telerik:DropDownListItem Value="Cousin(e)" Text="Cousin(e)" />
+                            <telerik:DropDownListItem Value="Parrain" Text="Parrain" />
+                            <telerik:DropDownListItem Value="Marraine" Text="Marraine" />
+                            <telerik:DropDownListItem Value="Epoux" Text="Epoux" />
+                            <telerik:DropDownListItem Value="Epouse" Text="Epouse" />
+                            <telerik:DropDownListItem Value="Copain" Text="Copain" />
+                            <telerik:DropDownListItem Value="Copine" Text="Copine" />
+                            <telerik:DropDownListItem Value="Voisin(e)" Text="Voisin(e)" />
+                            <telerik:DropDownListItem Value="Autre" Text="Autre" />
                         </Items>
                     </telerik:RadDropDownList>
                 </div>

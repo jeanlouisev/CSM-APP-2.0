@@ -151,9 +151,8 @@ public partial class SearchSpecialStudentDetails : System.Web.UI.Page
             st.id = txtCode.Text.Trim().Length <= 0 ? null : txtCode.Text.Trim();
             st.fullName = txtFullName.Text.Trim().Length <= 0 ? null : "%" + txtFullName.Text.Trim().ToLower() + "%";
             st.sex = ddlSex.SelectedValue.ToString() == "-1" ? null : ddlSex.SelectedValue;
-            st.marital_status = ddlMaritalStatus.SelectedValue.ToString() == "-1" ? null : ddlMaritalStatus.SelectedValue;
             st.vacation = ddlVacation.SelectedValue.ToString() == "-1" ? null : ddlVacation.SelectedValue;
-            st.class_id = int.Parse(ddlClassroom.SelectedValue);
+            st.classroom_id = int.Parse(ddlClassroom.SelectedValue);
             st.status = int.Parse(ddlActualStatus.SelectedValue);
             st.academic_year = int.Parse(ddlAcademicYear.SelectedValue);
 

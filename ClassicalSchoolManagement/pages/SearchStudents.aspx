@@ -1,8 +1,8 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SearchStudents.aspx.cs" EnableEventValidation="false"
-    Inherits="SearchStudents" MasterPageFile="~/master/Master3.Master" %>
+    Inherits="SearchStudents" MasterPageFile="~/master/Master5.Master" %>
 
-<%@ Register TagPrefix="art" TagName="SideBarContainer" Src="~/design/SideMenu.ascx" %>
-<%@ Register TagPrefix="art" TagName="DefaultHeader" Src="~/design/DefaultHeader.ascx" %>
+<%--<%@ Register TagPrefix="art" TagName="SideBarContainer" Src="~/design/SideMenu.ascx" %>
+<%@ Register TagPrefix="art" TagName="DefaultHeader" Src="~/design/DefaultHeader.ascx" %>--%>
 <%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 
@@ -12,16 +12,16 @@
     Liste des elèves
 </asp:Content>
 
-<asp:Content ID="HeaderContent" ContentPlaceHolderID="HeaderContentPlaceHolder" runat="Server">
+<%--<asp:Content ID="HeaderContent" ContentPlaceHolderID="HeaderContentPlaceHolder" runat="Server">
     <art:DefaultHeader ID="DefaultHeader" runat="server" />
 </asp:Content>
 
 <asp:Content ID="SideBarContent" ContentPlaceHolderID="SideBarPlaceHolder" runat="Server">
     <art:SideBarContainer runat="server" />
-</asp:Content>
+</asp:Content>--%>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ScriptIncludePlaceHolder" runat="Server">
-    <script src="../plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <%--  <script src="../plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <!-- Bootstrap 3.3.5 -->
     <script src="../bootstrap/js/bootstrap.min.js"></script>
     <!-- FastClick -->
@@ -54,7 +54,7 @@
     <link rel="stylesheet" href="../plugins/datatables/dataTables.bootstrap.css">
     <!-- daterange picker -->
     <link rel="stylesheet" href="../plugins/daterangepicker/daterangepicker-bs3.css">
-    <link rel="stylesheet" href="../plugins/datepicker/css/bootstrap-datepicker3.css">
+    <link rel="stylesheet" href="../plugins/datepicker/css/bootstrap-datepicker3.css">--%>
 
 
 
@@ -148,9 +148,9 @@
 <asp:Content ID="HomeContent" ContentPlaceHolderID="DynamicContainerContentPlaceHolder" runat="Server">
 
     <telerik:RadWindowManager ID="MessageAlert" ShowContentDuringLoad="false" VisibleStatusbar="false"
-        ReloadOnShow="true" BackColor="White" runat="server" EnableShadow="true" Skin="Office2007" DestroyOnClose="false">
+        ReloadOnShow="true" BackColor="White" runat="server" EnableShadow="true" Skin="Bootstrap" DestroyOnClose="false">
         <Windows>
-            <telerik:RadWindow ID="RadWindow1" runat="server" Modal="true" Skin="Office2007">
+            <telerik:RadWindow ID="RadWindow1" runat="server" Modal="true" Skin="Bootstrap">
             </telerik:RadWindow>
         </Windows>
     </telerik:RadWindowManager>
@@ -169,27 +169,42 @@
     </telerik:RadAjaxLoadingPanel>
 
 
+    <!-- Breadcubs Area Start Here -->
+    <div class="breadcrumbs-area">
+        <%-- <h3>Eleve</h3>--%>
+        <ul>
+            <li>
+                <a href="#">Élèves</a>
+            </li>
+            <li>Liste des élèves</li>
+        </ul>
+    </div>
+    <!-- Breadcubs Area End Here -->
 
-    <div class="panel panel-info">
-        <div class="panel-heading">
-            <h4><span class="fa fa-list-ol"></span>&nbsp;Liste des élèves</h4>
-        </div>
 
-        <div class="panel-body">
+    <div class="card height-auto">
+        <div class="card-body">
+            <div class="heading-layout1">
+                <div class="item-title">
+                    <h3><span class="fa fa-list-ol"></span>&nbsp;Liste des élèves</h3>
+                </div>
+            </div>
+
+
             <div class="row">
                 <div class="col-md-3">
                     <asp:Label ID="lblFirstName" runat="server" Text="Code" CssClass="app-label-design"></asp:Label>
-                    <telerik:RadTextBox ID="txtCode" runat="server" Width="100%" CssClass="toUpper">
+                    <telerik:RadTextBox ID="txtCode" runat="server" Width="100%" CssClass="toUpper" Skin="Bootstrap">
                     </telerik:RadTextBox>
                 </div>
                 <div class="col-md-3">
                     <asp:Label ID="Label5" runat="server" Text="Nom & Prénom	" CssClass="app-label-design"></asp:Label>
-                    <telerik:RadTextBox ID="txtFullName" runat="server" Width="100%" Skin="Web20">
+                    <telerik:RadTextBox ID="txtFullName" runat="server" Width="100%" Skin="Bootstrap">
                     </telerik:RadTextBox>
                 </div>
                 <div class="col-md-3">
                     <asp:Label ID="Label6" runat="server" Text="Sexe" CssClass="app-label-design"></asp:Label>
-                    <telerik:RadDropDownList ID="ddlSex" runat="server" Width="100%" Skin="Office2007">
+                    <telerik:RadDropDownList ID="ddlSex" runat="server" Width="100%" Skin="Bootstrap">
                         <Items>
                             <telerik:DropDownListItem Value="-1" Text="--Tout Sélectionner--" Selected="true" />
                             <telerik:DropDownListItem Value="M" Text="Masculin" />
@@ -200,48 +215,51 @@
                 <div class="col-md-3">
                     <asp:Label ID="Label8" runat="server" Text="Classe" CssClass="app-label-design"></asp:Label>
                     <telerik:RadDropDownList ID="ddlClassroom" runat="server"
-                        Width="100%" Skin="Office2007" ExpandDirection="Down">
+                        Width="100%" Skin="Bootstrap" ExpandDirection="Down">
                     </telerik:RadDropDownList>
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-md-3">
                     <asp:Label ID="Label9" runat="server" Text="Vacation" CssClass="app-label-design"></asp:Label>
-                    <telerik:RadDropDownList ID="ddlVacation" runat="server" Width="100%" Skin="Office2007">
+                    <telerik:RadDropDownList ID="ddlVacation" runat="server" Width="100%" Skin="Bootstrap">
                         <Items>
                             <telerik:DropDownListItem Value="-1" Text="--Tout Sélectionner--" />
-                            <telerik:DropDownListItem Value="AM" Text="Matin" Selected="true" />
-                            <telerik:DropDownListItem Value="PM" Text="Median" />
-                            <telerik:DropDownListItem Value="NG" Text="Soir" />
-                            <telerik:DropDownListItem Value="WK" Text="Weekend" />
+                            <telerik:DropDownListItem Value="Matin" Text="Matin" Selected="true" />
+                            <telerik:DropDownListItem Value="Médian" Text="Médian" />
+                            <telerik:DropDownListItem Value="Soir" Text="Soir" />
+                            <telerik:DropDownListItem Value="Weekend" Text="Weekend" />
                         </Items>
                     </telerik:RadDropDownList>
                 </div>
                 <div class="col-md-3">
                     <asp:Label ID="Label11" runat="server" Text="Année Académique" CssClass="app-label-design"></asp:Label>
-                    <telerik:RadDropDownList ID="ddlAcademicYear" runat="server" Width="100%" Skin="Office2007">
+                    <telerik:RadDropDownList ID="ddlAcademicYear" runat="server" Width="100%" Skin="Bootstrap">
                     </telerik:RadDropDownList>
                 </div>
-            </div>
-            <br />
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <button type="button" class="btn btn-sm btn-primary" id="btnSearch" runat="server"
-                        onserverclick="btnSearch_Click" width="120px">
+                <div class="col-md-3">
+                    <br />
+                    <button type="button" class="btn btn-lg btn-primary" id="btnSearch" runat="server"
+                        onserverclick="btnSearch_Click">
                         <span class="fa fa-search"></span>
                         <asp:Literal runat="server" Text="Rechercher"></asp:Literal></button>
                     &nbsp;
 
-                    <button type="button" class="btn btn-sm btn-default" id="btnExportExcel" runat="server"
-                        onserverclick="btnExportExcel_Click" width="120px">
-                        <span class="fa fa-file-excel-o"></span>
+                    <button type="button" class="btn btn-lg btn-secondary" id="btnExportExcel" runat="server"
+                        onserverclick="btnExportExcel_Click">
+                        <span class="fa fa-file-excel"></span>
                         <asp:Literal runat="server" Text="Exporter vers excel"></asp:Literal></button>
                 </div>
             </div>
-            <br />
+        </div>
+
+
+        <div class="card-body">
+
             <div class="row" runat="server" id="divGridStudent">
                 <div class="col-md-12" style="width: 100%;">
-                    <telerik:RadGrid runat="server" Skin="Office2007" RenderMode="Lightweight"
+                    <telerik:RadGrid runat="server" Skin="Bootstrap" RenderMode="Lightweight"
                         ID="gridStudent"
                         OnItemCommand="gridStudent_ItemCommand"
                         OnItemDataBound="gridStudent_ItemDataBound">
@@ -254,7 +272,7 @@
                                     <ItemStyle HorizontalAlign="Center" />
                                     <ItemTemplate>
                                         <asp:Label runat="server" ID="labelNo"></asp:Label>
-                                        <asp:HiddenField runat="server" ID="hiddenClassroomId" Value='<%# Eval("class_id") %>' />
+                                        <asp:HiddenField runat="server" ID="hiddenClassroomId" Value='<%# Eval("classroom_id") %>' />
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>
                                 <telerik:GridTemplateColumn>
@@ -297,7 +315,7 @@
                                     <HeaderStyle Width="150px" HorizontalAlign="Center" />
                                     <ItemStyle HorizontalAlign="Center" />
                                 </telerik:GridBoundColumn>
-                                <telerik:GridBoundColumn HeaderText="Classe" DataField="class_name">
+                                <telerik:GridBoundColumn HeaderText="Classe" DataField="classroom_name">
                                     <HeaderStyle Width="250px" HorizontalAlign="Center" />
                                     <ItemStyle HorizontalAlign="Center" />
                                 </telerik:GridBoundColumn>
@@ -315,7 +333,6 @@
                     </telerik:RadGrid>
                 </div>
             </div>
-
         </div>
     </div>
 </asp:Content>

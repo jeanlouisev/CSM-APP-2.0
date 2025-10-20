@@ -9,17 +9,9 @@
 
 
 
-public partial class ClassroomManagement {
-    
-    /// <summary>
-    /// DefaultHeader control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::DefaultHeader DefaultHeader;
-    
+public partial class ClassroomManagement
+{
+
     /// <summary>
     /// RadAjaxManager1 control.
     /// </summary>
@@ -28,7 +20,7 @@ public partial class ClassroomManagement {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::Telerik.Web.UI.RadAjaxManager RadAjaxManager1;
-    
+
     /// <summary>
     /// RadAjaxLoadingPanel1 control.
     /// </summary>
@@ -37,7 +29,7 @@ public partial class ClassroomManagement {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::Telerik.Web.UI.RadAjaxLoadingPanel RadAjaxLoadingPanel1;
-    
+
     /// <summary>
     /// MessageAlert control.
     /// </summary>
@@ -46,7 +38,7 @@ public partial class ClassroomManagement {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::Telerik.Web.UI.RadWindowManager MessageAlert;
-    
+
     /// <summary>
     /// RadWindow1 control.
     /// </summary>
@@ -55,7 +47,7 @@ public partial class ClassroomManagement {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::Telerik.Web.UI.RadWindow RadWindow1;
-    
+
     /// <summary>
     /// pnlClassroomList control.
     /// </summary>
@@ -64,7 +56,7 @@ public partial class ClassroomManagement {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.Panel pnlClassroomList;
-    
+
     /// <summary>
     /// lblCode control.
     /// </summary>
@@ -73,7 +65,7 @@ public partial class ClassroomManagement {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.Label lblCode;
-    
+
     /// <summary>
     /// ddlClassroom control.
     /// </summary>
@@ -82,7 +74,7 @@ public partial class ClassroomManagement {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::Telerik.Web.UI.RadDropDownList ddlClassroom;
-    
+
     /// <summary>
     /// Label2 control.
     /// </summary>
@@ -91,7 +83,7 @@ public partial class ClassroomManagement {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.Label Label2;
-    
+
     /// <summary>
     /// ddlAcademicYear control.
     /// </summary>
@@ -100,7 +92,7 @@ public partial class ClassroomManagement {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::Telerik.Web.UI.RadDropDownList ddlAcademicYear;
-    
+
     /// <summary>
     /// xxxxxx control.
     /// </summary>
@@ -109,7 +101,7 @@ public partial class ClassroomManagement {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.Label xxxxxx;
-    
+
     /// <summary>
     /// ddlClassroomCurrentStatus control.
     /// </summary>
@@ -118,7 +110,7 @@ public partial class ClassroomManagement {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::Telerik.Web.UI.RadComboBox ddlClassroomCurrentStatus;
-    
+
     /// <summary>
     /// radGridClassroom control.
     /// </summary>
@@ -127,7 +119,7 @@ public partial class ClassroomManagement {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::Telerik.Web.UI.RadGrid radGridClassroom;
-    
+
     /// <summary>
     /// pnlAddCoursToClassroom control.
     /// </summary>
@@ -136,7 +128,7 @@ public partial class ClassroomManagement {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.Panel pnlAddCoursToClassroom;
-    
+
     /// <summary>
     /// ddlClassroomPrice control.
     /// </summary>
@@ -145,7 +137,7 @@ public partial class ClassroomManagement {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::Telerik.Web.UI.RadComboBox ddlClassroomPrice;
-    
+
     /// <summary>
     /// ddlCourseNamePrice control.
     /// </summary>
@@ -154,7 +146,7 @@ public partial class ClassroomManagement {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::Telerik.Web.UI.RadComboBox ddlCourseNamePrice;
-    
+
     /// <summary>
     /// btnAffectCoursePrice control.
     /// </summary>
@@ -163,7 +155,7 @@ public partial class ClassroomManagement {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.HtmlControls.HtmlButton btnAffectCoursePrice;
-    
+
     /// <summary>
     /// btnReturn1 control.
     /// </summary>
@@ -172,7 +164,7 @@ public partial class ClassroomManagement {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.HtmlControls.HtmlButton btnReturn1;
-    
+
     /// <summary>
     /// radGridAffectedCourse control.
     /// </summary>

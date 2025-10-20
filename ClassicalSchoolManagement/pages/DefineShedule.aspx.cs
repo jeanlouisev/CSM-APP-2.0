@@ -261,7 +261,7 @@ public partial class DefineShedule : System.Web.UI.Page
 
         ClassRoom c = new ClassRoom();
         c.id = classId;
-        c.class_name = hiddenClassName.Value;
+        c.classroom_name = hiddenClassName.Value;
         c.vacation = hiddenVacation.Value;
 
         Session["classroom_obj"] = c;
