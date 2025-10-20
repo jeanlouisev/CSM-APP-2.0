@@ -14,10 +14,10 @@ namespace Db_Core
         public static string[] ConnectionStrings = new string[]
         {
             // localhost connection using root user
-             //"Data Source=localhost; Initial Catalog = csm; User Id = root; password=pass"
+            "Data Source=localhost; Initial Catalog = csm; User Id = root; password=Saphirvip@2019"
              
             // localhost connection using custom user
-             "Data Source=localhost; Initial Catalog = csm; User Id = hr_csm; password=Csm@9876&x"
+            // "Data Source=localhost; Initial Catalog = csm; User Id = hr_csm; password=Csm@9876&x"
             
             // remote connection
             // "Data Source=mysql9001.site4now.net; Initial Catalog = db_aa5d99_csm; User Id = aa5d99_csm; password=Csm@9876&x"

@@ -66,9 +66,9 @@ public partial class DialogStaffDetailsInfo : System.Web.UI.Page
                 lblCode.Text = st.id == null || st.id.Length <= 0 ? "N/A" : st.id;
                 lblSex.Text = st.sex == "M" ? "Masculin" : "Féminin";
                 lblEmail.Text = st.email == null || st.email.Length <= 0 ? "N/A" : st.email.ToLower();
-                lblAdresse.Text = st.adress == null || st.adress.Length <= 0 ? "N/A" : st.adress;
+                lblAdresse.Text = st.address == null || st.address.Length <= 0 ? "N/A" : st.address;
                 lblIdCard.Text = st.id_card == null || st.id_card.Length <= 0 ? "N/A" : st.id_card;
-                lblPhone.Text = st.phone1 == null || st.phone1.Length <= 0 ? "N/A" : st.phone1;
+                lblPhone.Text = st.phone == null || st.phone.Length <= 0 ? "N/A" : st.phone;
 
                 lblBirthDate.Text = st.birth_date == null || st.birth_date.ToString().Length <= 0 ? "N/A" :
                     st.birth_date.ToString("dd/MM/yyyy");
@@ -78,17 +78,17 @@ public partial class DialogStaffDetailsInfo : System.Web.UI.Page
 
                 lblMaritalStatus.Text = st.marital_status == null || st.marital_status.Length <= 0 ? "N/A" :
                     st.marital_status;
-                lblPosition.Text = st.position_name;
-                lblRoles.Text = st.role_name == null ? "N/A" : st.role_name;
+               // lblPosition.Text = st.position_name;
+//lblRoles.Text = st.role_name == null ? "N/A" : st.role_name;
 
-                switch (st.marital_status)
-                {
-                    case "C":lblMaritalStatus.Text = "Célibataire"; break;
-                    case "M":lblMaritalStatus.Text = "Marier"; break;
-                    case "D":lblMaritalStatus.Text = "Divorcer"; break;
-                    case "UL":lblMaritalStatus.Text = "Union Libre"; break;
-                    case "V":lblMaritalStatus.Text = "Veuf(ve)"; break;
-                }
+                //switch (st.marital_status)
+                //{
+                //    case "C":lblMaritalStatus.Text = "Célibataire"; break;
+                //    case "M":lblMaritalStatus.Text = "Marier"; break;
+                //    case "D":lblMaritalStatus.Text = "Divorcer"; break;
+                //    case "UL":lblMaritalStatus.Text = "Union Libre"; break;
+                //    case "V":lblMaritalStatus.Text = "Veuf(ve)"; break;
+                //}
                 
 
                 imageKeeper.ImageUrl = "~/images/image_data/" + st.image_path;
@@ -104,30 +104,13 @@ public partial class DialogStaffDetailsInfo : System.Web.UI.Page
 
                 // information parents
 
-                lblFirstNameCont.Text = st.ref_first_name;
-                lblLastNameCont.Text = st.ref_last_name;
-                lblSexCont.Text = st.ref_sex == "M" ? "Masculin" : "Feminin";
-                lblPhoneCont.Text = st.ref_phone;
-                lblAdressCont.Text = st.ref_adress;
+                //lblFirstNameCont.Text = st.ref_first_name;
+                //lblLastNameCont.Text = st.ref_last_name;
+                //lblSexCont.Text = st.ref_sex == "M" ? "Masculin" : "Feminin";
+                //lblPhoneCont.Text = st.ref_phone;
+                //lblAdressCont.Text = st.ref_adress;
 
-                switch (st.ref_relationship)
-                {
-                    case "FATHER": lblRelationshipCont.Text = "Père"; break;
-                    case "MOTHER": lblRelationshipCont.Text = "Mère"; break;
-                    case "UNCLE": lblRelationshipCont.Text = "Oncle"; break;
-                    case "AUNTIE": lblRelationshipCont.Text = "Tante"; break;
-                    case "BROTHER": lblRelationshipCont.Text = "Frere"; break;
-                    case "SISTER": lblRelationshipCont.Text = "Soeur"; break;
-                    case "COUSIN": lblRelationshipCont.Text = "Cousin (e)"; break;
-                    case "GOD_FATHER": lblRelationshipCont.Text = "Parrain"; break;
-                    case "GOD_MOTHER": lblRelationshipCont.Text = "Marraine"; break;
-                    case "HUSBAND": lblRelationshipCont.Text = "Epoux"; break;
-                    case "WIFE": lblRelationshipCont.Text = "Epouse"; break;
-                    case "BOYFRIEND": lblRelationshipCont.Text = "Copain"; break;
-                    case "GIRLFRIEND": lblRelationshipCont.Text = "Copine"; break;
-                    case "NEIGHBOR": lblRelationshipCont.Text = "Voisin(e)"; break;
-                    case "OTHER": lblRelationshipCont.Text = "Autre"; break;
-                }
+
 
             }
         }

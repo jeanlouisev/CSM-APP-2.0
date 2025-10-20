@@ -479,7 +479,9 @@ public class Salary
 
     public static List<Salary> getListTax()
     {
-        string sql = @"select * from tax_configuration
+        /*string sql = @"select * from tax_configuration
+                          ORDER by group_name asc";*/
+        string sql = @"select * from staff_tax_configuration
                           ORDER by group_name asc";
 
         try

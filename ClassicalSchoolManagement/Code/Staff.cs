@@ -12,76 +12,30 @@ public class Staff
 {
     //getters and setters
 
-    public string Staff_code { get; set; }
+    //public string Staff_code { get; set; }
     public string id { get; set; }
-    public int Status { get; set; }
-    public DateTime register_date { get; set; }
     public string first_name { get; set; }
     public string last_name { get; set; }
-    public string name { get; set; }
-    public string fullName { get; set; }
     public string sex { get; set; }
-    public string sex_code { get; set; }
     public string marital_status { get; set; }
-    public string marital_status_definition { get; set; }
     public string id_card { get; set; }
     public DateTime birth_date { get; set; }
     public string birth_place { get; set; }
-    public string adress { get; set; }
-    public string phone1 { get; set; }
-    public int position_id { get; set; }
-    public string position_name { get; set; }
+    public string address { get; set; }
+    public string phone { get; set; }
     public string email { get; set; }
     public string image_path { get; set; }
-    public string documentpath { get; set; }
     public string study_level { get; set; }
-    public String fromDate { get; set; }
-    public String toDate { get; set; }
-    //getters references info
-    //public string referenceIdCard { get; set; }
-    //public string referenceFirstName { get; set; }
-    //public string referenceLastName { get; set; }
-    //public string referenceSex { get; set; }
-    //public string referenceMaritalStatus { get; set; }
-    //public string referencePhone { get; set; }
-    //public string referenceAdress { get; set; }
-    //public string referenceRelationship { get; set; }
-    public DateTime Update_date { get; set; }
-    public string classroom { get; set; }
-    public string vacation { get; set; }
-    public string cours_counter { get; set; }
-    public DateTime register_date_timesheet { get; set; }
-    public int presence_status { get; set; }
-    public int validation_status { get; set; }
-    public int absence_reason { get; set; }
-    public int reference_status { get; set; }
-    public string relationship { get; set; }
-    public DateTime date_register { get; set; }
-    public string absence_reason_description { get; set; }
-    public string register_date_string { get; set; }
-    public double amount { get; set; }
-    public string group_name { get; set; }
     public int status { get; set; }
-    public int academic_year { get; set; }
-    public double salary_amount { get; set; }
-    public string reference_code { get; set; }
-    public string vacation_id { get; set; }
-    public string classroom_name { get; set; }
-    public string login_user { get; set; }
-    public int classroom_id { get; set; }
-    public DateTime sheet_date { get; set; }
-    public int group_name_id { get; set; }
-    public int tax_id { get; set; }
+    public int position_id { get; set; }
+    public DateTime date_register { get; set; }
+    public int login_user_id { get; set; }
     public int role_id { get; set; }
-    public string role_name { get; set; }
-    public string status_definition { get; set; }
-    //
-    public string ref_first_name { get; set; }
-    public string ref_last_name { get; set; }
-    public string ref_sex { get; set; }
-    public string ref_phone { get; set; }
-    public string ref_adress { get; set; }
-    public string ref_relationship { get; set; }
+    public string fullName { get; set; }
+    public string name { get; set; }
+    
+
+
 
 
 
@@ -106,22 +60,7 @@ public class Staff
                 {
                     if (reader.GetName(i).ToUpper() == "ID")
                     {
-                        try { staff.Staff_code = reader.GetValue(i).ToString(); }
-                        catch { }
-                    }
-                    if (reader.GetName(i).ToUpper() == "ID")
-                    {
                         try { staff.id = reader.GetValue(i).ToString(); }
-                        catch { }
-                    }
-                    if (reader.GetName(i).ToUpper() == "STATUS")
-                    {
-                        try { staff.Status = reader.GetInt32(i); }
-                        catch { }
-                    }
-                    if (reader.GetName(i).ToUpper() == "REGISTER_DATE")
-                    {
-                        try { staff.register_date = reader.GetDateTime(i); }
                         catch { }
                     }
                     if (reader.GetName(i).ToUpper() == "FIRST_NAME")
@@ -134,81 +73,16 @@ public class Staff
                         try { staff.last_name = reader.GetValue(i).ToString(); }
                         catch { }
                     }
-                    if (reader.GetName(i).ToUpper() == "NAME")
+                    if (reader.GetName(i).ToUpper() == "SEX")
                     {
-                        try { staff.name = reader.GetValue(i).ToString(); }
+                        try{staff.sex = reader.GetValue(i).ToString();}
                         catch { }
                     }
-                    if (reader.GetName(i).ToUpper() == "FULLNAME")
-                    {
-                        try { staff.fullName = reader.GetValue(i).ToString(); }
-                        catch { }
-                    }
-                    if (reader.GetName(i).ToUpper() == "SEXE")
-                    {
-                        try
-                        {
-                            switch (reader.GetValue(i).ToString())
-                            {
-                                case "M": staff.sex = "Masculin"; break;
-                                case "F": staff.sex = "Feminin"; break;
-                                default: staff.sex = ""; break;
-                            }
-                        }
 
-                        catch { }
-                    }
-                    if (reader.GetName(i).ToUpper() == "SEXE")
-                    {
-                        try { staff.sex_code = reader.GetValue(i).ToString(); }
-                        catch { }
-                    }
-                    if (reader.GetName(i).ToUpper() == "ROLE_NAME")
-                    {
-                        try { staff.role_name = reader.GetValue(i).ToString(); }
-                        catch { }
-                    }
                     if (reader.GetName(i).ToUpper() == "MARITAL_STATUS")
                     {
-                        try { staff.marital_status = reader.GetValue(i).ToString(); }
-                        catch { }
-                    }
-                    if (reader.GetName(i).ToUpper() == "MARITAL_STATUS")
-                    {
-                        try
-                        {
-                            switch (reader.GetValue(i).ToString())
-                            {
-                                case "C": staff.marital_status_definition = "Célibataire"; break;
-                                case "M": staff.marital_status_definition = "Marié(e)"; break;
-                                case "D": staff.marital_status_definition = "Divorcé(e)"; break;
-                                case "UL": staff.marital_status_definition = "Union Libre"; break;
-                                case "V": staff.marital_status_definition = "Veuf(ve)"; break;
-                            }
-                        }
-                        catch { }
-                    }
-                    if (reader.GetName(i).ToUpper() == "STATUS")
-                    {
-                        try
-                        {
-                            switch (reader.GetValue(i).ToString())
-                            {
-                                case "1": staff.status_definition = "Activé"; break;
-                                case "0": staff.status_definition = "Désactivé"; break;
-                            }
-                        }
-                        catch { }
-                    }
-                    if (reader.GetName(i).ToUpper() == "POSITION_ID")
-                    {
-                        try { staff.position_id = int.Parse(reader.GetValue(i).ToString()); }
-                        catch { }
-                    }
-                    if (reader.GetName(i).ToUpper() == "POSITION_NAME")
-                    {
-                        try { staff.position_name = reader.GetValue(i).ToString(); }
-                        catch { }
+                        try{staff.marital_status = reader.GetValue(i).ToString();}
+                         catch { }
                     }
                     if (reader.GetName(i).ToUpper() == "ID_CARD")
                     {
@@ -227,12 +101,12 @@ public class Staff
                     }
                     if (reader.GetName(i).ToUpper() == "ADRESS")
                     {
-                        try { staff.adress = reader.GetValue(i).ToString(); }
+                        try { staff.address = reader.GetValue(i).ToString(); }
                         catch { }
                     }
-                    if (reader.GetName(i).ToUpper() == "PHONE1")
+                    if (reader.GetName(i).ToUpper() == "PHONE")
                     {
-                        try { staff.phone1 = reader.GetValue(i).ToString(); }
+                        try { staff.phone = reader.GetValue(i).ToString(); }
                         catch { }
                     }
                     if (reader.GetName(i).ToUpper() == "EMAIL")
@@ -245,173 +119,41 @@ public class Staff
                         try { staff.image_path = reader.GetValue(i).ToString(); }
                         catch { }
                     }
-                    if (reader.GetName(i).ToUpper() == "DOCUMENTPATH")
+                    if (reader.GetName(i).ToUpper() == "NAME")
                     {
-                        try { staff.documentpath = reader.GetValue(i).ToString(); }
+                        try { staff.name = reader.GetValue(i).ToString(); }
                         catch { }
                     }
                     if (reader.GetName(i).ToUpper() == "STUDY_LEVEL")
                     {
                         try { staff.study_level = reader.GetValue(i).ToString(); }
                         catch { }
-                    }
-                    if (reader.GetName(i).ToUpper() == "DATE_REGISTER")
-                    {
-                        try { staff.date_register = reader.GetDateTime(i); }
-                        catch { }
-                    }
-                    if (reader.GetName(i).ToUpper() == "ABSENCE_REASON_DESCRIPTION")
-                    {
-                        try { staff.absence_reason_description = reader.GetValue(i).ToString(); }
-                        catch { }
-                    }
-                    if (reader.GetName(i).ToUpper() == "RELATIONSHIP")
-                    {
-                        try { staff.relationship = reader.GetValue(i).ToString(); }
-                        catch { }
-                    }
-                    if (reader.GetName(i).ToUpper() == "UPDATE_TIME")
-                    {
-                        try { staff.Update_date = reader.GetDateTime(i); }
-                        catch { }
-                    }
-                    if (reader.GetName(i).ToUpper() == "PRESENCE_STATUS")
-                    {
-                        try
-                        {
-                            if (reader.GetInt32(i) > 0)
-                            {
-                                staff.presence_status = reader.GetInt32(i);
-                            }
-                            else
-                            {
-                                staff.presence_status = 0;
-                            }
-                        }
-                        catch { }
-                    }
-                    if (reader.GetName(i).ToUpper() == "VALIDATION_STATUS")
-                    {
-                        try
-                        {
-                            if (reader.GetInt32(i) > 0)
-                            {
-                                staff.validation_status = reader.GetInt32(i);
-                            }
-                            else
-                            {
-                                staff.validation_status = 0;
-                            }
-                        }
-                        catch { }
-                    }
-                    if (reader.GetName(i).ToUpper() == "ABSENCE_REASON")
-                    {
-                        try
-                        {
-                            staff.absence_reason = reader.GetInt32(i);
-                        }
-                        catch { }
-                    }
-                    if (reader.GetName(i).ToUpper() == "REGISTER_DATE_TIMESHEET")
-                    {
-                        try { staff.register_date_timesheet = reader.GetDateTime(i); }
-                        catch { }
-                    }
-                    if (reader.GetName(i).ToUpper() == "REFERENCE_STATUS")
-                    {
-                        try { staff.reference_status = reader.GetInt32(i); }
-                        catch { }
-                    }
-                    if (reader.GetName(i).ToUpper() == "REGISTER_DATE_STRING")
-                    {
-                        try { staff.register_date_string = reader.GetValue(i).ToString(); }
-                        catch { }
-                    }
-                    if (reader.GetName(i).ToUpper() == "AMOUNT")
-                    {
-                        try { staff.amount = reader.GetDouble(i); }
-                        catch { }
-                    }
-                    if (reader.GetName(i).ToUpper() == "GROUP_NAME")
-                    {
-                        try { staff.group_name = reader.GetValue(i).ToString(); }
-                        catch { }
-                    }
-                    if (reader.GetName(i).ToUpper() == "GROUP_NAME")
+                    }                 
+
+                    if (reader.GetName(i).ToUpper() == "STATUS")
                     {
                         try { staff.status = int.Parse(reader.GetValue(i).ToString()); }
                         catch { }
                     }
-                    if (reader.GetName(i).ToUpper() == "ACADEMIC_YEAR")
+
+                    if (reader.GetName(i).ToUpper() == "POSITION_ID")
                     {
-                        try { staff.academic_year = reader.GetInt32(i); }
+                        try { staff.position_id = int.Parse(reader.GetValue(i).ToString()); }
                         catch { }
                     }
-                    if (reader.GetName(i).ToUpper() == "SALARY_AMOUNT")
+
+                    if (reader.GetName(i).ToUpper() == "DATE_REGISTER")
                     {
-                        try { staff.salary_amount = reader.GetDouble(i); } catch { }
+                        try { staff.date_register = DateTime.Parse(reader.GetValue(i).ToString()); }
+                        catch { }
                     }
-                    if (reader.GetName(i).ToUpper() == "REFERENCE_CODE")
+
+                    if (reader.GetName(i).ToUpper() == "LOGIN_USER_ID")
                     {
-                        try { staff.reference_code = reader.GetValue(i).ToString(); } catch { }
+                        try { staff.login_user_id = int.Parse(reader.GetValue(i).ToString()); }
+                        catch { }
                     }
-                    if (reader.GetName(i).ToUpper() == "VACATION_ID")
-                    {
-                        try { staff.vacation_id = reader.GetValue(i).ToString(); } catch { }
-                    }
-                    if (reader.GetName(i).ToUpper() == "CLASSROOM_NAME")
-                    {
-                        try { staff.classroom_name = reader.GetValue(i).ToString(); } catch { }
-                    }
-                    if (reader.GetName(i).ToUpper() == "LOGIN_USER")
-                    {
-                        try { staff.login_user = reader.GetValue(i).ToString(); } catch { }
-                    }
-                    if (reader.GetName(i).ToUpper() == "CLASSROOM_ID")
-                    {
-                        try { staff.classroom_id = int.Parse(reader.GetValue(i).ToString()); } catch { }
-                    }
-                    if (reader.GetName(i).ToUpper() == "SHEET_DATE")
-                    {
-                        try { staff.sheet_date = DateTime.Parse(reader.GetValue(i).ToString()); } catch { }
-                    }
-                    if (reader.GetName(i).ToUpper() == "GROUP_NAME_ID")
-                    {
-                        try { staff.group_name_id = int.Parse(reader.GetValue(i).ToString()); } catch { }
-                    }
-                    if (reader.GetName(i).ToUpper() == "TAX_ID")
-                    {
-                        try { staff.tax_id = int.Parse(reader.GetValue(i).ToString()); } catch { }
-                    }
-                    if (reader.GetName(i).ToUpper() == "ROLE_ID")
-                    {
-                        try { staff.role_id = int.Parse(reader.GetValue(i).ToString()); } catch { }
-                    }
-                    if (reader.GetName(i).ToUpper() == "REF_FIRST_NAME")
-                    {
-                        try { staff.ref_first_name = reader.GetValue(i).ToString(); } catch { }
-                    }
-                    if (reader.GetName(i).ToUpper() == "REF_LAST_NAME")
-                    {
-                        try { staff.ref_last_name = reader.GetValue(i).ToString(); } catch { }
-                    }
-                    if (reader.GetName(i).ToUpper() == "REF_SEX")
-                    {
-                        try { staff.ref_sex = reader.GetValue(i).ToString(); } catch { }
-                    }
-                    if (reader.GetName(i).ToUpper() == "REF_PHONE")
-                    {
-                        try { staff.ref_phone = reader.GetValue(i).ToString(); } catch { }
-                    }
-                    if (reader.GetName(i).ToUpper() == "REF_ADRESS")
-                    {
-                        try { staff.ref_adress = reader.GetValue(i).ToString(); } catch { }
-                    }
-                    if (reader.GetName(i).ToUpper() == "REF_RELATIONSHIP")
-                    {
-                        try { staff.ref_relationship = reader.GetValue(i).ToString(); } catch { }
-                    }
+
                 }
                 listStaff.Add(staff);
             }
@@ -425,23 +167,23 @@ public class Staff
         return listStaff;
     }
 
-    public static List<Staff> ChekIdReferemce(Staff st)
-    {
-        List<Staff> listResult = null;
+    //public static List<Staff> ChekIdReferemce(Staff st)
+    //{
+    //    List<Staff> listResult = null;
 
-        string sql = @"SELECT  a.id_card,
-                                    a.first_name,
-									a.last_name,
-                                    a.Sex,
-                                    a.Marital_status,                                  
-                                    a.Phone,
-                                    a.adress,
-                                    a.relationship
-                                FROM reference_external_information a
-                                WHERE 1=1 ";
+    //    string sql = @"SELECT  a.id_card,
+    //                                a.first_name,
+				//					a.last_name,
+    //                                a.Sex,
+    //                                a.Marital_status,                                  
+    //                                a.Phone,
+    //                                a.adress,
+    //                                a.relationship
+    //                            FROM reference_external_information a
+    //                            WHERE 1=1 ";
 
-        SqlStatement stmt = SqlStatement.FromString(sql, SqlConnString.CSM_APP);
-        return Parse(stmt.ExecuteReader());
+    //    SqlStatement stmt = SqlStatement.FromString(sql, SqlConnString.CSM_APP);
+    //    return Parse(stmt.ExecuteReader());
 
 
 
@@ -492,29 +234,29 @@ public class Staff
         }
         return listResult;
         */
-    }
+   // }
 
-    public static List<Staff> getListStaffByReference(Staff staff)
-    {
-        string sql = @"SELECT  a.*,
-                        concat(a.Last_name,' ',a.First_name) as fullName
-                        FROM STAFF a
-                        WHERE  a.status = 1 and a.Id NOT IN('PS-1')
-                        AND a.id = ?
-                        AND concat(lower(a.first_name),' ',lower(a.last_name)) like ? 
-                        AND a.sexe = ?";
+    //public static List<Staff> getListStaffByReference(Staff staff)
+    //{
+    //    string sql = @"SELECT  a.*,
+    //                    concat(a.Last_name,' ',a.First_name) as fullName
+    //                    FROM STAFF a
+    //                    WHERE  a.status = 1 and a.Id NOT IN('PS-1')
+    //                    AND a.id = ?
+    //                    AND concat(lower(a.first_name),' ',lower(a.last_name)) like ? 
+    //                    AND a.sexe = ?";
 
-        SqlStatement stmt = SqlStatement.FromString(sql, SqlConnString.CSM_APP);
-        stmt.SetParameters(staff.id, staff.fullName.ToUpper(), staff.sex);
-        return Parse(stmt.ExecuteReader());
-    }
+    //    SqlStatement stmt = SqlStatement.FromString(sql, SqlConnString.CSM_APP);
+    //    stmt.SetParameters(staff.id, staff.fullName.ToUpper(), staff.sex);
+    //    return Parse(stmt.ExecuteReader());
+    //}
 
     public static List<Staff> getListStaff(Staff st)
     {
         try
         {
             string sql = @"SELECT  a.*, concat(a.first_name,' ',a.Last_name) as fullname,
-                           ( SELECT (select group_concat(concat('-',' ',p.name))) from position p
+                           ( SELECT (select group_concat(concat('-',' ',p.name))) from staff_position p
 								inner join staff_position sp on sp.position_id = p.id and sp.staff_code in(a.id)
 								group by a.id
 							)	as position_name
@@ -534,15 +276,15 @@ public class Staff
             {
                 stmt.SetParameter(0, st.id);
             }
-            if (st.fullName != null)
+            if (st.first_name != null)
             {
-                stmt.SetParameter(1, st.fullName.ToLower());
+                stmt.SetParameter(1, st.first_name.ToLower());
             }
-            if (st.sex != "-1")
+            if (st.sex != null)
             {
                 stmt.SetParameter(2, st.sex);
             }
-            if (st.marital_status != "-1")
+            if (st.marital_status != null)
             {
                 stmt.SetParameter(3, st.marital_status);
             }
@@ -550,7 +292,7 @@ public class Staff
             {
                 stmt.SetParameter(4, st.position_id);
             }
-            if (st.status > 0)
+            if (st.status != null)
             {
                 stmt.SetParameter(5, st.status);
             }
@@ -751,42 +493,42 @@ public class Staff
         }
     }
 
-    public static List<Staff> SearchStaffTimesheet(Staff staff)
-    {
-        try
-        {
-            string sql = @"SELECT  a.*,
-                                    b.presence_status,
-									b.validation_status,b.date_register,
-									b.absence_reason, case when c.id = 1 then '' else c.description end as absence_reason_description
-                                    FROM staff a, timesheets b, reason_type c
-                                    WHERE a.Status = 1 AND b.staff_code = a.Id AND b.absence_reason = c.id
-                                    AND a.id like @_staffcode
-                                    AND lower(a.first_name) like @_firstName
-                                    AND lower(a.last_name) like @_lastName 
-                                    AND b.presence_status = @presence_status
-                             ";
+    //public static List<Staff> SearchStaffTimesheet(Staff staff)
+    //{
+    //    try
+    //    {
+    //        string sql = @"SELECT  a.*,
+    //                                b.presence_status,
+				//					b.validation_status,b.date_register,
+				//					b.absence_reason, case when c.id = 1 then '' else c.description end as absence_reason_description
+    //                                FROM staff a, timesheets b, reason_type c
+    //                                WHERE a.Status = 1 AND b.staff_code = a.Id AND b.absence_reason = c.id
+    //                                AND a.id like @_staffcode
+    //                                AND lower(a.first_name) like @_firstName
+    //                                AND lower(a.last_name) like @_lastName 
+    //                                AND b.presence_status = @presence_status
+    //                         ";
 
-            if (staff.fromDate != null)
-            {
-                sql += @" AND DATE_FORMAT(b.DATE_REGISTER ,'%Y%m%d') >= '" + staff.fromDate + "' ";
-            }
-            if (staff.toDate != null)
-            {
-                sql += @" AND DATE_FORMAT(b.DATE_REGISTER ,'%Y%m%d') <= '" + staff.toDate + "' ";
-            }
+    //        if (staff.fromDate != null)
+    //        {
+    //            sql += @" AND DATE_FORMAT(b.DATE_REGISTER ,'%Y%m%d') >= '" + staff.fromDate + "' ";
+    //        }
+    //        if (staff.toDate != null)
+    //        {
+    //            sql += @" AND DATE_FORMAT(b.DATE_REGISTER ,'%Y%m%d') <= '" + staff.toDate + "' ";
+    //        }
 
 
-            SqlStatement stmt = SqlStatement.FromString(sql, SqlConnString.CSM_APP);
-            stmt.SetParameters(staff.Staff_code, staff.first_name, staff.last_name,
-                staff.register_date_timesheet.ToString("yyyyMMdd"), staff.presence_status);
-            return Parse(stmt.ExecuteReader());
-        }
-        catch (Exception ex)
-        {
-            throw ex;
-        }
-    }
+    //        SqlStatement stmt = SqlStatement.FromString(sql, SqlConnString.CSM_APP);
+    //        stmt.SetParameters(staff.Staff_code, staff.first_name, staff.last_name,
+    //            staff.register_date_timesheet.ToString("yyyyMMdd"), staff.presence_status);
+    //        return Parse(stmt.ExecuteReader());
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        throw ex;
+    //    }
+    //}
 
     public static List<Staff> getListStaffById(string staffCode)
     {
@@ -817,7 +559,7 @@ public class Staff
 
     public static List<Staff> getListPositions()
     {
-        string sql = @"select * from position order by name";
+        string sql = @"select * from staff_position order by name";
         try
         {
             SqlStatement stmt = SqlStatement.FromString(sql, SqlConnString.CSM_APP);
@@ -874,14 +616,9 @@ public class Staff
             SqlStatement stmt = SqlStatement.FromString(sql, SqlConnString.CSM_APP);
             stmt.SetParameters(st.first_name, st.last_name, st.sex,
                                 st.marital_status, st.id_card,
-                                st.birth_date.ToString("yyyyMMdd"), st.birth_place, st.adress,
-                                st.phone1, st.email, st.image_path, st.study_level,
-                                st.ref_first_name,
-                                st.ref_last_name,
-                                st.ref_sex,
-                                st.ref_phone,
-                                st.ref_adress,
-                                st.ref_relationship, st.id);
+                                st.birth_date.ToString("yyyyMMdd"), st.birth_place, st.address,
+                                st.phone, st.email, st.image_path, st.study_level,
+                                st.id);
 
             stmt.ExecuteNonQuery();
         }
@@ -910,27 +647,16 @@ public class Staff
                             ?, -- imagePath,
                             ?, -- study_level,
                             ?, -- status,
-                            ?, -- ref_first_name
-                            ?, -- ref_last_name
-                            ?, -- ref_sex
-                            ?, -- ref_phone
-                            ?, -- ref_adress
-                            ?, -- ref_relationship
+                            ?, -- position_id,
                             now(),
-                            ? -- login_user
+                            ? -- login_user_id
                            )";
 
             SqlStatement stmt = SqlStatement.FromString(sql, SqlConnString.CSM_APP);
             stmt.SetParameters(st.id, st.first_name, st.last_name, st.sex, st.marital_status,
-                                st.id_card, st.birth_date.ToString("yyyyMMdd"), st.birth_place, st.adress, st.phone1, st.email,
-                                st.image_path, st.study_level, st.Status,
-                                st.ref_first_name,
-                                st.ref_last_name,
-                                st.ref_sex,
-                                st.ref_phone,
-                                st.ref_adress,
-                                st.ref_relationship,
-                                st.login_user);
+                                st.id_card, st.birth_date.ToString("yyyyMMdd"), st.birth_place, st.address, st.phone, st.email,
+                                st.image_path, st.study_level, st.status, st.position_id,                             
+                                st.login_user_id);
             stmt.ExecuteNonQuery();
         }
         catch (Exception ex)
@@ -1080,30 +806,30 @@ public class Staff
         return result;
     }
 
-    public static List<Staff> getListStaffForTimesheets(Staff staff)
-    {
-        try
-        {
-            string sql = @"SELECT  a.id, concat(upper(a.first_name),' ', upper(a.last_name)) as fullName
-                                FROM staff a
-                             where a.status = 1 and a.id not in ('PS-1') ";
+    //public static List<Staff> getListStaffForTimesheets(Staff staff)
+    //{
+    //    try
+    //    {
+    //        string sql = @"SELECT  a.id, concat(upper(a.first_name),' ', upper(a.last_name)) as fullName
+    //                            FROM staff a
+    //                         where a.status = 1 and a.id not in ('PS-1') ";
 
-            if (staff.id != null)
-            {
-                sql += @" AND a.id = '" + staff.id.ToUpper() + "' ";
-            }
-            if (staff.fullName != null)
-            {
-                sql += @" AND concat(upper(a.first_name),' ', upper(a.last_name)) like '%" + staff.fullName.ToUpper() + "'% ";
-            }
+    //        if (staff.id != null)
+    //        {
+    //            sql += @" AND a.id = '" + staff.id.ToUpper() + "' ";
+    //        }
+    //        if (staff.fullName != null)
+    //        {
+    //            sql += @" AND concat(upper(a.first_name),' ', upper(a.last_name)) like '%" + staff.fullName.ToUpper() + "'% ";
+    //        }
 
-            SqlStatement stmt = SqlStatement.FromString(sql, SqlConnString.CSM_APP);
-            return Parse(stmt.ExecuteReader());
-        }
-        catch (Exception ex)
-        {
-            throw ex;
-        }
-    }
+    //        SqlStatement stmt = SqlStatement.FromString(sql, SqlConnString.CSM_APP);
+    //        return Parse(stmt.ExecuteReader());
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        throw ex;
+    //    }
+    //}
 
 }

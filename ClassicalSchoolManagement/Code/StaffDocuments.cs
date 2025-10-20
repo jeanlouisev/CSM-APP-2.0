@@ -1,59 +1,69 @@
-﻿using System;
+﻿using AjaxControlToolkit;
+using Db_Core;
+using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
 using System.Linq;
 using System.Web;
-using System.Configuration;
-using MySql.Data.MySqlClient;
 using Utilities;
-using Db_Core;
-using System.Data;
 
 
-public class Documents
+public class StaffDocuments
 {
     public int id { get; set; }
-    public string staff_code { get; set; }
-    public string document_path { get; set; }
+    public string student_id { get; set; }
     public string document_name { get; set; }
+    public string document_type_def { get; set; }
     public string description { get; set; }
+    public int document_type_id { get; set; }
     public DateTime upload_time { get; set; }
 
-    public static List<Documents> Parse(MySqlDataReader reader)
+    public static List<StaffDocuments> Parse(MySqlDataReader reader)
     {
-        List<Documents> listDocuments = new List<Documents>();
+        List<StaffDocuments> listDocuments = new List<StaffDocuments>();
         try
         {
             while (reader.Read())
             {
-                Documents documents = new Documents();
+                StaffDocuments stDoc = new StaffDocuments();
                 for (int i = 0; i < reader.FieldCount; i++)
                 {
                     if (reader.GetName(i).ToUpper() == "ID")
                     {
-                        documents.id = int.Parse(reader.GetString(i));
+                        try { stDoc.id = int.Parse(reader.GetValue(i).ToString()); } catch { }
                     }
-                    if (reader.GetName(i).ToUpper() == "STAFF_CODE")
+                    if (reader.GetName(i).ToUpper() == "STUDENT_ID")
                     {
-                        documents.staff_code = reader.GetString(i);
-                    }
-                    if (reader.GetName(i).ToUpper() == "DOCUMENT_PATH")
-                    {
-                        documents.document_path = reader.GetString(i);
+                        try { stDoc.student_id = reader.GetValue(i).ToString(); } catch { }
                     }
                     if (reader.GetName(i).ToUpper() == "DOCUMENT_NAME")
                     {
-                        documents.document_name = reader.GetString(i);
+                        try { stDoc.document_name = reader.GetValue(i).ToString(); }
+                        catch { }
+                    }
+                    if (reader.GetName(i).ToUpper() == "DOCUMENT_TYPE_DEF")
+                    {
+                        try { stDoc.document_type_def = reader.GetValue(i).ToString(); }
+                        catch { }
                     }
                     if (reader.GetName(i).ToUpper() == "DESCRIPTION")
                     {
-                        documents.description = reader.GetString(i);
+                        try { stDoc.description = reader.GetValue(i).ToString(); }
+                        catch { }
+                    }
+                    if (reader.GetName(i).ToUpper() == "DOCUMENT_TYPE_ID")
+                    {
+                        try { stDoc.document_type_id = int.Parse(reader.GetValue(i).ToString()); } catch { }
                     }
                     if (reader.GetName(i).ToUpper() == "UPLOAD_TIME")
                     {
-                        documents.upload_time = reader.GetDateTime(i);
+                        try { stDoc.upload_time = DateTime.Parse(reader.GetValue(i).ToString()); }
+                        catch { }
                     }
                 }
-                listDocuments.Add(documents);
+                listDocuments.Add(stDoc);
             }
             //close the reader
             reader.Close();
@@ -65,46 +75,14 @@ public class Documents
         return listDocuments;
     }
 
-    public static void uploadDocument(List<Documents> listDocumentsAttach)
+    public static void uploadSudentDocuments(List<StaffDocuments> listDocumentsAttach, string studentId)
     {
         try
         {
             if (listDocumentsAttach != null && listDocumentsAttach.Count > 0)
             {
                 // remove existing documents for current student
-                string sql1 = @"DELETE FROM DOCUMENTS 
-                                WHERE staff_code = ?";
-
-                SqlStatement stmt = SqlStatement.FromString(sql1, SqlConnString.CSM_APP);
-                stmt.SetParameters(listDocumentsAttach[0].staff_code.ToUpper());
-                stmt.ExecuteNonQuery();
-
-
-                foreach (Documents doc in listDocumentsAttach)
-                {
-                    string sql2 = @"INSERT INTO DOCUMENTS(staff_code,document_path,
-                                    document_name, upload_time) VALUES(?,?,?,now())";
-
-                    stmt = SqlStatement.FromString(sql2, SqlConnString.CSM_APP);
-                    stmt.SetParameters(doc.staff_code.ToUpper(), doc.document_path, doc.document_name);
-                    stmt.ExecuteNonQuery();
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            throw ex;
-        }
-    }
-
-    public static void uploadSudentDocuments(List<Documents> listDocumentsAttach, string studentId)
-    {
-        try
-        {
-            if (listDocumentsAttach != null && listDocumentsAttach.Count > 0)
-            {
-                // remove existing documents for current student
-                string sql1 = @"DELETE FROM STUDENT_DOCUMENTS 
+                string sql1 = @"DELETE FROM STUDENT_DOCUMENTS
                                 WHERE student_id = ?";
 
                 SqlStatement stmt = SqlStatement.FromString(sql1, SqlConnString.CSM_APP);
@@ -112,13 +90,14 @@ public class Documents
                 stmt.ExecuteNonQuery();
 
 
-                foreach (Documents doc in listDocumentsAttach)
+                foreach (StaffDocuments doc in listDocumentsAttach)
                 {
-                    string sql2 = @"INSERT INTO STUDENT_DOCUMENTS(student_id,document_path,
+                    string sql2 = @"INSERT INTO STUDENT_DOCUMENTS
+                                    (student_id,document_path,
                                     document_type_id, upload_time) VALUES(?,?,?,now())";
 
                     stmt = SqlStatement.FromString(sql2, SqlConnString.CSM_APP);
-                    stmt.SetParameters(doc.staff_code.ToUpper(), doc.document_path, doc.document_name);
+                    stmt.SetParameters(studentId, doc.document_name, doc.document_type_id);
                     stmt.ExecuteNonQuery();
                 }
             }
@@ -129,37 +108,19 @@ public class Documents
         }
     }
 
-    public static void uploadDocument(Documents doc)
-    {
-        try
-        {
-            string sql = @"INSERT INTO DOCUMENTS(staff_code,document_path,
-                           document_name, upload_time) 
-                         VALUES(?,?,?,?)";
 
-            SqlStatement stmt = SqlStatement.FromString(sql, SqlConnString.CSM_APP);
-            stmt.SetParameters(doc.staff_code.ToUpper(), doc.document_path,
-                                doc.document_name, doc.upload_time);
-            stmt.ExecuteNonQuery();
-        }
-        catch (Exception ex)
-        {
-            throw ex;
-        }
-    }
-
-    public static List<Documents> getListUploadedDocuments(Documents doc)
+    public static List<StaffDocuments> getListUploadedDocuments(StaffDocuments doc)
     {
-        string sql = @"select * from documents
+        string sql = @"select * from student_documents
                        WHERE 1=1 
-                        [ and staff_code = ? ]";
+                        [ and student_id = ? ]";
 
         try
         {
             SqlStatement stmt = SqlStatement.FromString(sql, SqlConnString.CSM_APP);
-            if (doc.staff_code != null)
+            if (doc.student_id != null)
             {
-                stmt.SetParameter(0, doc.staff_code.ToUpper());
+                stmt.SetParameter(0, doc.student_id.ToUpper());
             }
 
             return Parse(stmt.ExecuteReader());
@@ -170,7 +131,7 @@ public class Documents
         }
     }
 
-    public static List<Documents> getListDocumentsByStaffCode(string staffCode)
+    public static List<StaffDocuments> getListDocumentsByStaffCode(string staffCode)
     {
         string sql = @"SELECT a.* FROM documents a
                                 WHERE a.staff_code = ?";
@@ -233,17 +194,14 @@ public class Documents
             throw ex;
         }
     }
-    
-    public static List<Documents> getListDocumentCategory()
+
+    public static List<StaffDocuments> getListDocumentType()
     {
-        /*string sql = @"SELECT a.*
-                            FROM staff_document_category a
-                            ORDER BY a.description asc";*/
         string sql = @"SELECT a.*
-                          FROM staff_documents a
-                          ";
-            
-            try
+                            FROM staff_document_type a
+                            ORDER BY a.description asc";
+
+        try
         {
             SqlStatement stmt = SqlStatement.FromString(sql, SqlConnString.CSM_APP);
             return Parse(stmt.ExecuteReader());

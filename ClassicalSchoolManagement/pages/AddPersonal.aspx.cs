@@ -30,7 +30,7 @@ public partial class AddPersonal : System.Web.UI.Page
     int menu_code = (int)Users.MENU.HR;
     string msgContent = "";
 
-    List<Documents> listDocumentsAttach = new List<Documents>();
+    List<StaffDocuments> listDocumentsAttach = new List<StaffDocuments>();
 
     //string sqlStaffCurval = @"select currval_staff('codeSeq') as staff_curval";
     string sqlStafftNextval = @"select nextval_staff('codeSeq') as staff_nextval";
@@ -60,12 +60,10 @@ public partial class AddPersonal : System.Web.UI.Page
 
         if (!IsPostBack)
         {
-            loadPositions();
-            loadDocumentCategories();
-            loadListRoles();
-            loadListTaxGroup();
-            imageUploader.Attributes["onchange"] = "UploadFile(this)";
-            
+            //loadPositions();
+            loadDocumentTypes();
+            loadListPosition();
+           
 
             if (Session["staff_code"] == null)
             {
@@ -80,61 +78,61 @@ public partial class AddPersonal : System.Web.UI.Page
         }
     }
 
-    private void loadListTaxGroup()
-    {
-        // get list academic year
-        List<Salary> listResult = Salary.getListTax();
+    //private void loadListTaxGroup()
+    //{
+    //    // get list academic year
+    //    List<Salary> listResult = Salary.getListTax();
 
-        if (listResult != null && listResult.Count > 0)
-        {
-            // fill the ddl now
-            ddlTax.DataValueField = "id";
-            ddlTax.DataTextField = "group_name";
-            ddlTax.DataSource = listResult;
-            ddlTax.DataBind();
-        }
-        //
-        ddlTax.Items.Insert(0, new DropDownListItem("--Tout Sélectionner--", "-1"));
-        ddlTax.SelectedValue = "-1";
-    }
+    //    if (listResult != null && listResult.Count > 0)
+    //    {
+    //        // fill the ddl now
+    //        ddlTax.DataValueField = "id";
+    //        ddlTax.DataTextField = "group_name";
+    //        ddlTax.DataSource = listResult;
+    //        ddlTax.DataBind();
+    //    }
+    //    //
+    //    ddlTax.Items.Insert(0, new DropDownListItem("--Tout Sélectionner--", "-1"));
+    //    ddlTax.SelectedValue = "-1";
+    //}
 
-    private void loadListRoles()
+    private void loadListPosition()
     {
         try
         {
-            List<Users> listResult = Users.getAllRoleType();
+            List<Staff> listResult = Staff.getListPositions();
             if (listResult != null && listResult.Count > 0)
             {
-                ddlRoles.DataSource = listResult;
-                ddlRoles.DataValueField = "id";
-                ddlRoles.DataTextField = "name";
-                ddlRoles.DataBind();
+                ddlPosition.DataSource = listResult;
+                ddlPosition.DataValueField = "id";
+                ddlPosition.DataTextField = "name";
+                ddlPosition.DataBind();
             }
             //
-            ddlRoles.Items.Insert(0, new DropDownListItem("--Sélectionner--", "-1"));
-            ddlRoles.SelectedValue = "-1";
+            ddlPosition.Items.Insert(0, new DropDownListItem("--Sélectionner--", "-1"));
+            ddlPosition.SelectedValue = "-1";
         }
         catch { }
     }
 
-    private void loadPositions()
-    {
-        try
-        {
-            ddlPosition.Items.Clear();
-            // get list all academic  year
-            List<Staff> listResult = Staff.getListPositions();
+    //private void loadPositions()
+    //{
+    //    try
+    //    {
+    //        ddlPosition.Items.Clear();
+    //        // get list all academic  year
+    //        List<Staff> listResult = Staff.getListPositions();
 
-            if (listResult != null && listResult.Count > 0)
-            {
-                ddlPosition.DataValueField = "id";
-                ddlPosition.DataTextField = "name";
-                ddlPosition.DataSource = listResult;
-                ddlPosition.DataBind();
-            }
-        }
-        catch (Exception ex) { }
-    }
+    //        if (listResult != null && listResult.Count > 0)
+    //        {
+    //            ddlPosition.DataValueField = "id";
+    //            ddlPosition.DataTextField = "name";
+    //            ddlPosition.DataSource = listResult;
+    //            ddlPosition.DataBind();
+    //        }
+    //    }
+    //    catch (Exception ex) { }
+    //}
 
     private void verifyAccessLevel()
     {
@@ -192,59 +190,33 @@ public partial class AddPersonal : System.Web.UI.Page
         if (listStaffInfo != null && listStaffInfo.Count > 0)
         {
             Staff st = listStaffInfo[0];
-            lblStaffCode.Text = st.id;
+            //lblStaffCode.Text = st.id;
             txtFirstName.Text = st.first_name;
             txtLastName.Text = st.last_name;
-            ddlSex.SelectedValue = st.sex_code;
+            ddlSex.SelectedValue = st.sex;
             txtBirthPlace.Text = st.birth_place;
             radBirthDate.SelectedDate = st.birth_date;
-            txtPhone1.Text = st.phone1;
-            txtAddress.Text = st.adress;
+            txtPhone1.Text = st.phone;
+            txtAddress.Text = st.address;
             txtCardId.Text = st.id_card;
             txtEmail.Text = st.email;
             ddlStudyLevel.SelectedValue = st.study_level;
             ddlMaritalStatus.SelectedValue = st.marital_status;
-            ddlPosition.SelectedValue = st.position_id.ToString();
+            //  ddlPosition.SelectedValue = st.position_id.ToString();
             //
-            ddlRoles.SelectedValue = st.role_id.ToString();
+            ddlPosition.SelectedValue = st.position_id.ToString();
 
             string imagePaths = "~/images/image_data/" + st.image_path;
             imgStaff.Attributes.Add("src", imagePaths);
 
 
             // contact information 
-            txtParentFirstName.Text = st.ref_first_name;
-            txtParentLastName.Text = st.ref_last_name;
-            ddlParentSex.SelectedValue = st.ref_sex;
-            txtParentPhone.Text = st.ref_phone;
-            txtParentAdress.Text = st.ref_adress;
-            ddlParentRelationship.SelectedValue = st.ref_relationship;
-
-            // salary
-            txtSalary.Value = st.salary_amount;
-            ddlTax.SelectedValue = st.tax_id.ToString();
-
-            // positions
-            List<Staff> listPositions = Staff.getListPositionsByStaffCode(st.id);
-            if(listPositions != null && listPositions.Count > 0)
-            {
-                foreach(Staff pos in listPositions)
-                {
-                    foreach(RadComboBoxItem item in ddlPosition.Items)
-                    {
-                        if(item.Value == pos.position_id.ToString())
-                        {
-                            item.Checked = true;
-                        }
-                    }
-                }
-            }
 
 
             // documents
             Session["list_documents_attach"] = Documents.getListDocumentsByStaffCode(staffCode);
             gridAttachDocuments.Rebind();
-            pnlDocuments.Visible = true;
+            //pnlDocuments.Visible = true;
 
         }
     }
@@ -272,59 +244,43 @@ public partial class AddPersonal : System.Web.UI.Page
                 st.id_card = txtCardId.Text.Trim();
                 st.birth_date = radBirthDate.SelectedDate.Value;
                 st.birth_place = txtBirthPlace.Text.Trim();
-                st.phone1 = txtPhone1.Text.Trim();
-                st.adress = txtAddress.Text.Trim();
+                st.phone = txtPhone1.Text.Trim();
+                st.address = txtAddress.Text.Trim();
                 st.email = txtEmail.Text.Trim();
                 st.image_path = imgStaff.Src.Replace("~/images/image_data/", "");
                 st.study_level = ddlStudyLevel.SelectedValue;
-                st.Status = 1;
-                st.login_user = user.username;
-                st.role_id = int.Parse(ddlRoles.SelectedValue);
+                st.status = Convert.ToInt32(Staff.STATUS.ACTIVE);
+                st.login_user_id = user.id;
+                st.position_id = int.Parse(ddlPosition.SelectedValue);
+                // parent information
+                StudentContactPerson p = new StudentContactPerson();
+                p.first_name = txtParentFirstName.Text.Trim();
+                p.last_name = txtParentLastName.Text.Trim();
+                p.sex = ddlParentSex.SelectedValue;
+                p.birth_place = txtParentBirthPlace.Text.Trim();
+                p.birth_date = radParentBirthDate.SelectedDate.Value;
+                p.occupation = txtParentOccupation.Text.Trim();
+                p.marital_status = ddlParentMaritalStatus.SelectedValue;
+                p.id_card = txtParentIdCard.Text.Trim();
+                p.phone = txtParentPhone.Text.Trim();
+                p.email = txtParentEmail.Text.Trim();
+                p.address = txtParentAddress.Text.Trim();
+                p.job_title = txtParentJobTitle.Text.Trim();
+                p.relationship = ddlParentRelationship.SelectedValue;
+                p.image_path = "";
 
-                // contact information 
-                st.ref_first_name = txtParentFirstName.Text.Trim();
-                st.ref_last_name = txtParentLastName.Text.Trim();
-                st.ref_sex = ddlParentSex.SelectedValue;
-                st.ref_phone = txtParentPhone.Text.Trim();
-                st.ref_adress = txtParentAdress.Text.Trim();
-                st.ref_relationship = ddlParentRelationship.SelectedValue;
 
 
                 if (Session["staff_code"] == null)     // add new
                 {
-                    string code = "PS-" + Universal.getUniversalSequence(sqlStafftNextval).ToString();
-                    st.id = code;
+                    string staff_code = "PS-" + Universal.getUniversalSequence(sqlStafftNextval).ToString();
+                    st.id = "PS-" + Universal.getUniversalSequence(sqlStafftNextval).ToString();
 
-                    // Salary 
-                    Salary s = new Salary();
-                    s.staff_code = code;
-                    s.amount = double.Parse(txtSalary.Value.ToString());
-                    s.status = 1;
-                    s.login_user_id = user.id;
-                    s.tax_id = int.Parse(ddlTax.SelectedValue.ToString());
+                    string code_staff = st.id;
 
-                    // position
-                    List<Staff> listPosition = new List<Staff>();
-                    foreach (RadComboBoxItem item in ddlPosition.Items)
-                    {
-                        if (item.Checked)
-                        {
-                            Staff _st = new Staff();
-                            _st.id = code;
-                            _st.position_id = int.Parse(item.Value);
-                            listPosition.Add(_st);
-                        }
-                    }
-
-                    // add new teacher
                     Staff.addPersonal(st);
 
-                    // attach staff to position
-                    Staff.attachStaffToPosition(listPosition);
-                    
-                    // salary configuration
-                    Salary.AddStaffToTaxGroup(s);
-                    Salary.InsertStaffSalaryInfo(s);
+
 
                     // check if staff already has a login_user account
                     List<Users> listUserInfo = Users.getListUsersByCode(st.id);
@@ -338,7 +294,7 @@ public partial class AddPersonal : System.Web.UI.Page
                         _userInfo.password = Hash.EncodePasswordSH1(defaultPasswd); ; // default passwd
                         _userInfo.locked = 0; // 0. unlocked    /   1. locked
                         _userInfo.expiry_date = DateTime.Now.AddYears(1); // 1 year after that password will be expired
-                        _userInfo.role_id = st.role_id;
+                        _userInfo.role_id = 2;   // Administrator
                         // add new user
                         Users.addUser(_userInfo);
                     }
@@ -346,50 +302,28 @@ public partial class AddPersonal : System.Web.UI.Page
                     // clear fields
                     emptyFields();
 
-                    msgContent = "Sauvegarder avec succès !!! \\rCode personnel : " + code;
-                    MessageAlert.RadAlert(msgContent, 300, 200, "Information", null, "../images/success_check.png");
+                    //msgContent = "Sauvegarder avec succès !!! \\rCode personnel : ";
+                    //MessageAlert.RadAlert(msgContent, 300, 200, "Information", null, "../images/success_check.png");
+                    MessageAlert.RadAlert("Personnel sauvegarder avec succès ! Code personnel  :" + code_staff, 300, 200, "Information", null, "../images/success_check.png");
+
                 }
+
+
                 else    // update new 
                 {
                     string code = Session["staff_code"].ToString();
 
-                    // Salary 
-                    Salary s = new Salary();
-                    s.staff_code = code;
-                    s.amount = double.Parse(txtSalary.Value.ToString());
-                    s.status = 1;
-                    s.login_user_id = user.id;
-                    s.tax_id = int.Parse(ddlTax.SelectedValue.ToString());
 
-                    // position
-                    List<Staff> listPosition = new List<Staff>();
-                    foreach (RadComboBoxItem item in ddlPosition.Items)
-                    {
-                        if (item.Checked)
-                        {
-                            Staff _st = new Staff();
-                            _st.id = code;
-                            _st.position_id = int.Parse(item.Value);
-                            listPosition.Add(_st);
-                        }
-                    }                    
-
-                    // update staff
                     st.id = code;
                     Staff.updateStaff(st);
 
-                    // attach staff to position
-                    Staff.attachStaffToPosition(listPosition);
 
-                    // salary configuration
-                    Salary.AddStaffToTaxGroup(s);
-                    Salary.InsertStaffSalaryInfo(s);
 
                     // attach documents
                     if (Session["list_documents_attach"] != null)
                     {
-                        listDocumentsAttach = Session["list_documents_attach"] as List<Documents>;
-                        Documents.uploadDocument(listDocumentsAttach);
+                        listDocumentsAttach = Session["list_documents_attach"] as List<StaffDocuments>;
+                        //StaffDocuments.uploadSudentDocuments(listDocumentsAttach,code_staff);
                     }
                     // clear fields
                     emptyFields();
@@ -420,33 +354,32 @@ public partial class AddPersonal : System.Web.UI.Page
         }
     }
 
-    private void loadDocumentCategories()
+    private void loadDocumentTypes()
     {
-        List<Documents> listResult = Documents.getListDocumentCategory();
-        ddlDocumentCategory.DataValueField = "description";
-        ddlDocumentCategory.DataTextField = "description";
-        ddlDocumentCategory.DataSource = listResult;
-        ddlDocumentCategory.DataBind();
-        //
-        ddlDocumentCategory.Items.Insert(0, new DropDownListItem("--Sélectionner--", "-1"));
-        ddlDocumentCategory.SelectedValue = "-1";
+        List<StaffDocuments> listResult = StaffDocuments.getListDocumentType();
+        ddlDocumentType.DataValueField = "id";
+        ddlDocumentType.DataTextField = "description";
+        ddlDocumentType.DataSource = listResult;
+        ddlDocumentType.DataBind();
+        ddlDocumentType.Items.Insert(0, new DropDownListItem("--Sélectionner--", "-1"));
+        ddlDocumentType.SelectedValue = "-1";
     }
+
 
     protected void btnAttachDocuments_ServerClick(object sender, EventArgs e)
     {
-        if (ddlDocumentCategory.SelectedValue == "-1")
+        if (ddlDocumentType.SelectedValue == "-1")
         {
             MessageAlert.RadAlert("Erreur : Veuillez saisir la description", 300, 200, "Information", null, "../images/error.png");
         }
         else
         {
-            string _code = lblStaffCode.Text;
             //get new document path
-            string FolderPath = Server.MapPath("~/Uploaded_Documents/" + _code);
+            string FolderPath = Server.MapPath("~/staff_uploaded_documents/");
 
             if (!Directory.Exists(FolderPath))
             {
-                Directory.CreateDirectory(Server.MapPath("~/Uploaded_Documents/" + _code));
+                Directory.CreateDirectory(Server.MapPath("~/staff_uploaded_documents/"));
             }
 
             if (!documentsAttachFile.HasFile) // check fileUpload control for files
@@ -464,7 +397,7 @@ public partial class AddPersonal : System.Web.UI.Page
                 {
                     if (Session["list_documents_attach"] != null)
                     {
-                        listDocumentsAttach = Session["list_documents_attach"] as List<Documents>;
+                        listDocumentsAttach = Session["list_documents_attach"] as List<StaffDocuments>;
                     }
 
                     HttpPostedFile userPostedFile = documentsAttachFile.PostedFile;
@@ -472,19 +405,27 @@ public partial class AddPersonal : System.Web.UI.Page
                     {
                         if (userPostedFile.ContentLength > 0)
                         {
-                            string fileName = DateTime.Now.ToString("ddMMyyyyHHmmss") + "_" + Path.GetFileName(userPostedFile.FileName);
-                            string filepath = "~/Uploaded_Documents/" + _code + "/" + fileName;
+                            string fileName = "sta_"+DateTime.Now.ToString("ddMMyyyyHHmmss") + "_" + Path.GetFileName(userPostedFile.FileName);
+                            string filepath = "~/staff_uploaded_documents/" + fileName;
                             userPostedFile.SaveAs(Server.MapPath(filepath)); //save file to folder
-                            Documents doc = new Documents();
-                            doc.staff_code = _code;
-                            doc.document_path = filepath;
-                            doc.document_name = ddlDocumentCategory.SelectedValue;
+                            StaffDocuments doc = new StaffDocuments();
+
+                            doc.document_name = fileName;
+                            doc.document_type_def = ddlDocumentType.SelectedItem.Text;
+                            doc.document_type_id = int.Parse(ddlDocumentType.SelectedValue);
                             doc.upload_time = DateTime.Now;
                             listDocumentsAttach.Add(doc);
                             Session["list_documents_attach"] = listDocumentsAttach;
                             // add to gridview
                             gridAttachDocuments.Rebind();
+                            //
+                            ddlDocumentType.SelectedValue = "-1";
                         }
+
+
+                      
+
+
                     }
                     catch (Exception Ex)
                     {
@@ -515,11 +456,11 @@ public partial class AddPersonal : System.Web.UI.Page
         ddlMaritalStatus.SelectedIndex = 0;
         radBirthDate.Clear();
         txtAddress.Text = "";
-        ddlPosition.SelectedIndex = 0;
+        //ddlPosition.SelectedIndex = 0;
         txtEmail.Text = "";
         txtCardId.Text = "";
         ddlStudyLevel.SelectedValue = "-1";
-        ddlRoles.SelectedIndex = 0;
+        ddlPosition.SelectedIndex = 0;
         // clear image
         imgStaff.Attributes.Add("src", "../images/image_data/Default.png");
 
@@ -528,23 +469,15 @@ public partial class AddPersonal : System.Web.UI.Page
         txtParentLastName.Text = "";
         ddlParentSex.SelectedValue = "-1";
         txtParentPhone.Text = "";
-        txtParentAdress.Text = "";
+       // txtParentAdress.Text = "";
         ddlParentRelationship.SelectedValue = "-1";
 
-        // salary config
-        txtSalary.Value = null;
-        ddlTax.SelectedValue = "-1";
-        // clear position
-        foreach (RadComboBoxItem item in ddlPosition.Items)
-        {
-            item.Checked = false;
-        }
-
+      
 
         // kill sessions
         Session.Remove("list_documents_attach");
         Session["list_documents_attach"] = null;
-        listDocumentsAttach = null;
+        listDocumentsAttach = new List<StaffDocuments>();
 
         // reload documents grid
         gridAttachDocuments.Rebind();
@@ -582,10 +515,10 @@ public partial class AddPersonal : System.Web.UI.Page
         {
             result = false;
         }
-        else if (ddlPosition.SelectedValue.ToString() == "-1")
-        {
-            result = false;
-        }
+        //else if (ddlPosition.SelectedValue.ToString() == "-1")
+        //{
+        //    result = false;
+        //}
         else if (txtParentFirstName.Text.Trim().Length <= 0)
         {
             result = false;
@@ -602,15 +535,15 @@ public partial class AddPersonal : System.Web.UI.Page
         {
             result = false;
         }
-        else if (txtParentAdress.Text.Trim().Length <= 0)
-        {
-            result = false;
-        }
+        //else if (txtParentAdress.Text.Trim().Length <= 0)
+        //{
+        //    result = false;
+        //}
         else if (ddlParentRelationship.SelectedValue.ToString() == "-1")
         {
             result = false;
         }
-        else if (ddlRoles.SelectedValue.ToString() == "-1")
+        else if (ddlPosition.SelectedValue.ToString() == "-1")
         {
             result = false;
         }
@@ -618,14 +551,14 @@ public partial class AddPersonal : System.Web.UI.Page
         {
             result = false;
         }
-        else if (ddlTax.SelectedValue.ToString() == "-1")
-        {
-            result = false;
-        }
-        else if (txtSalary.Value == null)
-        {
-            result = false;
-        }
+        //else if (ddlTax.SelectedValue.ToString() == "-1")
+        //{
+        //    result = false;
+        //}
+        //else if (txtSalary.Value == null)
+        //{
+        //    result = false;
+        //}
         else
         {
             result = true;
@@ -635,11 +568,11 @@ public partial class AddPersonal : System.Web.UI.Page
         return result;
     }
 
-    protected void btnLoadImage_Click(object sender, EventArgs e)
+   /* protected void btnLoadImage_Click(object sender, EventArgs e)
     {
         try
         {
-            /**
+            
 
             OpenFileDialog open = new OpenFileDialog();
 
@@ -653,7 +586,7 @@ public partial class AddPersonal : System.Web.UI.Page
 
 
             }
-         **/
+         
 
         }
 
@@ -663,7 +596,7 @@ public partial class AddPersonal : System.Web.UI.Page
             //  throw new ApplicationException("Failed loading image");
 
         }
-    }
+    }*/
 
     private void loadActiveClassroom(RadDropDownList dropDownList)
     {
@@ -809,7 +742,7 @@ public partial class AddPersonal : System.Web.UI.Page
     {
         if (Session["list_documents_attach"] != null)
         {
-            listDocumentsAttach = Session["list_documents_attach"] as List<Documents>;
+            listDocumentsAttach = Session["list_documents_attach"] as List<StaffDocuments>;
         }
         gridAttachDocuments.DataSource = listDocumentsAttach;
     }

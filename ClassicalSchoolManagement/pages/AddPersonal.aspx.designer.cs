@@ -9,17 +9,9 @@
 
 
 
-public partial class AddPersonal {
-    
-    /// <summary>
-    /// DefaultHeader control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::DefaultHeader DefaultHeader;
-    
+public partial class AddPersonal
+{
+
     /// <summary>
     /// RadAjaxManager1 control.
     /// </summary>
@@ -28,7 +20,7 @@ public partial class AddPersonal {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::Telerik.Web.UI.RadAjaxManager RadAjaxManager1;
-    
+
     /// <summary>
     /// RadAjaxLoadingPanel1 control.
     /// </summary>
@@ -37,7 +29,7 @@ public partial class AddPersonal {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::Telerik.Web.UI.RadAjaxLoadingPanel RadAjaxLoadingPanel1;
-    
+
     /// <summary>
     /// MessageAlert control.
     /// </summary>
@@ -46,7 +38,7 @@ public partial class AddPersonal {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::Telerik.Web.UI.RadWindowManager MessageAlert;
-    
+
     /// <summary>
     /// RadWindow1 control.
     /// </summary>
@@ -55,7 +47,7 @@ public partial class AddPersonal {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::Telerik.Web.UI.RadWindow RadWindow1;
-    
+
     /// <summary>
     /// RadWindowSearchStudent control.
     /// </summary>
@@ -64,43 +56,7 @@ public partial class AddPersonal {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::Telerik.Web.UI.RadWindow RadWindowSearchStudent;
-    
-    /// <summary>
-    /// lblStaffCode control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblStaffCode;
-    
-    /// <summary>
-    /// imgStaff control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.HtmlControls.HtmlImage imgStaff;
-    
-    /// <summary>
-    /// imageUploader control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.FileUpload imageUploader;
-    
-    /// <summary>
-    /// btnUploadImage control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.ImageButton btnUploadImage;
-    
+
     /// <summary>
     /// lblFirstName control.
     /// </summary>
@@ -109,7 +65,7 @@ public partial class AddPersonal {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.Label lblFirstName;
-    
+
     /// <summary>
     /// txtFirstName control.
     /// </summary>
@@ -118,7 +74,7 @@ public partial class AddPersonal {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::Telerik.Web.UI.RadTextBox txtFirstName;
-    
+
     /// <summary>
     /// lblLastName control.
     /// </summary>
@@ -127,7 +83,7 @@ public partial class AddPersonal {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.Label lblLastName;
-    
+
     /// <summary>
     /// txtLastName control.
     /// </summary>
@@ -136,7 +92,7 @@ public partial class AddPersonal {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::Telerik.Web.UI.RadTextBox txtLastName;
-    
+
     /// <summary>
     /// lblSex control.
     /// </summary>
@@ -145,7 +101,7 @@ public partial class AddPersonal {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.Label lblSex;
-    
+
     /// <summary>
     /// ddlSex control.
     /// </summary>
@@ -154,7 +110,7 @@ public partial class AddPersonal {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::Telerik.Web.UI.RadDropDownList ddlSex;
-    
+
     /// <summary>
     /// lblBirthPlace control.
     /// </summary>
@@ -163,7 +119,7 @@ public partial class AddPersonal {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.Label lblBirthPlace;
-    
+
     /// <summary>
     /// txtBirthPlace control.
     /// </summary>
@@ -172,7 +128,7 @@ public partial class AddPersonal {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::Telerik.Web.UI.RadTextBox txtBirthPlace;
-    
+
     /// <summary>
     /// lblBirthDate control.
     /// </summary>
@@ -181,7 +137,7 @@ public partial class AddPersonal {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.Label lblBirthDate;
-    
+
     /// <summary>
     /// radBirthDate control.
     /// </summary>
@@ -190,7 +146,7 @@ public partial class AddPersonal {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::Telerik.Web.UI.RadDatePicker radBirthDate;
-    
+
     /// <summary>
     /// lblPhone1 control.
     /// </summary>
@@ -199,7 +155,7 @@ public partial class AddPersonal {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.Label lblPhone1;
-    
+
     /// <summary>
     /// txtPhone1 control.
     /// </summary>
@@ -208,7 +164,7 @@ public partial class AddPersonal {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::Telerik.Web.UI.RadNumericTextBox txtPhone1;
-    
+
     /// <summary>
     /// lblAddress control.
     /// </summary>
@@ -217,7 +173,7 @@ public partial class AddPersonal {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.Label lblAddress;
-    
+
     /// <summary>
     /// txtAddress control.
     /// </summary>
@@ -226,7 +182,7 @@ public partial class AddPersonal {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::Telerik.Web.UI.RadTextBox txtAddress;
-    
+
     /// <summary>
     /// Label1 control.
     /// </summary>
@@ -235,7 +191,7 @@ public partial class AddPersonal {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.Label Label1;
-    
+
     /// <summary>
     /// txtCardId control.
     /// </summary>
@@ -244,7 +200,7 @@ public partial class AddPersonal {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::Telerik.Web.UI.RadTextBox txtCardId;
-    
+
     /// <summary>
     /// lblemail control.
     /// </summary>
@@ -253,7 +209,7 @@ public partial class AddPersonal {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.Label lblemail;
-    
+
     /// <summary>
     /// txtEmail control.
     /// </summary>
@@ -262,7 +218,7 @@ public partial class AddPersonal {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::Telerik.Web.UI.RadTextBox txtEmail;
-    
+
     /// <summary>
     /// lblMaritalStatus control.
     /// </summary>
@@ -271,7 +227,7 @@ public partial class AddPersonal {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.Label lblMaritalStatus;
-    
+
     /// <summary>
     /// ddlMaritalStatus control.
     /// </summary>
@@ -280,7 +236,7 @@ public partial class AddPersonal {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::Telerik.Web.UI.RadDropDownList ddlMaritalStatus;
-    
+
     /// <summary>
     /// RadLabel3 control.
     /// </summary>
@@ -289,7 +245,7 @@ public partial class AddPersonal {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.Label RadLabel3;
-    
+
     /// <summary>
     /// ddlStudyLevel control.
     /// </summary>
@@ -298,7 +254,7 @@ public partial class AddPersonal {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::Telerik.Web.UI.RadDropDownList ddlStudyLevel;
-    
+
     /// <summary>
     /// Label5 control.
     /// </summary>
@@ -307,133 +263,7 @@ public partial class AddPersonal {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.Label Label5;
-    
-    /// <summary>
-    /// ddlRoles control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::Telerik.Web.UI.RadDropDownList ddlRoles;
-    
-    /// <summary>
-    /// Label2 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Label Label2;
-    
-    /// <summary>
-    /// txtParentFirstName control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::Telerik.Web.UI.RadTextBox txtParentFirstName;
-    
-    /// <summary>
-    /// Label3 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Label Label3;
-    
-    /// <summary>
-    /// txtParentLastName control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::Telerik.Web.UI.RadTextBox txtParentLastName;
-    
-    /// <summary>
-    /// RadLabel5 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Label RadLabel5;
-    
-    /// <summary>
-    /// ddlParentSex control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::Telerik.Web.UI.RadDropDownList ddlParentSex;
-    
-    /// <summary>
-    /// RadLabel4 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Label RadLabel4;
-    
-    /// <summary>
-    /// txtParentPhone control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::Telerik.Web.UI.RadNumericTextBox txtParentPhone;
-    
-    /// <summary>
-    /// RadLabel6 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Label RadLabel6;
-    
-    /// <summary>
-    /// txtParentAdress control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::Telerik.Web.UI.RadTextBox txtParentAdress;
-    
-    /// <summary>
-    /// Label4 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Label Label4;
-    
-    /// <summary>
-    /// ddlParentRelationship control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::Telerik.Web.UI.RadDropDownList ddlParentRelationship;
-    
-    /// <summary>
-    /// lblPosition control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblPosition;
-    
+
     /// <summary>
     /// ddlPosition control.
     /// </summary>
@@ -441,52 +271,34 @@ public partial class AddPersonal {
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::Telerik.Web.UI.RadComboBox ddlPosition;
-    
+    protected global::Telerik.Web.UI.RadDropDownList ddlPosition;
+
     /// <summary>
-    /// Label9 control.
+    /// imgStaff control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label Label9;
-    
+    protected global::System.Web.UI.HtmlControls.HtmlImage imgStaff;
+
     /// <summary>
-    /// txtSalary control.
+    /// imageUploader control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::Telerik.Web.UI.RadNumericTextBox txtSalary;
-    
+    protected global::System.Web.UI.WebControls.FileUpload imageUploader;
+
     /// <summary>
-    /// Label8 control.
+    ///   control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label Label8;
-    
-    /// <summary>
-    /// ddlTax control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::Telerik.Web.UI.RadDropDownList ddlTax;
-    
-    /// <summary>
-    /// pnlDocuments control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.HtmlControls.HtmlGenericControl pnlDocuments;
+    protected global::System.Web.UI.WebControls.ImageButton  ;
     
     /// <summary>
     /// Label7 control.
@@ -496,16 +308,16 @@ public partial class AddPersonal {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.Label Label7;
-    
+
     /// <summary>
-    /// ddlDocumentCategory control.
+    /// ddlDocumentType control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::Telerik.Web.UI.RadDropDownList ddlDocumentCategory;
-    
+    protected global::Telerik.Web.UI.RadDropDownList ddlDocumentType;
+
     /// <summary>
     /// Label6 control.
     /// </summary>
@@ -514,7 +326,7 @@ public partial class AddPersonal {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.Label Label6;
-    
+
     /// <summary>
     /// documentsAttachFile control.
     /// </summary>
@@ -523,7 +335,7 @@ public partial class AddPersonal {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.FileUpload documentsAttachFile;
-    
+
     /// <summary>
     /// btnAttachDocuments control.
     /// </summary>
@@ -532,7 +344,7 @@ public partial class AddPersonal {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.HtmlControls.HtmlButton btnAttachDocuments;
-    
+
     /// <summary>
     /// gridAttachDocuments control.
     /// </summary>
@@ -541,7 +353,241 @@ public partial class AddPersonal {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::Telerik.Web.UI.RadGrid gridAttachDocuments;
-    
+
+    /// <summary>
+    /// RadLabel1 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label RadLabel1;
+
+    /// <summary>
+    /// txtParentFirstName control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::Telerik.Web.UI.RadTextBox txtParentFirstName;
+
+    /// <summary>
+    /// Label2 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label Label2;
+
+    /// <summary>
+    /// txtParentLastName control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::Telerik.Web.UI.RadTextBox txtParentLastName;
+
+    /// <summary>
+    /// RadLabel5 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label RadLabel5;
+
+    /// <summary>
+    /// ddlParentSex control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::Telerik.Web.UI.RadDropDownList ddlParentSex;
+
+    /// <summary>
+    /// Label3 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label Label3;
+
+    /// <summary>
+    /// txtParentBirthPlace control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::Telerik.Web.UI.RadTextBox txtParentBirthPlace;
+
+    /// <summary>
+    /// Label4 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label Label4;
+
+    /// <summary>
+    /// radParentBirthDate control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::Telerik.Web.UI.RadDatePicker radParentBirthDate;
+
+    /// <summary>
+    /// Label10 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label Label10;
+
+    /// <summary>
+    /// txtParentOccupation control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::Telerik.Web.UI.RadTextBox txtParentOccupation;
+
+    /// <summary>
+    /// Label11 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label Label11;
+
+    /// <summary>
+    /// ddlParentMaritalStatus control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::Telerik.Web.UI.RadDropDownList ddlParentMaritalStatus;
+
+    /// <summary>
+    /// Label12 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label Label12;
+
+    /// <summary>
+    /// txtParentIdCard control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::Telerik.Web.UI.RadTextBox txtParentIdCard;
+
+    /// <summary>
+    /// Label13 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label Label13;
+
+    /// <summary>
+    /// txtParentJobTitle control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::Telerik.Web.UI.RadTextBox txtParentJobTitle;
+
+    /// <summary>
+    /// RadLabel4 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label RadLabel4;
+
+    /// <summary>
+    /// txtParentPhone control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::Telerik.Web.UI.RadNumericTextBox txtParentPhone;
+
+    /// <summary>
+    /// Label14 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label Label14;
+
+    /// <summary>
+    /// txtParentEmail control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::Telerik.Web.UI.RadTextBox txtParentEmail;
+
+    /// <summary>
+    /// RadLabel6 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label RadLabel6;
+
+    /// <summary>
+    /// txtParentAddress control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::Telerik.Web.UI.RadTextBox txtParentAddress;
+
+    /// <summary>
+    /// Label15 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label Label15;
+
+    /// <summary>
+    /// ddlParentRelationship control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::Telerik.Web.UI.RadDropDownList ddlParentRelationship;
+
     /// <summary>
     /// btnSave control.
     /// </summary>
@@ -550,7 +596,7 @@ public partial class AddPersonal {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.HtmlControls.HtmlButton btnSave;
-    
+
     /// <summary>
     /// btnBack control.
     /// </summary>

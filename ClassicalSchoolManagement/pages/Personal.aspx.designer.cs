@@ -9,8 +9,9 @@
 
 
 
-public partial class Personal {
-    
+public partial class Personal
+{
+
     /// <summary>
     /// bannerContainer control.
     /// </summary>
@@ -19,7 +20,7 @@ public partial class Personal {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::ClassicalSchoolManagement.design.Banner bannerContainer;
-    
+
     /// <summary>
     /// DefaultMenuContent control.
     /// </summary>
@@ -28,7 +29,7 @@ public partial class Personal {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::ClassicalSchoolManagement.design.Menu1 DefaultMenuContent;
-    
+
     /// <summary>
     /// PersonalMenuContent control.
     /// </summary>

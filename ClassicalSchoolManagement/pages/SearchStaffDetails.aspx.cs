@@ -62,15 +62,15 @@ public partial class SearchStaffDetails : System.Web.UI.Page
     {
         Staff st = new Staff();
         //get the fields from the form            
-        st.Staff_code = txtCode.Text.Trim().Length <= 0 ? "%" : txtCode.Text.Trim();
+        st.id = txtCode.Text.Trim().Length <= 0 ? "%" : txtCode.Text.Trim();
         st.first_name = txtFirst.Text.Trim().Length <= 0 ? "%" : "%" + txtFirst.Text.Trim().ToLower() + "%";
         st.last_name = txtLastName.Text.Trim().Length <= 0 ? "%" : "%" + txtLastName.Text.Trim().ToLower() + "%";
         st.sex = ddlSex.SelectedValue.ToString() == "-1" ? "%" : ddlSex.SelectedValue;
-        st.fromDate = radFromDate.SelectedDate.Value == null ? "%" : radFromDate.SelectedDate.Value.ToString("yyyyMMdd");
-        st.toDate = radToDate.SelectedDate.Value == null ? "%" : radToDate.SelectedDate.Value.ToString("yyyyMMdd");
-        st.marital_status = ddlMaritalStatus.SelectedValue.ToString() == "-1" ? "%" : ddlMaritalStatus.SelectedValue;
+       // st.fromDate = radFromDate.SelectedDate.Value == null ? "%" : radFromDate.SelectedDate.Value.ToString("yyyyMMdd");
+       // st.toDate = radToDate.SelectedDate.Value == null ? "%" : radToDate.SelectedDate.Value.ToString("yyyyMMdd");
+        //st.marital_status = ddlMaritalStatus.SelectedValue.ToString() == "-1" ? "%" : ddlMaritalStatus.SelectedValue;
         st.position_id = 0; // dllposition.SelectedValue.ToString() == "-1" ? "%" : dllposition.SelectedValue;
-        st.Status = 1;
+        st.status = 1;
 
         //get list of staff
         List<Staff> listResult = Staff.getListStaff(st);

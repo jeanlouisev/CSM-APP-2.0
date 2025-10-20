@@ -11,7 +11,7 @@ using Db_Core;
 
 
 
-public class Notesxxx
+public class Notes
 {
     //getters and setters
     public int id { get; set; }

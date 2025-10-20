@@ -236,7 +236,7 @@ public partial class SearchPersonal : System.Web.UI.Page
             Staff st = new Staff();
             //get the fields from the form            
             st.id = txtCode.Text.Trim().Length <= 0 ? null : txtCode.Text.Trim();
-            st.fullName = txtFullName.Text.Trim().Length <= 0 ? null : txtFullName.Text.Trim();
+            //st.fullName = txtFullName.Text.Trim().Length <= 0 ? null : txtFullName.Text.Trim();
             st.sex = ddlSex.SelectedValue;
             st.marital_status = ddlMaritalStatus.SelectedValue;
             st.position_id = int.Parse(ddlPosition.SelectedValue);

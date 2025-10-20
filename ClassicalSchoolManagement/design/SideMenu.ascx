@@ -143,7 +143,8 @@
             <ul class="treeview-menu">
 
                 <li><a href="../Pages/AddPersonal.aspx"><i class="fa fa-plus"></i>
-                    <asp:Literal runat="server" Text="Nouveau Personnel"></asp:Literal></a></li>
+                    <asp:Literal runat="server" Text="Nouveau xxxPersonnel"></asp:Literal></a></li>
+
                 <li><a href="../Pages/SearchPersonal.aspx"><i class="fa fa-list-ol"></i>
                     <asp:Literal runat="server" Text="Liste des personnels"></asp:Literal></a></li>
 

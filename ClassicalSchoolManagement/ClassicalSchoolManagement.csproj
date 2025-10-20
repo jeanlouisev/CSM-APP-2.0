@@ -3249,6 +3249,10 @@
     <Content Include="WrongServerError.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Code\avatar\Notes.cs" />
+    <Compile Include="Code\Notes.cs" />
+    <Compile Include="Code\PersonalContactPerson.cs" />
+    <Compile Include="Code\StaffDocuments.cs" />
     <Compile Include="Code\StudentContactPerson.cs" />
     <Compile Include="design\DefaultHeader.ascx.cs">
       <DependentUpon>DefaultHeader.ascx</DependentUpon>
@@ -3339,7 +3343,6 @@
     <Compile Include="Code\Documents.cs" />
     <Compile Include="Code\Exam.cs" />
     <Compile Include="Code\Expenditure.cs" />
-    <Compile Include="Code\Notes.cs" />
     <Compile Include="Code\Payment.cs" />
     <Compile Include="Code\Payments.cs" />
     <Compile Include="Code\Payroll.cs" />
@@ -4612,8 +4615,8 @@
     <Folder Include="audio\" />
     <Folder Include="DynamicData\FieldTemplates\" />
     <Folder Include="images\Data\" />
+    <Folder Include="staff_uploaded_documents\" />
     <Folder Include="uploaded\" />
-    <Folder Include="Uploaded_Documents\" />
     <Folder Include="Uploaded_Exams\" />
     <Folder Include="videos\" />
     <Folder Include="xml\" />

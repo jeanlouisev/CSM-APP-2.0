@@ -434,6 +434,9 @@
         </div>
     </div>
 
+
+    
+    
     <div class="card height-auto">
         <div class="card-body">
             <div class="heading-layout1">
@@ -441,11 +444,7 @@
                     <h3>Documents Administratifs</h3>
                 </div>
             </div>
-            <%--     <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h4><span class="fa fa-file-archive-o"></span>&nbsp;Documents Administratifs</h4>
-                </div>
-                <div class="panel-body">--%>
+          
             <div class="row">
                 <div class="col-md-5">
                     <asp:Label ID="Label7" runat="server" Text="Description" CssClass="app-label-design">
@@ -468,6 +467,10 @@
                     </span>
                 </div>
             </div>
+
+
+
+
             <br />
             <div class="row">
                 <div class="col-md-12" style="width: 100%; overflow-x: scroll;">
@@ -485,16 +488,7 @@
                                         <asp:Label runat="server" ID="labelNo"></asp:Label>
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>
-                                <%--      <telerik:GridTemplateColumn>
-                                    <HeaderStyle HorizontalAlign="Center" VerticalAlign="Middle" Width="50px" />
-                                    <ItemStyle HorizontalAlign="Center" />
-                                    <ItemTemplate>
-                                        <button runat="server" class="btn btn-danger btn-sm" title="Cliquer ici pour supprimer"
-                                            id="btnRemoveDocuments" onserverclick="btnRemoveDocuments_ServerClick">
-                                            <span class="fa fa-remove"></span>
-                                        </button>
-                                    </ItemTemplate>
-                                </telerik:GridTemplateColumn>--%>
+                             
                                 <telerik:GridBoundColumn HeaderText="Description" DataField="document_name">
                                     <HeaderStyle Width="150px" />
                                 </telerik:GridBoundColumn>
@@ -578,7 +572,7 @@
                 <div class="col-md-3">
                     <asp:Label ID="Label8" runat="server" Text="État Civil" CssClass="app-label-design"></asp:Label>
                     <span class="asterix">*</span>
-                            <telerik:RadDropDownList ID="ddlParentMaritalStatus" runat="server" Skin="Office2007" Width="100%">
+                            <telerik:RadDropDownList ID="ddlParentMaritalStatus" runat="server" Skin="Bootstrap" Width="100%">
                                 <Items>
                                     <telerik:DropDownListItem Value="-1" Text="-- Sélectionner --" Selected="true" />
                                     <telerik:DropDownListItem Value="C" Text="Célibataire" />
