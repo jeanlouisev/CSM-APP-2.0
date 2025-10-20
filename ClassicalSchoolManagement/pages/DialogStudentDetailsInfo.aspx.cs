@@ -53,18 +53,16 @@ public partial class DialogStudentDetailsInfo : System.Web.UI.Page
     {
         try
         {
-            string studentCode = Session["student_code"].ToString();
+            string studentId = Session["student_code"].ToString();
             //int classId = int.Parse(Session["classroom_id"].ToString());
-
-            Student st = Student.getStudentFullDetailsByCode(studentCode);
             //
+            Student st = Student.getStudentFullDetailsById(studentId);
             if (st != null)
             {
                 // information personnelles
                 lblFirstName.Text = st.first_name.ToUpper() == null || st.id.Length <= 0 ? "N/A" : st.first_name.ToUpper();
                 lblLastName.Text = st.last_name.ToUpper() == null || st.id.Length <= 0 ? "N/A" : st.last_name.ToUpper();
                 lblCode.Text = st.id == null || st.id.Length <= 0 ? "N/A" : st.id;
-                lblSex.Text = st.sex_definition == null || st.sex_definition.Length <= 0 ? "N/A" : st.sex_definition;
                 lblEmail.Text = st.email == null || st.email.Length <= 0 ? "N/A" : st.email.ToLower();
                 lblAdresse.Text = st.address == null || st.address.Length <= 0 ? "N/A" : st.address;
                 lblVacation.Text = st.vacation == null || st.vacation.Length <= 0 ? "N/A" : st.vacation;
@@ -77,10 +75,7 @@ public partial class DialogStudentDetailsInfo : System.Web.UI.Page
                 lblBirthPlace.Text = st.birth_place == null || st.birth_place.Length <= 0 ? "N/A" :
                     st.birth_place;
 
-                lblMaritalStatus.Text = st.marital_status == null || st.marital_status.Length <= 0 ? "N/A" :
-                    st.marital_status;
-
-                lblClassroom.Text = st.class_name;
+                lblClassroom.Text = st.classroom_name;
                 //ClassRoom.getClassroomNameById(int.Parse(st.classroom)).Length <= 0 ? "N/A" :
                 //                    ClassRoom.getClassroomNameById(int.Parse(st.classroom));
 

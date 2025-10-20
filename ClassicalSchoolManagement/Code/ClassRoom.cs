@@ -13,7 +13,7 @@ public class ClassRoom
     //getters and setters
     public int id { get; set; }
     public int academic_year_id { get; set; }
-    public int class_id { get; set; }
+    public int classroom_id { get; set; }
     public string name { get; set; }
     public int fixed_capacity { get; set; }
     public int current_capacity { get; set; }
@@ -35,7 +35,7 @@ public class ClassRoom
     public double amount { get; set; }
     public int login_user_id { get; set; }
     public int cours_id { get; set; }
-    public string class_name { get; set; }
+    public string classroom_name { get; set; }
     public string course_name { get; set; }
     public string start_hour { get; set; }
     public string end_hour { get; set; }
@@ -50,7 +50,6 @@ public class ClassRoom
     public string thursday { get; set; }
     public string friday { get; set; }
     public string saturday { get; set; }
-    public string classroom_name { get; set; }
     public string cours_name { get; set; }
     public string vacation_name { get; set; }
 
@@ -84,9 +83,9 @@ public class ClassRoom
                         try { classroom.academic_year_id = int.Parse(reader.GetValue(i).ToString()); }
                         catch { }
                     }
-                    if (reader.GetName(i).ToUpper() == "CLASS_ID")
+                    if (reader.GetName(i).ToUpper() == "CLASSROOM_ID")
                     {
-                        try { classroom.class_id = int.Parse(reader.GetValue(i).ToString()); }
+                        try { classroom.classroom_id = int.Parse(reader.GetValue(i).ToString()); }
                         catch { }
                     }
                     if (reader.GetName(i).ToUpper() == "NAME")
@@ -132,20 +131,6 @@ public class ClassRoom
                     if (reader.GetName(i).ToUpper() == "VACATION")
                     {
                         try { classroom.vacation = reader.GetValue(i).ToString(); }
-                        catch { }
-                    }
-                    if (reader.GetName(i).ToUpper() == "VACATION")
-                    {
-                        try
-                        {
-                            switch (reader.GetValue(i).ToString())
-                            {
-                                case "AM": classroom.vacation_definition = "Matin"; break;
-                                case "PM": classroom.vacation_definition = "Median"; break;
-                                case "NG": classroom.vacation_definition = "Soir"; break;
-                                case "WK": classroom.vacation_definition = "Weekend"; break;
-                            }
-                        }
                         catch { }
                     }
                     if (reader.GetName(i).ToUpper() == "CAPACITY")
@@ -203,9 +188,9 @@ public class ClassRoom
                         try { classroom.cours_id = int.Parse(reader.GetValue(i).ToString()); }
                         catch { }
                     }
-                    if (reader.GetName(i).ToUpper() == "CLASS_NAME")
+                    if (reader.GetName(i).ToUpper() == "CLASSROOM_NAME")
                     {
-                        try { classroom.class_name = reader.GetValue(i).ToString(); }
+                        try { classroom.classroom_name = reader.GetValue(i).ToString(); }
                         catch { }
                     }
                     if (reader.GetName(i).ToUpper() == "COURSE_NAME")
@@ -213,12 +198,12 @@ public class ClassRoom
                         try { classroom.course_name = reader.GetValue(i).ToString(); }
                         catch { }
                     }
-                    if (reader.GetName(i).ToUpper() == "start_hour")
+                    if (reader.GetName(i).ToUpper() == "START_HOUR")
                     {
                         try { classroom.start_hour = reader.GetValue(i).ToString(); }
                         catch { }
                     }
-                    if (reader.GetName(i).ToUpper() == "end_hour")
+                    if (reader.GetName(i).ToUpper() == "END_HOUR")
                     {
                         try { classroom.end_hour = reader.GetValue(i).ToString(); }
                         catch { }
@@ -278,12 +263,7 @@ public class ClassRoom
                         try { classroom.saturday = reader.GetValue(i).ToString(); }
                         catch { }
                     }
-                    if (reader.GetName(i).ToUpper() == "CLASSROOM_NAME")
-                    {
-                        try { classroom.classroom_name = reader.GetValue(i).ToString(); }
-                        catch { }
-                    }
-                    if (reader.GetName(i).ToUpper() == "CLASSROOM_NAME")
+                    if (reader.GetName(i).ToUpper() == "COURS_NAME")
                     {
                         try { classroom.cours_name = reader.GetValue(i).ToString(); }
                         catch { }
@@ -349,17 +329,17 @@ public class ClassRoom
         }
     }
 
-    //public static List<ClassRoom> getListActiveClassroomVactaion(int class_id)
+    //public static List<ClassRoom> getListActiveClassroomVactaion(int classroom_id)
     //{
     //    try
     //    {
     //        string sql = @"select a.vacation_type 
     //                       from classroom_vacation_management a,classroom b
     //                       where a.vacation_status=1 and b.Status=1
-    //                       and a.class_id=b.Id and b.id = ?";
+    //                       and a.classroom_id=b.Id and b.id = ?";
 
     //        SqlStatement stmt = SqlStatement.FromString(sql, SqlConnString.CSM_APP);
-    //        stmt.SetParameters(class_id);
+    //        stmt.SetParameters(classroom_id);
     //        return Parse(stmt.ExecuteReader());
     //    }
     //    catch (Exception ex)
@@ -379,7 +359,7 @@ public class ClassRoom
                                 when vacation_type ='WK' then 'Weekend'
                                 end as vacation
                             FROM classroom_vacation_management a
-                            WHERE class_id = ?
+                            WHERE classroom_id = ?
                             AND vacation_status = 1";
 
             SqlStatement stmt = SqlStatement.FromString(sql, SqlConnString.CSM_APP);
@@ -398,10 +378,10 @@ public class ClassRoom
     //    {
     //        string sql = @"select cvm.vacation_type as vacation, cvm.capacity as fixed_capacity,
     //                    (select count(*) from classroom_staff_management
-    //                        where class_id = cvm.class_id
+    //                        where classroom_id = cvm.classroom_id
     //                               and vacation = cvm.vacation_type) current_capacity
     //                    from classroom_vacation_management cvm
-    //                    where cvm.class_id = ?";
+    //                    where cvm.classroom_id = ?";
 
     //        SqlStatement stmt = SqlStatement.FromString(sql, SqlConnString.CSM_APP);
     //        stmt.SetParameters(classId);
@@ -420,11 +400,11 @@ public class ClassRoom
     //    {
     //        string sql = @"select cvm.vacation_type as vacation, cvm.capacity as fixed_capacity,
     //                    (select count(*) from classroom_staff_management 
-    //                        where class_id = cvm.class_id
+    //                        where classroom_id = cvm.classroom_id
     //                               and vacation = cvm.vacation_type) current_capacity
     //                    from classroom_vacation_management cvm
     //                    where 1=1
-    //                        and cvm.class_id = ?
+    //                        and cvm.classroom_id = ?
     //                        and cvm.vacation_type = ?";
 
     //        SqlStatement stmt = SqlStatement.FromString(sql, SqlConnString.CSM_APP);
@@ -441,9 +421,9 @@ public class ClassRoom
     {
         try
         {
-            string sql = @"SELECT distinct(a.name), a.id,b.class_id 
+            string sql = @"SELECT distinct(a.name), a.id,b.classroom_id 
                             FROM classroom a,cours_management b
-                            WHERE a.id=b.class_id
+                            WHERE a.id=b.classroom_id
                             ORDER BY a.id asc";
 
             SqlStatement stmt = SqlStatement.FromString(sql, SqlConnString.CSM_APP);
@@ -455,33 +435,33 @@ public class ClassRoom
         }
     }
 
-    public static List<ClassRoom> getListClassroom(int classId, int currentStatus)
+    public static List<ClassRoom> getListClassroom(int classId, int currentStatus, int accYearId)
     {
         try
         {
-            string sql = @"SELECT a.*,
+            string sql = @"SELECT a.*, a.name as classroom_name,
                             (select concat(extract(YEAR from start_date),' - ',extract(YEAR from end_date)) 
-                                from academic_year where id = 26) as academic_year_concat,
-                            (select count(*) from classroom_staff_management b
-			                             where b.class_id = a.id
+                                from academic_year where id = "+ accYearId + @") as academic_year_concat,
+                            (select count(*) from student_classroom_attach b
+			                             where b.classroom_id = a.id
+											and b.academic_year_id = "+ accYearId + @"
 				                            and b.status = 1
-				                            and b.staff_code like 'EL-%'
-				                            and b.vacation = 'AM') as am_cc, -- AM current_capacity
-                            (select count(*) from classroom_staff_management b
-			                             where b.class_id = a.id
+				                            and b.vacation = 'Matin') as am_cc, -- AM current_capacity
+                            (select count(*) from student_classroom_attach b
+			                             where b.classroom_id = a.id
+											and b.academic_year_id = "+ accYearId + @"
 				                            and b.status = 1
-				                            and b.staff_code like 'EL-%'
-				                            and b.vacation = 'PM') as pm_cc, -- PM current_capacity
-                            (select count(*) from classroom_staff_management b
-			                             where b.class_id = a.id
+				                            and b.vacation = 'Médian') as pm_cc, -- PM current_capacity
+                            (select count(*) from student_classroom_attach b
+			                             where b.classroom_id = a.id
+											and b.academic_year_id = "+ accYearId + @"
 				                            and b.status = 1
-				                            and b.staff_code like 'EL-%'
-				                            and b.vacation = 'NG') as ng_cc, -- NG current_capacity
-                            (select count(*) from classroom_staff_management b
-			                             where b.class_id = a.id
+				                            and b.vacation = 'Soir') as ng_cc, -- NG current_capacity
+                            (select count(*) from student_classroom_attach b
+			                             where b.classroom_id = a.id
+											and b.academic_year_id = "+ accYearId + @"
 				                            and b.status = 1
-				                            and b.staff_code like 'EL-%'
-				                            and b.vacation = 'WK') as wk_cc -- WK current_capacity
+				                            and b.vacation = 'Weekend') as wk_cc -- WK current_capacity
 			                        FROM classroom a
 		                         wHERE 1=1";
 
@@ -515,9 +495,9 @@ public class ClassRoom
     //    List<ClassRoom> listResult = null;
     //    
     //    string sql = @"SELECT a.capacity as static_quantity,(select count(*) from classroom_staff_management b
-    //                      where b.class_id =@id1 and b.academic_year = @academicYear and b.vacation = @vacation_type1) as capacity
+    //                      where b.classroom_id =@id1 and b.academic_year = @academicYear and b.vacation = @vacation_type1) as capacity
     //                     FROM classroom_vacation_management a
-    //                     WHERE a.class_id =@id2 and a.vacation_type = @vacation_type2";
+    //                     WHERE a.classroom_id =@id2 and a.vacation_type = @vacation_type2";
 
     //    MySqlConnection con = new MySqlConnection(constr);
     //    MySqlCommand cmd = new MySqlCommand();
@@ -570,7 +550,7 @@ public class ClassRoom
         {
             string sql = @"SELECT a.id, a.name, a.static_quantity, a.status, a.update_time,
                             (select count(*) from classroom_staff_management b, student c
-                               where b.class_id = a.id 
+                               where b.classroom_id = a.id 
 		                            and b.staff_code = c.Id
 		                           and c.Status =1
                                 and b.staff_code like 'EL-%') as capacity
@@ -614,7 +594,7 @@ public class ClassRoom
         {
             string sql = @"SELECT a.*,
                             (SELECT count(*) from classroom_staff_management b, student c
-                               WHERE b.class_id = a.id 
+                               WHERE b.classroom_id = a.id 
 		                            and b.staff_code = c.Id
 		                            and c.Status =1
                                 and b.staff_code like 'EL-%') as capacity
@@ -637,14 +617,14 @@ public class ClassRoom
         try
         {
             string sql = @"SELECT a.*,
-                            (SELECT count(*) from classroom_staff_management b, student c
-                               WHERE b.class_id = a.id 
-		                            and b.staff_code = c.Id
+                            (SELECT count(*) from student_classroom_attach b, student c
+                               WHERE b.classroom_id = a.id 
+		                            and b.student_id = c.Id
 		                            and c.Status =1
-                                and b.staff_code like 'EL-%') as capacity,
+                                and b.student_id like 'EL-%') as capacity,
 							cfp.amount
                             FROM classroom a
-							left join classroom_fixed_payment cfp on cfp.class_id = a.id														
+							left join classroom_fixed_payment cfp on cfp.classroom_id = a.id														
 							where status = 1
                                 group by a.id
                                 ORDER BY a.id asc";
@@ -666,7 +646,7 @@ public class ClassRoom
     //        string sql = @"SELECT a.id, a.name, a.static_quantity, a.status, a.update_time,
     //                            (select b.success_percent from classroom_average_management b
     //                                 where 1=1 
-    //                                    and b.class_id = a.id
+    //                                    and b.classroom_id = a.id
     //                                       and b.academic_year = ?) as success_percent
     //                        FROM classroom a
     //                          WHERE 1=1
@@ -692,7 +672,7 @@ public class ClassRoom
     //        string sql = @"SELECT a.id, a.name, a.status,
     //                            (select b.success_percent from classroom_average_management b
     //                                 where 1=1 
-    //                                    and b.class_id = a.id
+    //                                    and b.classroom_id = a.id
     //                                       and b.academic_year = ?) as success_percent
     //                            FROM classroom a
     //                            WHERE 1=1
@@ -717,7 +697,7 @@ public class ClassRoom
             string sql = @"SELECT a.id, a.name as class_name,
                                 (select b.success_percent from classroom_average_management b
                                      where 1=1
-                                        and b.class_id = a.id
+                                        and b.classroom_id = a.id
                                            and b.academic_year = " + accademicYearId + @") as success_percent,
 							(select concat(extract(YEAR from start_date),' - ',extract(YEAR from end_date)) 
                                     from academic_year where id = " + accademicYearId + @") as years,
@@ -768,41 +748,41 @@ public class ClassRoom
 												(select  group_concat('','<br/>',CONCAT(time_format(sch.start_hour,'%H:%m'),'-',time_format(sch.end_hour,'%H:%m'),' : ', c.name)) 
 																			from schedule sch
 																inner join cours c on c.id = sch.cours_id
-																where sch.class_id = a.id
+																where sch.classroom_id = a.id
 																and sch.vacation = cvm.vacation_type
 																and sch.Days = 'MO') as monday,
 												(select  group_concat('','<br/>',CONCAT(time_format(sch.start_hour,'%H:%m'),'-',time_format(sch.end_hour,'%H:%m'),' : ', c.name)) 
 																			from schedule sch
 																inner join cours c on c.id = sch.cours_id
-																where sch.class_id = a.id
+																where sch.classroom_id = a.id
 																and sch.vacation = cvm.vacation_type
 																and sch.Days = 'TU') as tuesday,
 												(select  group_concat('','<br/>',CONCAT(time_format(sch.start_hour,'%H:%m'),'-',time_format(sch.end_hour,'%H:%m'),' : ', c.name)) 
 																			from schedule sch
 																inner join cours c on c.id = sch.cours_id
-																where sch.class_id = a.id
+																where sch.classroom_id = a.id
 																and sch.vacation = cvm.vacation_type
 																and sch.Days = 'WE') as wednesday,
 												(select  group_concat('','<br/>',CONCAT(time_format(sch.start_hour,'%H:%m'),'-',time_format(sch.end_hour,'%H:%m'),' : ', c.name)) 
 																			from schedule sch
 																inner join cours c on c.id = sch.cours_id
-																where sch.class_id = a.id
+																where sch.classroom_id = a.id
 																and sch.vacation = cvm.vacation_type
 																and sch.Days = 'TH') as thursday,
 												(select  group_concat('','<br/>',CONCAT(time_format(sch.start_hour,'%H:%m'),'-',time_format(sch.end_hour,'%H:%m'),' : ', c.name)) 
 																			from schedule sch
 																inner join cours c on c.id = sch.cours_id
-																where sch.class_id = a.id
+																where sch.classroom_id = a.id
 																and sch.vacation = cvm.vacation_type
 																and sch.Days = 'FR') as friday,
 												(select  group_concat('','<br/>',CONCAT(time_format(sch.start_hour,'%H:%m'),'-',time_format(sch.end_hour,'%H:%m'),' : ', c.name)) 
 																			from schedule sch
 																inner join cours c on c.id = sch.cours_id
-																where sch.class_id = a.id
+																where sch.classroom_id = a.id
 																and sch.vacation = cvm.vacation_type
 																and sch.Days = 'SA') as saturday
 			            FROM classroom a
-			                inner join classroom_vacation_management cvm on cvm.class_id = a.id
+			                inner join classroom_vacation_management cvm on cvm.classroom_id = a.id
 			            where a.status = 1 
                         and cvm.vacation_status = 1 
                         and a.id = ?";
@@ -972,11 +952,16 @@ public class ClassRoom
     public static void attachStudentToClassroom(Student st)
     {
         string sql = @"INSERT INTO student_classroom_attach
-                            VALUES(?, ?, ?, ?, 1)";
+                            VALUES(?, -- student_id
+                                    ?, -- classroom_id
+                                    ?, -- academic_year_id
+                                    ?, -- vacation
+                                    1  -- status
+                                    )";
         try
         {
             SqlStatement stmt = SqlStatement.FromString(sql, SqlConnString.CSM_APP);
-            stmt.SetParameters(st.class_id, st.id, st.academic_year_id, st.vacation);
+            stmt.SetParameters(st.id, st.classroom_id, st.academic_year_id, st.vacation);
             stmt.ExecuteNonQuery();
         }
         catch (Exception ex)
@@ -1004,7 +989,7 @@ public class ClassRoom
     public static void updateStaffClassInfo(int classId, string staff_code, string vacation)
     {
 
-        string sql = @"UPDATE classroom_staff_management set vacation = @vacation, class_id = @class_id,
+        string sql = @"UPDATE classroom_staff_management set vacation = @vacation, classroom_id = @classroom_id,
                              update_time = now()
                             where staff_code = @staff_code and status = 1";
         try
@@ -1037,19 +1022,19 @@ public class ClassRoom
         }
     }
 
-    //public static void updateClassroomVacation(int class_id, int vacation_status, string vacation_type)
+    //public static void updateClassroomVacation(int classroom_id, int vacation_status, string vacation_type)
     //{
 
     //    string sql = @"update classroom_vacation_management
     //                        set vacation_status = ?                                                  
     //                        where vacation_type = ?
-    //                        and class_id = ?";
+    //                        and classroom_id = ?";
 
     //    try
     //    {
 
     //        SqlStatement stmt = SqlStatement.FromString(sql, SqlConnString.CSM_APP);
-    //        stmt.SetParameters(vacation_status, vacation_type, class_id);
+    //        stmt.SetParameters(vacation_status, vacation_type, classroom_id);
     //        stmt.ExecuteNonQuery();
     //    }
     //    catch (Exception ex)
@@ -1064,7 +1049,7 @@ public class ClassRoom
     //    string sql = @"update classroom_vacation_management
     //                        set capacity = ?                           
     //                        where vacation_type = ? 
-    //                        and class_id = ?";
+    //                        and classroom_id = ?";
 
     //    try
     //    {
@@ -1081,7 +1066,7 @@ public class ClassRoom
     public static void updateClassroomStaffManagement(int idClass, string staffCode)
     {
         string sql = @"UPDATE classroom_staff_management set 
-                            class_id = ?, update_time = now()
+                            classroom_id = ?, update_time = now()
                             WHERE staff_code= ?";
 
         try
@@ -1124,7 +1109,7 @@ public class ClassRoom
     {
         string sql = @"SELECT a.id, a.name, a.static_quantity, a.status, a.update_time
                             FROM classroom a, classroom_staff_management b
-                            where a.id = b.class_id
+                            where a.id = b.classroom_id
                             and b.staff_code = ?";
         try
         {
@@ -1144,7 +1129,7 @@ public class ClassRoom
     {
         string sql = @"SELECT a.id, a.name
                             FROM classroom a, exam b
-                            where a.id = b.class_id
+                            where a.id = b.classroom_id
                                 and b.academic_year_start = ?
                                 and b.academic_year_end = ?
                                 and period = ?
@@ -1166,7 +1151,7 @@ public class ClassRoom
     //public static List<ClassRoom> getListActiveVacationByClass(int id)
     //{
     //    string sql = @"select * from classroom_vacation_management
-    //                        where class_id = ?
+    //                        where classroom_id = ?
     //                        and vacation_status = 1";
 
     //    try
@@ -1195,7 +1180,7 @@ public class ClassRoom
                 foreach (ClassRoom c in listClassroom)
                 {
                     string sql = @"INSERT INTO classroom_average_management
-                                         (success_percent,class_id,academic_year,date_register,login_user)
+                                         (success_percent,classroom_id,academic_year,date_register,login_user)
                                             values(?, ?, ?, now(), ?)";
 
                     SqlStatement stmt = SqlStatement.FromString(sql, SqlConnString.CSM_APP);
@@ -1220,7 +1205,7 @@ public class ClassRoom
                 foreach (ClassRoom c in listClassroom)
                 {
                     string sql = @"DELETE FROM classroom_average_management
-                                         WHERE class_id = ? and academic_year = ?";
+                                         WHERE classroom_id = ? and academic_year = ?";
 
                     SqlStatement stmt = SqlStatement.FromString(sql, SqlConnString.CSM_APP);
                     stmt.SetParameters(c.id, c.academic_year_id);
@@ -1237,7 +1222,7 @@ public class ClassRoom
     public static List<ClassRoom> getClassroomCurrentSalary(int classId, string vacation_type)
     {
 
-        string sql = @"SELECT  * from classroom_salary_management where class_id = ?
+        string sql = @"SELECT  * from classroom_salary_management where classroom_id = ?
                               and status = 1 and vacation_type = ?";
         try
         {
@@ -1256,11 +1241,11 @@ public class ClassRoom
     public static void updateExistingSalaryAmountForClassroom(ClassRoom c)
     {
         string sql = @"UPDATE classroom_salary_management set status = 0
-                             WHERE class_id = ? and vacation_type = ?";
+                             WHERE classroom_id = ? and vacation_type = ?";
         try
         {
             SqlStatement stmt = SqlStatement.FromString(sql, SqlConnString.CSM_APP);
-            stmt.SetParameters(c.class_id, c.vacation_type);
+            stmt.SetParameters(c.classroom_id, c.vacation_type);
             stmt.ExecuteNonQuery();
         }
         catch (Exception ex)
@@ -1272,12 +1257,12 @@ public class ClassRoom
     public static void deleteExistingSalaryAmountForClassroom(ClassRoom c)
     {
         string sql = @"DELETE FROM classroom_salary_management
-                             WHERE class_id = ? and vacation_type = ?";
+                             WHERE classroom_id = ? and vacation_type = ?";
 
         try
         {
             SqlStatement stmt = SqlStatement.FromString(sql, SqlConnString.CSM_APP);
-            stmt.SetParameters(c.class_id, c.vacation_type);
+            stmt.SetParameters(c.classroom_id, c.vacation_type);
             stmt.ExecuteNonQuery();
         }
         catch (Exception ex)
@@ -1298,11 +1283,11 @@ public class ClassRoom
                     deleteExistingSalaryAmountForClassroom(c);
 
                     // add new class info
-                    string sql = @"INSERT INTO classroom_salary_management(class_id,amount,status,date_register,login_user_id,vacation_type)
+                    string sql = @"INSERT INTO classroom_salary_management(classroom_id,amount,status,date_register,login_user_id,vacation_type)
                                 VALUES(?,?,1,now(),?,?)";
 
                     SqlStatement stmt = SqlStatement.FromString(sql, SqlConnString.CSM_APP);
-                    stmt.SetParameters(c.class_id, c.amount, c.login_user_id, c.vacation_type);
+                    stmt.SetParameters(c.classroom_id, c.amount, c.login_user_id, c.vacation_type);
                     stmt.ExecuteNonQuery();
                 }
             }
@@ -1319,7 +1304,7 @@ public class ClassRoom
         {
             string sql = @"select c.name as classroom_name,
 					        (select COALESCE(amount,0) from classroom_fixed_payment
-							        where class_id = c.id ) as amount
+							        where classroom_id = c.id ) as amount
 					         from classroom c where c.id = ?";
 
             SqlStatement stmt = SqlStatement.FromString(sql, SqlConnString.CSM_APP);
@@ -1396,7 +1381,7 @@ public class ClassRoom
 
 
         // add new fixed payment
-        string sql = @"INSERT INTO classroom_fixed_payment(class_id, amount)
+        string sql = @"INSERT INTO classroom_fixed_payment(classroom_id, amount)
                             VALUES(?, ?)";
 
         try
@@ -1415,7 +1400,7 @@ public class ClassRoom
     {
 
         string sql = @"DELETE FROM classroom_fixed_payment
-                            WHERE class_id = ?";
+                            WHERE classroom_id = ?";
 
         try
         {
@@ -1439,7 +1424,7 @@ public class ClassRoom
             foreach (ClassRoom c in listClassPrice)
             {
                 // add new fixed payment
-                string sql = @"INSERT INTO classroom_hourly_payment(class_id, cours_id, amount)
+                string sql = @"INSERT INTO classroom_hourly_payment(classroom_id, cours_id, amount)
                             VALUES(?,?,?)";
 
 
@@ -1458,7 +1443,7 @@ public class ClassRoom
     {
 
         string sql = @"DELETE FROM classroom_hourly_payment
-                            WHERE class_id = ?";
+                            WHERE classroom_id = ?";
 
         try
         {
@@ -1500,7 +1485,7 @@ public class ClassRoom
         try
         {
             SqlStatement stmt = SqlStatement.FromString(sql, SqlConnString.CSM_APP);
-            stmt.SetParameters(c.class_id, c.staffCode, c.academic_year_id, c.vacation);
+            stmt.SetParameters(c.classroom_id, c.staffCode, c.academic_year_id, c.vacation);
             stmt.ExecuteNonQuery();
         }
         catch (Exception ex)
@@ -1529,7 +1514,7 @@ public class ClassRoom
     public static List<ClassRoom> getListScheduleCourseByTeachId(string teacherCode, int academicYear)
     {
         string sql = @"SELECT * from classroom 
-                            where id in (select distinct(class_id) from schedule 
+                            where id in (select distinct(classroom_id) from schedule 
                                             where Id_teacher = ? and academic_year = ?)
                             order by name asc";
 

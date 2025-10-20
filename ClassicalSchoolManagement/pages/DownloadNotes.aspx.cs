@@ -236,7 +236,7 @@ public partial class DownloadNotes : System.Web.UI.Page
         {
             Notes notes = new Notes();
             //notes.teacher_id = ddlTeacher.SelectedValue;
-            //notes.class_id = int.Parse(ddlClassroom.SelectedValue);
+            //notes.classroom_id = int.Parse(ddlClassroom.SelectedValue);
             //notes.vacation = ddlVacation.SelectedValue;
             ////notes.exam_period = ddlPeriod.SelectedValue;
             //notes.cours_id = int.Parse(ddlCourse.SelectedValue);
@@ -342,7 +342,7 @@ public partial class DownloadNotes : System.Web.UI.Page
                 //
                 Notes notes = new Notes();
                 notes.teacher_id = ddlTeacher.SelectedValue;
-                notes.class_id = int.Parse(ddlClassroom.SelectedValue);
+                notes.classroom_id = int.Parse(ddlClassroom.SelectedValue);
                 notes.vacation = ddlVacation.SelectedValue;
                 //notes. = ddlPeriod.SelectedValue;
                 notes.cours_id = int.Parse(ddlCourse.SelectedValue);
@@ -574,7 +574,7 @@ public partial class DownloadNotes : System.Web.UI.Page
             if (ddlVacation.SelectedValue != "-1")
             {
                 Course course = new Course();
-                course.class_id = int.Parse(ddlClassroom.SelectedValue);
+                course.classroom_id = int.Parse(ddlClassroom.SelectedValue);
                 course.academic_year = int.Parse(ddlAcademicYear.SelectedValue);
                 course.vacation_code = ddlVacation.SelectedValue;
 

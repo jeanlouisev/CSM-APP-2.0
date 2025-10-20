@@ -131,7 +131,7 @@ public partial class AddExams : System.Web.UI.Page
                 //get the values of the form
                 exam.id = "EX-" + Universal.getUniversalSequence(sqlExamNextval).ToString();
                 exam.description = txtDescription.Text;
-                exam.class_id = Convert.ToInt32(ddlClassroom.SelectedValue);
+                exam.classroom_id = Convert.ToInt32(ddlClassroom.SelectedValue);
                 exam.course_id = Convert.ToInt32(ddlCourse.SelectedValue);
                 exam.teacher_id = ddlTeacher.SelectedValue;
                 exam.vacation = ddlVacation.SelectedValue;
@@ -441,12 +441,12 @@ public partial class AddExams : System.Web.UI.Page
                             //
                             filepath = "~/Uploaded_Exams/" + fileName;
                             userPostedFile.SaveAs(Server.MapPath(filepath)); //save file to folder
-                            Documents doc = new Documents();
-                            doc.staff_code = exam.teacher_id;
-                            doc.document_path = filepath;
+                            ExamDocuments doc = new ExamDocuments();
+                            //doc.staff_code = exam.teacher_id;
+                            //doc.document_path = filepath;
                             doc.document_name = fileName;
                             //doc.document_type = 3; // 0 is for student / 1 is for teacher / 2 is for staff / 3 is for Exam
-                            Documents.uploadDocument(doc);
+                            //ExamDocuments.uploadDocument(doc);
                         }
                     }
                     catch (Exception Ex)
@@ -696,7 +696,7 @@ public partial class AddExams : System.Web.UI.Page
             Users user = Session["user"] as Users;
             //
             Exam exam = new Exam();
-            exam.class_id = ddlClassroom.SelectedValue == "-1" ? 0 : int.Parse(ddlClassroom.SelectedValue);
+            exam.classroom_id = ddlClassroom.SelectedValue == "-1" ? 0 : int.Parse(ddlClassroom.SelectedValue);
             exam.vacation = ddlVacation.SelectedValue == "-1" ? null : ddlVacation.SelectedValue;
             exam.control = ddlControl.SelectedValue == "-1" ? 0 : int.Parse(ddlControl.SelectedValue);
             exam.course_id = ddlCourse.SelectedValue == "-1" ? 0 : int.Parse(ddlCourse.SelectedValue);

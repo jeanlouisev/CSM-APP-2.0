@@ -18,7 +18,7 @@ public class Notesxxx
     public string student_id { get; set; }
     public double note_obtained { get; set; }
     public string teacher_id { get; set; }
-    public int class_id { get; set; }
+    public int classroom_id { get; set; }
     public string vacation { get; set; }
     public string vacation_code { get; set; }
     public int academic_year_id { get; set; }
@@ -124,9 +124,9 @@ public class Notesxxx
                         try { notes.teacher_id = reader.GetValue(i).ToString(); }
                         catch { }
                     }
-                    if (reader.GetName(i).ToUpper() == "CLASS_ID")
+                    if (reader.GetName(i).ToUpper() == "classroom_id")
                     {
-                        try { notes.class_id = int.Parse(reader.GetValue(i).ToString()); }
+                        try { notes.classroom_id = int.Parse(reader.GetValue(i).ToString()); }
                         catch { }
                     }
                     if (reader.GetName(i).ToUpper() == "SUCCESS_PERCENT")
@@ -233,12 +233,12 @@ public class Notesxxx
                 // insert new notes
                 foreach (Notes n in listNotes)
                 {
-                    string sql = @"INSERT INTO notes(student_id, class_id, vacation, control, academic_year_id, 
+                    string sql = @"INSERT INTO notes(student_id, classroom_id, vacation, control, academic_year_id, 
                                         cours_id, coefficient, note_obtained, date_register, login_user)
                                         values(?,?,?,?,?,?,?,?,now(),?)";
 
                     SqlStatement stmt = SqlStatement.FromString(sql, SqlConnString.CSM_APP);
-                    stmt.SetParameters(n.student_id, n.class_id, n.vacation, n.control, n.academic_year_id, 
+                    stmt.SetParameters(n.student_id, n.classroom_id, n.vacation, n.control, n.academic_year_id, 
                                         n.cours_id, n.coefficient, n.note_obtained, n.login_user);
                     stmt.ExecuteNonQuery();
                 }
@@ -257,7 +257,7 @@ public class Notesxxx
             string sql = @"select st.id as student_id, 
                             concat(st.First_name, ' ', st.Last_name) as student_fullname, 
                             csm.vacation,
-							cr.id as class_id,
+							cr.id as classroom_id,
                             cr.name as class_name, 
 							acc.id as academic_year_id,
                             concat(EXTRACT(year FROM acc.start_date), '-', EXTRACT(year FROM acc.end_date)) as years,
@@ -266,7 +266,7 @@ public class Notesxxx
                             ccm.coefficient,
                             (select coalesce(n.note_obtained,0) from notes n
                                 where n.student_id = st.id
-                                and n.class_id = cr.id
+                                and n.classroom_id = cr.id
                                 and n.vacation = csm.vacation
                                 and n.academic_year_id = acc.Id
                                 and n.cours_id = c.id
@@ -274,12 +274,12 @@ public class Notesxxx
                                 ) as note_obtained
                             FROM student st
                                 inner join classroom_staff_management csm on csm.staff_code = st.id
-                                inner join classroom cr on cr.id = csm.class_id
+                                inner join classroom cr on cr.id = csm.classroom_id
                                 inner join academic_year acc on acc.id = csm.academic_year_id
-								inner join classroom_cours_management ccm on ccm.class_id = csm.class_id
+								inner join classroom_cours_management ccm on ccm.classroom_id = csm.classroom_id
 								inner join cours c on c.id = ccm.cours_id
                             WHERE st.status = 1
-                                [  and csm.class_id = ? ] -- 0
+                                [  and csm.classroom_id = ? ] -- 0
                                 [  AND csm.vacation = ? ]  -- 1
                                 [  AND st.id = ? ]  -- 2
                                 [  AND acc.id = ? ]  -- 3
@@ -290,9 +290,9 @@ public class Notesxxx
 
             
 
-            if (note.class_id > 0)
+            if (note.classroom_id > 0)
             {
-                stmt.SetParameter(0, note.class_id);
+                stmt.SetParameter(0, note.classroom_id);
             }
             if (note.vacation != null)
             {
@@ -363,7 +363,7 @@ public class Notesxxx
         {
             SqlStatement stmt = SqlStatement.FromString(sql, SqlConnString.CSM_APP);
             stmt.SetParameters(n.teacher_id.ToUpper(),
-                                n.class_id,
+                                n.classroom_id,
                                 n.vacation.ToUpper(),
                                 //n.exam_period,
                                 n.cours_id,
@@ -434,14 +434,14 @@ public class Notesxxx
                 {
                     string sql = @"delete from notes 
                             where student_id = ?
-                                and class_id = ?
+                                and classroom_id = ?
                                 and vacation = ?
                                 and control = ?
                                 and academic_year_id = ?
                                 and cours_id = ?";
 
                     SqlStatement stmt = SqlStatement.FromString(sql, SqlConnString.CSM_APP);
-                    stmt.SetParameters(n.student_id, n.class_id, n.vacation, n.control, n.academic_year_id, n.cours_id );
+                    stmt.SetParameters(n.student_id, n.classroom_id, n.vacation, n.control, n.academic_year_id, n.cours_id );
                     stmt.ExecuteNonQuery();
                 }
             }
@@ -466,12 +466,12 @@ public class Notesxxx
                                 inner join academic_year acc on acc.id = n.academic_year_id
                             WHERE n.student_id = ?
                                 and n.vacation = ?
-                                and n.class_id = ?
+                                and n.classroom_id = ?
                                 and n.academic_year_id = ?
                                 and n.control = ?";
 
             SqlStatement stmt = SqlStatement.FromString(sql, SqlConnString.CSM_APP);
-            stmt.SetParameters(n.student_id, n.vacation, n.class_id, n.academic_year_id, n.control);
+            stmt.SetParameters(n.student_id, n.vacation, n.classroom_id, n.academic_year_id, n.control);
             //
             return Parse(stmt.ExecuteReader());
         }
@@ -489,10 +489,10 @@ public class Notesxxx
                         n.note_obtained
                         from student st
                         inner join classroom_staff_management csm on csm.staff_code = st.id
-                        inner join classroom_cours_management ccm on ccm.class_id = csm.class_id
+                        inner join classroom_cours_management ccm on ccm.classroom_id = csm.classroom_id
                         inner join cours c on c.id = ccm.cours_id
-                        left join notes n on n.class_id = csm.class_id and n.student_id = st.id and n.cours_id = c.id
-                        where  n.class_id = ?
+                        left join notes n on n.classroom_id = csm.classroom_id and n.student_id = st.id and n.cours_id = c.id
+                        where  n.classroom_id = ?
 						   and n.vacation = ?
 						   and n.control = ?
 						   and n.academic_year_id = ?

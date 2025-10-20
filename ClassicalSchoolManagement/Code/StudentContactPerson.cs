@@ -26,7 +26,6 @@ public class StudentContactPerson
     public string email { get; set; }
     public string job_title { get; set; }
     public string address { get; set; }
-    public string image_path { get; set; }
     public string relationship { get; set; }
     public DateTime date_register { get; set; }
 
@@ -81,21 +80,6 @@ public class StudentContactPerson
                     {
                         try { cp.id_card = reader.GetValue(i).ToString(); } catch { }
                     }
-                    if (reader.GetName(i).ToUpper() == "MARITAL_STATUS")
-                    {
-                        try
-                        {
-                            switch (reader.GetValue(i).ToString())
-                            {
-                                case "C": cp.marital_status_definition = "Célibataire"; break;
-                                case "M": cp.marital_status_definition = "Marié(e)"; break;
-                                case "D": cp.marital_status_definition = "Divorcé(e)"; break;
-                                case "V": cp.marital_status_definition = "Veuf(ve)"; break;
-                            }
-                        }
-                        catch { }
-
-                    }
                     if (reader.GetName(i).ToUpper() == "PHONE")
                     {
                         try { cp.phone = reader.GetValue(i).ToString(); } catch { }
@@ -115,10 +99,6 @@ public class StudentContactPerson
                     if (reader.GetName(i).ToUpper() == "RELATIONSHIP")
                     {
                         try { cp.relationship = reader.GetValue(i).ToString(); } catch { }
-                    }
-                    if (reader.GetName(i).ToUpper() == "IMAGE_PATH")
-                    {
-                        try { cp.image_path = reader.GetValue(i).ToString(); } catch { }
                     }
                     if (reader.GetName(i).ToUpper() == "DATE_REGISTER")
                     {
@@ -195,45 +175,62 @@ public class StudentContactPerson
     {
 
         string sql = @"INSERT INTO STUDENT_CONTACT_PERSON(
-parent_code,
-first_name,
-last_name,
-sex,
-birth_place,
-birth_date,
-occupation,
-marital_status,
-id_card,
-phone,
-email,
-address,
-job_title,
-relationship,
-image_path,
-student_id)
-                                VALUES(?, -- studentCode,
-                                        ?, -- firstName,
-                                        ?, -- lastName,
-                                        ?, -- sex,
-                                        ?, -- maritalStatus,
-                                        ?, -- id_card,
-                                        ?, -- birth_date,
-                                        ?, -- birth_place,
-                                        ?, -- adress,
-                                        ?, -- phone,                                       
-                                        ?, -- email,
-                                        ?, -- image_path,
-                                        ?, -- status,
-                                        now(), -- date_register,
-                                        ? -- login_user_id
+                                        parent_code,
+                                        first_name,
+                                        last_name,
+                                        sex,
+                                        birth_place,
+                                        birth_date,
+                                        occupation,
+                                        marital_status,
+                                        id_card,
+                                        phone,
+                                        email,
+                                        address,
+                                        job_title)
+                                VALUES( ?, -- parent_code
+                                        ?, -- first_name
+                                        ?, -- last_name
+                                        ?, -- sex
+                                        ?, -- birth_place
+                                        ?, -- birth_date
+                                        ?, -- occupation
+                                        ?, -- marital_status
+                                        ?, -- id_card
+                                        ?, -- phone
+                                        ?, -- email
+                                        ?, -- address
+                                        ? -- job_title
                                         )";
 
 
         SqlStatement stmt = SqlStatement.FromString(sql, SqlConnString.CSM_APP);
-        stmt.SetParameters(p.id, p.first_name, p.last_name, p.sex, p.marital_status,
-                            p.id_card, p.birth_date.ToString("yyyyMMdd"), p.birth_place, p.address,
-                            p.phone, p.email, p.image_path
-                            );
+        stmt.SetParameters(p.parent_code,
+                            p.first_name,
+                            p.last_name,
+                            p.sex,
+                            p.birth_place,
+                            p.birth_date.ToString("yyyyMMdd"),
+                            p.occupation,
+                            p.marital_status,
+                            p.id_card,
+                            p.phone,
+                            p.email,
+                            p.address,
+                            p.job_title);
+
+        stmt.ExecuteNonQuery();
+    }
+
+    public static void Attach(string parentCode, string studentId, string relationship)
+    {
+
+        string sql = @"INSERT INTO STUDENT_CONTACT_PERSON_ATTACH
+                                VALUES( ?, ?, ?)";
+
+
+        SqlStatement stmt = SqlStatement.FromString(sql, SqlConnString.CSM_APP);
+        stmt.SetParameters(parentCode, studentId, relationship);
 
         stmt.ExecuteNonQuery();
     }
@@ -258,7 +255,6 @@ student_id)
             cmd.Parameters.AddWithValue("@marital_status", p.marital_status);
             cmd.Parameters.AddWithValue("@phone", p.phone);
             cmd.Parameters.AddWithValue("@adress", p.address);
-            cmd.Parameters.AddWithValue("@image_path", p.image_path);
             cmd.Parameters.AddWithValue("@id_card", p.id_card);
             cmd.ExecuteNonQuery();
         }

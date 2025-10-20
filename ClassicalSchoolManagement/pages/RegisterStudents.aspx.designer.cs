@@ -166,13 +166,13 @@ public partial class RegisterStudents
     protected global::System.Web.UI.WebControls.Label lblPhone1;
 
     /// <summary>
-    /// txtPhone1 control.
+    /// txtPhone control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::Telerik.Web.UI.RadNumericTextBox txtPhone1;
+    protected global::Telerik.Web.UI.RadNumericTextBox txtPhone;
 
     /// <summary>
     /// lblAddress control.
@@ -301,6 +301,42 @@ public partial class RegisterStudents
     protected global::System.Web.UI.WebControls.ImageButton btnUploadImage;
 
     /// <summary>
+    /// txtContributionPaymentType control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::Telerik.Web.UI.RadTextBox txtContributionPaymentType;
+
+    /// <summary>
+    /// hiddenContributionTypeId control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.HiddenField hiddenContributionTypeId;
+
+    /// <summary>
+    /// txtContributionPaidAmount control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::Telerik.Web.UI.RadNumericTextBox txtContributionPaidAmount;
+
+    /// <summary>
+    /// chkRegPaymentStatus control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::Telerik.Web.UI.RadCheckBox chkRegPaymentStatus;
+
+    /// <summary>
     /// Label7 control.
     /// </summary>
     /// <remarks>
@@ -310,13 +346,13 @@ public partial class RegisterStudents
     protected global::System.Web.UI.WebControls.Label Label7;
 
     /// <summary>
-    /// ddlDocumentCategory control.
+    /// ddlDocumentType control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::Telerik.Web.UI.RadDropDownList ddlDocumentCategory;
+    protected global::Telerik.Web.UI.RadDropDownList ddlDocumentType;
 
     /// <summary>
     /// Label6 control.

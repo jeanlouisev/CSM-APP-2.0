@@ -16,7 +16,7 @@ public class Exam
     public string id { get; set; }
     public string description { get; set; }
     public DateTime exam_date { get; set; }
-    public int class_id { get; set; }
+    public int classroom_id { get; set; }
     public int schedule_id { get; set; }
     public string class_name { get; set; }
     public int course_id { get; set; }
@@ -72,9 +72,9 @@ public class Exam
                         try { exam.course_id = reader.GetInt32(i); }
                         catch { }
                     }
-                    if (reader.GetName(i).ToUpper() == "CLASS_ID")
+                    if (reader.GetName(i).ToUpper() == "classroom_id")
                     {
-                        try { exam.class_id = reader.GetInt32(i); }
+                        try { exam.classroom_id = reader.GetInt32(i); }
                         catch { }
                     }
                     if (reader.GetName(i).ToUpper() == "SCHEDULE_ID")
@@ -276,7 +276,7 @@ public class Exam
                                 exam.start_hour,
                                 exam.end_hour,
                                 exam.vacation,
-                                exam.class_id,
+                                exam.classroom_id,
                                 exam.course_id,
                                 exam.teacher_id,
                                 exam.staff_request,
@@ -320,7 +320,7 @@ public class Exam
 
         string sql = @"SELECT a.id, a.description, a.exam_date,
                                 a.start_hour, a.end_hour, 
-                                a.vacation, a.class_id,
+                                a.vacation, a.classroom_id,
                                 a.course_id, a.teacher_id, 
                                 a.staff_request, a.register_date,
                                 a.points, a.control, a.file_path, a.file_name,
@@ -332,16 +332,16 @@ public class Exam
                                 end as control_name, a.academic_year,
                                   (select concat(EXTRACT(year FROM start_date),'-',EXTRACT(year FROM end_date)) 
                                     from academic_year where id = a.academic_year) as academic_year_description,
-                                (select name from classroom where id = a.class_id) as class_name,
+                                (select name from classroom where id = a.classroom_id) as class_name,
                                 (select name from cours where id = a.course_id) as cours_name,
                                 (select concat(first_name,' ',last_name) 
                                         from teacher WHERE id = a.teacher_id) as teacher_name
                                 FROM exam a where 1=1";
 
 
-        if (exam.class_id != 0)
+        if (exam.classroom_id != 0)
         {
-            sql += @" AND a.id_class =" + exam.class_id + " ";
+            sql += @" AND a.id_class =" + exam.classroom_id + " ";
         }
         if (exam.vacation != null && exam.vacation.Length > 0)
         {
@@ -447,9 +447,9 @@ public class Exam
                                 and a.Id_Class =  c.Id_class
                                 and c.Id_class = d.Id";
 
-        if (note.class_id != 0)
+        if (note.classroom_id != 0)
         {
-            sql += @" AND a.id_class = " + note.class_id + " ";
+            sql += @" AND a.id_class = " + note.classroom_id + " ";
         }
 
         if (note.vacation != null)
@@ -552,7 +552,7 @@ public class Exam
                                 exam.start_hour,
                                 exam.end_hour,
                                 exam.vacation,
-                                exam.class_id,
+                                exam.classroom_id,
                                 exam.course_id,
                                 exam.teacher_id,
                                 exam.staff_request,
@@ -574,9 +574,9 @@ public class Exam
         string sql = @"select * FROM exam
                             Where 1=1";
 
-        if (exam.class_id != 0)
+        if (exam.classroom_id != 0)
         {
-            sql += @" and id_class = " + exam.class_id + " ";
+            sql += @" and id_class = " + exam.classroom_id + " ";
         }
 
         if (exam.course_id != 0)

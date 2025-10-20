@@ -29,7 +29,7 @@ public partial class RegisterStudents : System.Web.UI.Page
 {
     int menu_code = (int)Users.MENU.STUDENT;
 
-    List<Documents> listDocumentsAttach = new List<Documents>();
+    List<StudentDocuments> listDocumentsAttach = new List<StudentDocuments>();
     string sqlStudentNextval = @"select nextval_student('codeSeq') as student_nextval";
     string sqlContactPersonNextval = @"select nextval_student_contact_person('codeSeq') as contact_person_nextval";
     string msgContent = "";
@@ -73,10 +73,10 @@ public partial class RegisterStudents : System.Web.UI.Page
                 txtAcademicYear.Text = acc.years.ToString();
                 hiddenAcademicYearId.Value = acc.id.ToString();
                 //
-                //lblResult.Text = "";
-                //txtFirstName.Focus();
-                //loadActiveClassroom(ddlClassroom);       ----- to be reactivated
-                //loadDocumentCategories();                ----- to be reactivated
+                loadActiveClassroom(ddlClassroom); 
+                loadDocumentTypes();
+                loadRegistrationFees();
+
                 imageUploader.Attributes["onchange"] = "UploadFile(this)";
                 //
                 if (Session["student_id"] == null)
@@ -127,38 +127,38 @@ public partial class RegisterStudents : System.Web.UI.Page
     {
         try
         {
-            List<Student> listStudentInfo = Student.getListStudentByCode(studentCode);
-            Student st = listStudentInfo[0];
-            //get student data
-            //txtCode.Text = st.id;
-            //txtCode.Visible = true;
-            txtFirstName.Text = st.first_name;
-            txtLastName.Text = st.last_name;
-            ddlSex.SelectedValue = st.sex_code;
-            txtCardId.Text = st.id_card;
-            txtBirthPlace.Text = st.birth_place;
-            radBirthDate.SelectedDate = st.birth_date;
-            //txtphone.Text = st.phone;
-            txtAddress.Text = st.address;
-            txtEmail.Text = st.email;
-            ddlClassroom.SelectedValue = st.class_id.ToString();
-            ddlClassroom.Enabled = false;
-            ddlVacation.SelectedValue = st.vacation_code;
-            string imagePaths = "~/images/image_data/" + st.image_path;
-            imgStudent.Attributes.Add("src", imagePaths);
+            //    List<Student> listStudentInfo = Student.getListStudentByCode(studentCode);
+            //    Student st = listStudentInfo[0];
+            //    //get student data
+            //    //txtCode.Text = st.id;
+            //    //txtCode.Visible = true;
+            //    txtFirstName.Text = st.first_name;
+            //    txtLastName.Text = st.last_name;
+            //    ddlSex.SelectedValue = st.sex_code;
+            //    txtCardId.Text = st.id_card;
+            //    txtBirthPlace.Text = st.birth_place;
+            //    radBirthDate.SelectedDate = st.birth_date;
+            //    //txtphone.Text = st.phone;
+            //    txtAddress.Text = st.address;
+            //    txtEmail.Text = st.email;
+            //    ddlClassroom.SelectedValue = st.classroom_id.ToString();
+            //    ddlClassroom.Enabled = false;
+            //    ddlVacation.SelectedValue = st.vacation_code;
+            //    string imagePaths = "~/images/image_data/" + st.image_path;
+            //    imgStudent.Attributes.Add("src", imagePaths);
 
-            // parent information
-            //StudentContactPerson p = new StudentContactPerson();
-            //txtParentFirstName.Text = st.ref_first_name;
-            //txtParentLastName.Text = st.ref_last_name;
-            //txtParentPhone.Text = st.ref_phone;
-            //txtParentAddress.Text = st.ref_adress;
-            //ddlParentSex.SelectedValue = st.ref_sex;
-            //ddlParentRelationship.SelectedValue = st.ref_relationship;
+            //    // parent information
+            //    //StudentContactPerson p = new StudentContactPerson();
+            //    //txtParentFirstName.Text = st.ref_first_name;
+            //    //txtParentLastName.Text = st.ref_last_name;
+            //    //txtParentPhone.Text = st.ref_phone;
+            //    //txtParentAddress.Text = st.ref_adress;
+            //    //ddlParentSex.SelectedValue = st.ref_sex;
+            //    //ddlParentRelationship.SelectedValue = st.ref_relationship;
 
-            //get list of available documents
-            Session["list_documents_attach"] = Documents.getListDocumentsByStaffCode(studentCode);
-            gridAttachDocuments.Rebind();
+            //    //get list of available documents
+            //    Session["list_documents_attach"] = Documents.getListDocumentsByStaffCode(studentCode);
+            //    gridAttachDocuments.Rebind();
 
         }
         catch (Exception ex)
@@ -200,16 +200,27 @@ public partial class RegisterStudents : System.Web.UI.Page
         dropDownList.SelectedValue = "-1";
     }
 
-    private void loadDocumentCategories()
+    private void loadDocumentTypes()
     {
-        List<Documents> listResult = Documents.getListDocumentCategory();
-        ddlDocumentCategory.DataValueField = "description";
-        ddlDocumentCategory.DataTextField = "description";
-        ddlDocumentCategory.DataSource = listResult;
-        ddlDocumentCategory.DataBind();
+        List<StudentDocuments> listResult = StudentDocuments.getListDocumentType();
+        ddlDocumentType.DataValueField = "id";
+        ddlDocumentType.DataTextField = "description";
+        ddlDocumentType.DataSource = listResult;
+        ddlDocumentType.DataBind();
         //
-        ddlDocumentCategory.Items.Insert(0, new DropDownListItem("--Sélectionner--", "-1"));
-        ddlDocumentCategory.SelectedValue = "-1";
+        ddlDocumentType.Items.Insert(0, new DropDownListItem("--Sélectionner--", "-1"));
+        ddlDocumentType.SelectedValue = "-1";
+    }
+
+    private void loadRegistrationFees()
+    {
+        StudentContribution sc = StudentContribution.getRegistrationFee();
+        if(sc != null)
+        {
+            txtContributionPaymentType.Text = sc.description;
+            hiddenContributionTypeId.Value = sc.id.ToString();
+            txtContributionPaidAmount.Value = sc.price;
+        }
     }
 
     protected void btnSave_Click(object sender, EventArgs e)
@@ -231,35 +242,44 @@ public partial class RegisterStudents : System.Web.UI.Page
                 st.sex = ddlSex.SelectedValue;
                 st.id_card = txtCardId.Text.Trim().Length <= 0 ? "" : txtCardId.Text.Trim();
                 st.birth_place = txtBirthPlace.Text.Trim().Length <= 0 ? "" : txtBirthPlace.Text.Trim();
-                //st.phone = txtphone.Text.Trim().Length <= 0 ? "" : txtphone.Text.Trim();
+                st.phone = txtPhone.Text.Trim().Length <= 0 ? "" : txtPhone.Text.Trim();
                 st.last_name = txtLastName.Text.Trim().Length <= 0 ? "" : txtLastName.Text.Trim();
-                st.marital_status = "C"; // C is used by default to define type "SINGLE"  //  ddlMaritalStatus.SelectedValue;
                 st.birth_date = radBirthDate.SelectedDate.Value;
                 st.address = txtAddress.Text.Trim().Length <= 0 ? "" : txtAddress.Text.Trim();
                 st.vacation = ddlVacation.SelectedValue;
                 st.email = txtEmail.Text.Trim().Length <= 0 ? "" : txtEmail.Text.Trim().ToLower();
-                st.image_path = imgStudent.Src.Replace("~/images/image_data/", "");
+                st.image_path = imgStudent.Src.Replace("~/images/student_profile/", "");
                 st.status = Convert.ToInt32(Student.StudenStatus.Active);
                 st.login_user_id = user.id;
-                st.class_id = int.Parse(ddlClassroom.SelectedValue);
+                st.classroom_id = int.Parse(ddlClassroom.SelectedValue);
                 st.academic_year_id = int.Parse(hiddenAcademicYearId.Value);
 
                 // parent information
-                StudentContactPerson p = new StudentContactPerson();
-                p.first_name = txtParentFirstName.Text.Trim();
-                p.last_name = txtParentLastName.Text.Trim();
-                p.sex = ddlParentSex.SelectedValue;
-                p.birth_place = txtParentBirthPlace.Text.Trim();
-                p.birth_date = radParentBirthDate.SelectedDate.Value;
-                p.occupation = txtParentOccupation.Text.Trim();
-                p.marital_status = ddlParentMaritalStatus.SelectedValue;
-                p.id_card = txtParentIdCard.Text.Trim();
-                p.phone = txtParentPhone.Text.Trim();
-                p.email = txtParentEmail.Text.Trim();
-                p.address = txtParentAddress.Text.Trim();
-                p.job_title = txtParentJobTitle.Text.Trim();
-                p.relationship = ddlParentRelationship.SelectedValue;
-                p.image_path = "";
+                StudentContactPerson cp = new StudentContactPerson();
+                cp.first_name = txtParentFirstName.Text.Trim();
+                cp.last_name = txtParentLastName.Text.Trim();
+                cp.sex = ddlParentSex.SelectedValue;
+                cp.birth_place = txtParentBirthPlace.Text.Trim();
+                cp.birth_date = radParentBirthDate.SelectedDate.Value;
+                cp.occupation = txtParentOccupation.Text.Trim();
+                cp.marital_status = ddlParentMaritalStatus.SelectedValue;
+                cp.id_card = txtParentIdCard.Text.Trim();
+                cp.phone = txtParentPhone.Text.Trim();
+                cp.email = txtParentEmail.Text.Trim();
+                cp.address = txtParentAddress.Text.Trim();
+                cp.job_title = txtParentJobTitle.Text.Trim();
+
+                // registration fees
+                StudentContribution sc = new StudentContribution();
+                sc.contribution_type_id = int.Parse(hiddenContributionTypeId.Value);
+                sc.paid_amount = double.Parse(txtContributionPaidAmount.Value.ToString());
+                sc.classroom_id = int.Parse(ddlClassroom.SelectedValue);
+                sc.academic_year_id = int.Parse(hiddenAcademicYearId.Value);
+                sc.status = chkRegPaymentStatus.Checked == true ? 1 : 0;     // 0.- not paid / 1.- Paid
+                sc.login_user_id = user.id;
+
+
+
 
 
                 if (hiddenAcademicYearId.Value == null)
@@ -271,60 +291,66 @@ public partial class RegisterStudents : System.Web.UI.Page
                 {
                     /*************** ADD NEW STUDENT ***************/
 
-                    if (Session["student_id"] == null)
+                    //if (Session["student_id"] == null)
+                    //{
+                    string studentId = "EL-" + Universal.getUniversalSequence(sqlStudentNextval).ToString();
+                    string parentCode = "PA-" + Universal.getUniversalSequence(sqlContactPersonNextval).ToString();
+
+                    // student id
+                    st.id = studentId;
+                    sc.student_id = studentId;
+                    // generate parent's code for online purpose
+                    cp.parent_code = parentCode;
+
+                    Student.addStudent(st);
+                    //attach student to selected class
+                    ClassRoom.attachStudentToClassroom(st);
+                    // insert contact person
+                    StudentContactPerson.Add(cp);
+                    // attach student to contact person
+                    string relationship = ddlParentRelationship.SelectedValue;
+                    StudentContactPerson.Attach(parentCode, studentId, relationship);
+                    // insert contribution fees
+                    StudentContribution.makePayments(sc);
+
+                    // attach documents
+                    if (Session["list_documents_attach"] != null)
                     {
-                        string studentId = "EL-" + Universal.getUniversalSequence(sqlStudentNextval).ToString();
-
-                        // student id
-                        st.id = studentId;
-                        // student id for contact person
-                        p.student_id = studentId;
-                        // generate parent's code for online purpose
-                        p.parent_code = "PA-" + Universal.getUniversalSequence(sqlContactPersonNextval).ToString();
-
-                        Student.addStudent(st);
-                        //attach student to selected class
-                        ClassRoom.attachStudentToClassroom(st);
-                        // insert contact person
-
-                        // attach documents
-                        if (Session["list_documents_attach"] != null)
-                        {
-                            listDocumentsAttach = Session["list_documents_attach"] as List<Documents>;
-                            Documents.uploadSudentDocuments(listDocumentsAttach, studentId);
-                        }
-
-                        // clear student form
-                        emptyFields();
-
-                        //get the student nextval and add it to the code
-                        //txtCode.Text = "EL-" + Universal.getUniversalSequence(sqlStudentNextval).ToString();
-
-                        MessageAlert.RadAlert("Enregistrer avec succès !\nCode Eleve : " + studentId, 300, 200, "Information", null, "../images/success_check.png");
+                        listDocumentsAttach = Session["list_documents_attach"] as List<StudentDocuments>;
+                        StudentDocuments.uploadSudentDocuments(listDocumentsAttach, studentId);
                     }
-                    else
-                    {
-                        /*************** UPDATE EXISTING STUDENT ***************/
-                        Student.updateStudent(st);
 
-                        // attach documents
-                        if (Session["list_documents_attach"] != null)
-                        {
-                            listDocumentsAttach = Session["list_documents_attach"] as List<Documents>;
-                            Documents.uploadSudentDocuments(listDocumentsAttach, st.id);
-                        }
+                    // clear student form
+                    emptyFields();
 
-                        // clear document grid
-                        listDocumentsAttach = null;
-                        listDocumentsAttach = new List<Documents>();
-                        gridAttachDocuments.Rebind();
-                        // clear fields
-                        emptyFields();
+                    //get the student nextval and add it to the code
+                    //txtCode.Text = "EL-" + Universal.getUniversalSequence(sqlStudentNextval).ToString();
 
-                        MessageAlert.RadAlert("Modifié avec succès !", 300, 200, "Information", null, "../images/success_check.png");
+                    MessageAlert.RadAlert("Enregistrer avec succès ! Code Eleve : " + studentId, 300, 200, "Information", null, "../images/success_check.png");
+                    //}
+                    //else
+                    //{
+                    //    /*************** UPDATE EXISTING STUDENT ***************/
+                    //    Student.updateStudent(st);
 
-                        //Response.Redirect("SearchStudents.aspx");
-                    }
+                    //    // attach documents
+                    //    if (Session["list_documents_attach"] != null)
+                    //    {
+                    //        listDocumentsAttach = Session["list_documents_attach"] as List<Documents>;
+                    //        Documents.uploadSudentDocuments(listDocumentsAttach, st.id);
+                    //    }
+
+                    //    // clear document grid
+                    //    listDocumentsAttach = null;
+                    //    listDocumentsAttach = new List<Documents>();
+                    //    gridAttachDocuments.Rebind();
+                    //    // clear fields
+                    //    emptyFields();
+
+                    //    MessageAlert.RadAlert("Modifié avec succès !", 300, 200, "Information", null, "../images/success_check.png");
+
+                    //    //Response.Redirect("SearchStudents.aspx");
+                    //}
                 }
             }
         }
@@ -336,15 +362,14 @@ public partial class RegisterStudents : System.Web.UI.Page
 
     private void emptyFields()
     {
-        //empty student form
-        //lblResult.Text = "";
+        //empty student fields
         txtFirstName.Text = "";
         txtLastName.Text = "";
         ddlSex.SelectedValue = "-1";
         txtCardId.Text = "";
         txtBirthPlace.Text = "";
         radBirthDate.Clear();
-        //txtphone.Text = "";
+        txtPhone.Text = "";
         txtAddress.Text = "";
         txtEmail.Text = "";
         ddlClassroom.SelectedValue = "-1";
@@ -352,22 +377,25 @@ public partial class RegisterStudents : System.Web.UI.Page
         //imageKeeper.ImageUrl = "~/images/image_data/Default.png";
         imgStudent.Attributes.Add("src", "../images/image_data/Default.png");
 
-        // clear contact fields
+        // student contact person
         txtParentFirstName.Text = "";
         txtParentLastName.Text = "";
         ddlParentSex.SelectedValue = "-1";
+        txtParentBirthPlace.Text = "";
+        radParentBirthDate.Clear();
+        txtParentOccupation.Text = "";
+        ddlParentMaritalStatus.SelectedValue = "-1";
+        txtParentIdCard.Text = "";
         txtParentPhone.Text = "";
+        txtParentEmail.Text = "";
         txtParentAddress.Text = "";
+        txtParentJobTitle.Text = "";
         ddlParentRelationship.SelectedValue = "-1";
-
-        //get the student nextval and add it to the code
-        //txtCode.Text = "EL-" + Universal.getUniversalSequence(sqlStudentNextval).ToString();
-
 
         // kill sessions
         Session["student_id"] = null;
         Session["list_documents_attach"] = null;
-        listDocumentsAttach = null;
+        listDocumentsAttach = new List<StudentDocuments>();
 
         // reload documents grid
         gridAttachDocuments.Rebind();
@@ -412,7 +440,7 @@ public partial class RegisterStudents : System.Web.UI.Page
             result = false;
         }
 
-        // check parent info
+        // check student contact person
 
         else if (txtParentFirstName.Text.Trim().Length <= 0)
         {
@@ -426,11 +454,43 @@ public partial class RegisterStudents : System.Web.UI.Page
         {
             result = false;
         }
+        else if (txtParentBirthPlace.Text.Trim().Length <= 0)
+        {
+            result = false;
+        }
+        else if (radParentBirthDate.SelectedDate == null)
+        {
+            result = false;
+        }
+        else if (txtParentLastName.Text.Trim().Length <= 0)
+        {
+            result = false;
+        }
+        else if (txtParentOccupation.Text.Trim().Length <= 0)
+        {
+            result = false;
+        }
+        else if (ddlParentMaritalStatus.SelectedValue.ToString() == "-1")
+        {
+            result = false;
+        }
+        else if (txtParentIdCard.Text.Trim().Length <= 0)
+        {
+            result = false;
+        }
         else if (txtParentPhone.Text.Trim().Length <= 0)
         {
             result = false;
         }
+        else if (txtParentEmail.Text.Trim().Length <= 0)
+        {
+            result = false;
+        }
         else if (txtParentAddress.Text.Trim().Length <= 0)
+        {
+            result = false;
+        }
+        else if (txtParentJobTitle.Text.Trim().Length <= 0)
         {
             result = false;
         }
@@ -458,7 +518,7 @@ public partial class RegisterStudents : System.Web.UI.Page
                     if (imageUploader.PostedFile.ContentLength > 0)
                     {
                         string fileName = DateTime.Now.ToString("ddMMyyyyHHmmssff") + "_" + Path.GetFileName(imageUploader.PostedFile.FileName);
-                        string filePaths = "~/images/image_data/" + fileName;
+                        string filePaths = "~/images/student_profile/" + fileName;
                         imageUploader.SaveAs(Server.MapPath(filePaths)); //save file to folder
                                                                          //imageKeeper.ImageUrl = filePaths;
                         imgStudent.Attributes.Add("src", filePaths);
@@ -538,9 +598,9 @@ public partial class RegisterStudents : System.Web.UI.Page
         {
             DateTime _birthDate = DateTime.Parse(dpicker.SelectedDate.Value.ToString());
             int days = (DateTime.Now - _birthDate).Days;
-            if (days < 365) // check if student is at least 1 year old
+            if (days < 730) // check if student is at least 2 years old or 730 days old
             {
-                MessageAlert.RadAlert("Erreur : Date de naissance invalide. Eleve doit avoir un (1) an ou plus !", 350, 200, "Information", null);
+                MessageAlert.RadAlert("Erreur : Date de naissance invalide. Eleve doit avoir un (2) an ou plus !", 350, 200, "Information", null);
                 radBirthDate.SelectedDate = null;
             }
         }
@@ -555,7 +615,7 @@ public partial class RegisterStudents : System.Web.UI.Page
             try
             {
                 ClassRoom _classroom = new ClassRoom();
-                _classroom.class_id = int.Parse(ddlClassroom.SelectedValue);
+                _classroom.classroom_id = int.Parse(ddlClassroom.SelectedValue);
                 _classroom.vacation_type = ddlVacation.SelectedValue;
             }
             catch (Exception ex)
@@ -583,13 +643,13 @@ public partial class RegisterStudents : System.Web.UI.Page
     {
         emptyFields();
 
-        if (Session["student_id"] != null)
-        {
-            Session.Remove("student_id");
-            Session["student_id"] = null;
-            //
-            Response.Redirect("SearchStudents.aspx");
-        }
+        //if (Session["student_id"] != null)
+        //{
+        //    Session.Remove("student_id");
+        //    Session["student_id"] = null;
+        //    //
+        //    Response.Redirect("SearchStudents.aspx");
+        //}
     }
 
 
@@ -597,7 +657,7 @@ public partial class RegisterStudents : System.Web.UI.Page
     {
         if (Session["list_documents_attach"] != null)
         {
-            listDocumentsAttach = Session["list_documents_attach"] as List<Documents>;
+            listDocumentsAttach = Session["list_documents_attach"] as List<StudentDocuments>;
         }
         gridAttachDocuments.DataSource = listDocumentsAttach;
     }
@@ -620,19 +680,18 @@ public partial class RegisterStudents : System.Web.UI.Page
 
     protected void btnAttachDocuments_ServerClick(object sender, EventArgs e)
     {
-        if (ddlDocumentCategory.SelectedValue == "-1")
+        if (ddlDocumentType.SelectedValue == "-1")
         {
             MessageAlert.RadAlert("Erreur : Veuillez selectionner la categorie du document", 300, 200, "Information", null, "../images/error.png");
         }
         else
         {
             //get new document path
-            String studentCode = null; // txtCode.Text.Trim().ToUpper();
-            string FolderStudents = Server.MapPath("~/Uploaded_Documents/" + studentCode);
+            string FolderStudents = Server.MapPath("~/student_uploaded_documents/");
 
             if (!Directory.Exists(FolderStudents))
             {
-                Directory.CreateDirectory(Server.MapPath("~/Uploaded_Documents/" + studentCode));
+                Directory.CreateDirectory(Server.MapPath("~/student_uploaded_documents/"));
             }
 
             if (!documentsAttachFile.HasFile) // check fileUpload control for files
@@ -650,7 +709,7 @@ public partial class RegisterStudents : System.Web.UI.Page
                 {
                     if (Session["list_documents_attach"] != null)
                     {
-                        listDocumentsAttach = Session["list_documents_attach"] as List<Documents>;
+                        listDocumentsAttach = Session["list_documents_attach"] as List<StudentDocuments>;
                     }
 
                     HttpPostedFile userPostedFile = documentsAttachFile.PostedFile;
@@ -658,20 +717,20 @@ public partial class RegisterStudents : System.Web.UI.Page
                     {
                         if (userPostedFile.ContentLength > 0)
                         {
-                            string fileName = DateTime.Now.ToString("ddMMyyyyHHmmss") + "_" + Path.GetFileName(userPostedFile.FileName);
-                            string filepath = "~/Uploaded_Documents/" + studentCode + "/" + fileName;
+                            string fileName = "st_" + DateTime.Now.ToString("ddMMyyyyHHmmss") + "_" + Path.GetFileName(userPostedFile.FileName);
+                            string filepath = "~/student_uploaded_documents/" + fileName;
                             userPostedFile.SaveAs(Server.MapPath(filepath)); //save file to folder
-                            Documents doc = new Documents();
-                            doc.staff_code = studentCode;
-                            doc.document_path = filepath;
-                            doc.document_name = ddlDocumentCategory.SelectedValue;
+                            StudentDocuments doc = new StudentDocuments();
+                            doc.document_name = fileName;
+                            doc.document_type_def = ddlDocumentType.SelectedItem.Text;
+                            doc.document_type_id = int.Parse(ddlDocumentType.SelectedValue);
                             doc.upload_time = DateTime.Now;
                             listDocumentsAttach.Add(doc);
                             Session["list_documents_attach"] = listDocumentsAttach;
                             // add to gridview
                             gridAttachDocuments.Rebind();
                             //
-                            ddlDocumentCategory.SelectedValue = "-1";
+                            ddlDocumentType.SelectedValue = "-1";
                         }
                     }
                     catch (Exception Ex)
@@ -694,10 +753,10 @@ public partial class RegisterStudents : System.Web.UI.Page
         //
         if (Session["list_documents_attach"] != null)
         {
-            listDocumentsAttach = Session["list_documents_attach"] as List<Documents>;
+            listDocumentsAttach = Session["list_documents_attach"] as List<StudentDocuments>;
         }
 
-        List<Documents> listTemp = new List<Documents>();
+        List<StudentDocuments> listTemp = new List<StudentDocuments>();
         //foreach (Documents doc in listDocumentsAttach)
         //{
         //    if (doc.rand_code != randCode)
@@ -706,7 +765,7 @@ public partial class RegisterStudents : System.Web.UI.Page
         //    }
         //}
         // udpate old list to temporary list
-        listDocumentsAttach = new List<Documents>();
+        listDocumentsAttach = new List<StudentDocuments>();
         listDocumentsAttach = listTemp;
         Session["list_documents_attach"] = listTemp;
         // refresh grid

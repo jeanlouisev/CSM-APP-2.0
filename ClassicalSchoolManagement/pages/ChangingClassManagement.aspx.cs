@@ -348,7 +348,7 @@ public partial class ChangingClassManagement : System.Web.UI.Page
                     HiddenField hiddenVacationCode = row.FindControl("hiddenVacationCode") as HiddenField;
                     HiddenField hiddenAcademicYear = row.FindControl("hiddenAcademicYear") as HiddenField;
                     //
-                    st.class_id = int.Parse(hiddenClassId.Value);
+                    st.classroom_id = int.Parse(hiddenClassId.Value);
                     st.final_result_status = int.Parse(hiddenResultStat.Value);
                     st.staff_code = row.Cells[3].Text;
                     st.vacation = hiddenVacationCode.Value;
@@ -400,44 +400,44 @@ public partial class ChangingClassManagement : System.Web.UI.Page
                 foreach (Student st in listStudentReportInfo)
                 {
                     #region start loop
-                    if (st.class_id == 1)
+                    if (st.classroom_id == 1)
                     {
                         listStudent_1ereAnneeKindergarden.Add(st);
                     }
-                    else if (st.class_id == 2)
+                    else if (st.classroom_id == 2)
                     {
                         listStudent_2iemeAnneeKindergarden.Add(st);
                     }
-                    else if (st.class_id == 3)
+                    else if (st.classroom_id == 3)
                     {
                         listStudent_3iemeAnneeKindergarden.Add(st);
                     }
-                    else if (st.class_id >= 10 && st.class_id <= 19)
+                    else if (st.classroom_id >= 10 && st.classroom_id <= 19)
                     {
                         listStudent_1ereAnneeFondamentale.Add(st);
                     }
-                    else if (st.class_id >= 20 && st.class_id <= 29)
+                    else if (st.classroom_id >= 20 && st.classroom_id <= 29)
                     {
                         listStudent_2iemeAnneeKindergarden.Add(st);
                     }
-                    else if (st.class_id >= 30 && st.class_id <= 39)
+                    else if (st.classroom_id >= 30 && st.classroom_id <= 39)
                     {
                         listStudent_3iemeAnneeFondamentale.Add(st);
                     }
-                    else if (st.class_id >= 40 && st.class_id <= 49)
+                    else if (st.classroom_id >= 40 && st.classroom_id <= 49)
                     {
                         listStudent_4iemeAnneeFondamentale.Add(st);
                     }
-                    else if (st.class_id >= 50 && st.class_id <= 59)
+                    else if (st.classroom_id >= 50 && st.classroom_id <= 59)
                     {
                         ClassRoom classR = new ClassRoom();
                         if (st.final_result_status <= 0)
                         {
-                            classR.class_id = st.class_id;
+                            classR.classroom_id = st.classroom_id;
                         }
                         else
                         {
-                            classR.class_id = st.class_id + 10;
+                            classR.classroom_id = st.classroom_id + 10;
                         }
                         //
                         classR.staffCode = st.staff_code;
@@ -447,35 +447,35 @@ public partial class ChangingClassManagement : System.Web.UI.Page
                         ClassRoom.disableStudentFromOldClassroom(classR.staffCode);
                         ClassRoom.changeClassroom(classR);
                     }
-                    else if (st.class_id >= 60 && st.class_id <= 69)
+                    else if (st.classroom_id >= 60 && st.classroom_id <= 69)
                     {
                         listStudent_6iemeAnneeFondamentale.Add(st);
                     }
-                    else if (st.class_id >= 70 && st.class_id <= 79)
+                    else if (st.classroom_id >= 70 && st.classroom_id <= 79)
                     {
                         listStudent_7iemeAnneeFondamentale.Add(st);
                     }
-                    else if (st.class_id >= 80 && st.class_id <= 89)
+                    else if (st.classroom_id >= 80 && st.classroom_id <= 89)
                     {
                         listStudent_8iemeAnneeFondamentale.Add(st);
                     }
-                    else if (st.class_id >= 90 && st.class_id <= 99)
+                    else if (st.classroom_id >= 90 && st.classroom_id <= 99)
                     {
                         listStudent_9iemeAnneeFondamentale.Add(st);
                     }
-                    else if (st.class_id >= 100 && st.class_id <= 109)
+                    else if (st.classroom_id >= 100 && st.classroom_id <= 109)
                     {
                         listStudent_3iemeSecondaire.Add(st);
                     }
-                    else if (st.class_id >= 110 && st.class_id <= 119)
+                    else if (st.classroom_id >= 110 && st.classroom_id <= 119)
                     {
                         listStudent_seconde.Add(st);
                     }
-                    else if (st.class_id >= 120 && st.class_id <= 129)
+                    else if (st.classroom_id >= 120 && st.classroom_id <= 129)
                     {
                         listStudent_retho.Add(st);
                     }
-                    else if (st.class_id >= 130 && st.class_id <= 139)
+                    else if (st.classroom_id >= 130 && st.classroom_id <= 139)
                     {
                         listStudent_philo.Add(st);
                     }

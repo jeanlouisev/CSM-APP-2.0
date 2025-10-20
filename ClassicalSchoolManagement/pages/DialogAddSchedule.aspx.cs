@@ -49,7 +49,7 @@ public partial class DialogAddSchedule : System.Web.UI.Page
     private void LoadClassroomPreviousInfo()
     {
         ClassRoom c = Session["classroom_obj"] as ClassRoom;
-        this.Title = "Horaire de la classe : " + c.class_name;
+        this.Title = "Horaire de la classe : " + c.classroom_name;
         hiddenClassId.Value = c.id.ToString();
         ddlVacation.SelectedValue = c.vacation;
 

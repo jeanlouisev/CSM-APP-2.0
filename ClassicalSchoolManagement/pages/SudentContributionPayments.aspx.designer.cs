@@ -9,7 +9,7 @@
 
 
 
-public partial class SearchStudents
+public partial class SudentContributionPayments
 {
 
     /// <summary>
@@ -49,112 +49,13 @@ public partial class SearchStudents
     protected global::Telerik.Web.UI.RadAjaxLoadingPanel RadAjaxLoadingPanel1;
 
     /// <summary>
-    /// lblFirstName control.
+    /// txtStudentId control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblFirstName;
-
-    /// <summary>
-    /// txtCode control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::Telerik.Web.UI.RadTextBox txtCode;
-
-    /// <summary>
-    /// Label5 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Label Label5;
-
-    /// <summary>
-    /// txtFullName control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::Telerik.Web.UI.RadTextBox txtFullName;
-
-    /// <summary>
-    /// Label6 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Label Label6;
-
-    /// <summary>
-    /// ddlSex control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::Telerik.Web.UI.RadDropDownList ddlSex;
-
-    /// <summary>
-    /// Label8 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Label Label8;
-
-    /// <summary>
-    /// ddlClassroom control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::Telerik.Web.UI.RadDropDownList ddlClassroom;
-
-    /// <summary>
-    /// Label9 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Label Label9;
-
-    /// <summary>
-    /// ddlVacation control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::Telerik.Web.UI.RadDropDownList ddlVacation;
-
-    /// <summary>
-    /// Label11 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Label Label11;
-
-    /// <summary>
-    /// ddlAcademicYear control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::Telerik.Web.UI.RadDropDownList ddlAcademicYear;
+    protected global::Telerik.Web.UI.RadTextBox txtStudentId;
 
     /// <summary>
     /// btnSearch control.
@@ -166,29 +67,110 @@ public partial class SearchStudents
     protected global::System.Web.UI.HtmlControls.HtmlButton btnSearch;
 
     /// <summary>
-    /// btnExportExcel control.
+    /// txtFullname control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.HtmlControls.HtmlButton btnExportExcel;
+    protected global::Telerik.Web.UI.RadTextBox txtFullname;
 
     /// <summary>
-    /// divGridStudent control.
+    /// txtClassroomName control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.HtmlControls.HtmlGenericControl divGridStudent;
+    protected global::Telerik.Web.UI.RadTextBox txtClassroomName;
 
     /// <summary>
-    /// gridStudent control.
+    /// txtVacation control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::Telerik.Web.UI.RadGrid gridStudent;
+    protected global::Telerik.Web.UI.RadTextBox txtVacation;
+
+    /// <summary>
+    /// txtAcademicYear control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::Telerik.Web.UI.RadTextBox txtAcademicYear;
+
+    /// <summary>
+    /// btnCancel control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.HtmlControls.HtmlButton btnCancel;
+
+    /// <summary>
+    /// hiddenStudentId control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.HiddenField hiddenStudentId;
+
+    /// <summary>
+    /// hiddenClassroomId control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.HiddenField hiddenClassroomId;
+
+    /// <summary>
+    /// hiddentAccYearId control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.HiddenField hiddentAccYearId;
+
+    /// <summary>
+    /// ddlContributionType control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::Telerik.Web.UI.RadDropDownList ddlContributionType;
+
+    /// <summary>
+    /// txtContributionAmount control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::Telerik.Web.UI.RadNumericTextBox txtContributionAmount;
+
+    /// <summary>
+    /// btnPay control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.HtmlControls.HtmlButton btnPay;
+
+    /// <summary>
+    /// gridContributionPayment control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::Telerik.Web.UI.RadGrid gridContributionPayment;
 }

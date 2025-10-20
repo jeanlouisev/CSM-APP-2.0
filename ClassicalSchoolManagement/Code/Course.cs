@@ -17,8 +17,8 @@ public class Course
     public double amount { get; set; }
     public string teacher_id { get; set; }
     public string teacher_fullname { get; set; }
-    public int class_id { get; set; }
-    public string class_name { get; set; }
+    public int classroom_id { get; set; }
+    public string classroom_name { get; set; }
     public int cours_id { get; set; }
     public string cours_name { get; set; }
     public int cours_id_price { get; set; }
@@ -64,9 +64,9 @@ public class Course
                         try { course.teacher_id = reader.GetValue(i).ToString(); }
                         catch { }
                     }
-                    if (reader.GetName(i).ToUpper() == "CLASS_ID")
+                    if (reader.GetName(i).ToUpper() == "CLASSROOM_ID")
                     {
-                        try { course.class_id = int.Parse(reader.GetValue(i).ToString()); }
+                        try { course.classroom_id = int.Parse(reader.GetValue(i).ToString()); }
                         catch { }
                     }
                     if (reader.GetName(i).ToUpper() == "COURS_ID")
@@ -114,9 +114,9 @@ public class Course
                         try { course.academic_year_concat = reader.GetValue(i).ToString(); }
                         catch { }
                     }
-                    if (reader.GetName(i).ToUpper() == "CLASS_NAME")
+                    if (reader.GetName(i).ToUpper() == "CLASSROOM_NAME")
                     {
-                        try { course.class_name = reader.GetValue(i).ToString(); }
+                        try { course.classroom_name = reader.GetValue(i).ToString(); }
                         catch { }
                     }
                     if (reader.GetName(i).ToUpper() == "COURSE_FULLNAME")
@@ -197,7 +197,7 @@ public class Course
         {
             SqlStatement stmt = SqlStatement.FromString(sql, SqlConnString.CSM_APP);
             stmt.SetParameters(c.teacher_id,
-                                c.class_id,
+                                c.classroom_id,
                                 c.cours_id,
                                 c.cours_id_price,
                                 c.vacation_code);
@@ -259,8 +259,8 @@ public class Course
 
             foreach (Course c in listCourseInfo)
             {
-                string sql = @"INSERT INTO classroom_cours_management(
-                                        class_id,
+                string sql = @"INSERT INTO classroom_cours_attach(
+                                        classroom_id,
                                         cours_id,
                                         coefficient)
                                  VALUES(?,?,?)";
@@ -268,7 +268,7 @@ public class Course
                 try
                 {
                     SqlStatement stmt = SqlStatement.FromString(sql, SqlConnString.CSM_APP);
-                    stmt.SetParameters(c.class_id, c.cours_id, c.coefficient);
+                    stmt.SetParameters(c.classroom_id, c.cours_id, c.coefficient);
                     stmt.ExecuteNonQuery();
                 }
                 catch (Exception ex)
@@ -413,11 +413,11 @@ public class Course
         {
             foreach (Course c in listCourseInfo)
             {
-                string sql = @"delete from classroom_cours_management 
-                                    WHERE class_id = ? and cours_id = ?";
+                string sql = @"delete from classroom_cours_attach 
+                                    WHERE classroom_id = ? and cours_id = ?";
 
                 SqlStatement stmt = SqlStatement.FromString(sql, SqlConnString.CSM_APP);
-                stmt.SetParameters(c.class_id, c.cours_id);
+                stmt.SetParameters(c.classroom_id, c.cours_id);
                 stmt.ExecuteNonQuery();
             }
         }
@@ -425,7 +425,7 @@ public class Course
 
     public static void removeAffectedCourseById(int id)
     {
-        string sql = @"delete from classroom_cours_management where id = ?";
+        string sql = @"delete from classroom_cours_attach where id = ?";
 
         try
         {
@@ -489,11 +489,12 @@ public class Course
 
     public static List<Course> getListAffectedCoursePrice(int classId)
     {
-        string sql = @"select ccm.*,c.name as class_name, co.name as cours_name, chp.amount
-                        from classroom_cours_management ccm
-                        inner join classroom c on c.id = ccm.class_id
+        string sql = @"select ccm.*,c.name as classroom_name, 
+                          co.name as cours_name, chp.amount
+                        from classroom_cours_attach ccm
+                        inner join classroom c on c.id = ccm.classroom_id
                         inner join cours co on co.id = ccm.cours_id
-						left join classroom_hourly_payment chp on chp.class_id = c.id and chp.cours_id = co.id
+						left join classroom_hourly_payment chp on chp.classroom_id = c.id and chp.cours_id = co.id
                         where 1=1
 							and c.id = ?
 							order by co.name";
@@ -514,7 +515,7 @@ public class Course
         string sql = @"SELECT a.*, b.name as cours_name
                             FROM classroom_cours_management a
 							inner join cours b on b.id = a.cours_id
-                            where a.class_id = ?
+                            where a.classroom_id = ?
                             order by b.name asc";
         try
         {
@@ -532,7 +533,7 @@ public class Course
     {
         string sql = @"select a.*, (select b.name from cours b where b.Id = a.cours_id) as course_fullname
                             from `schedule` a
-                            where a.class_id = ?
+                            where a.classroom_id = ?
                             and a.vacation = ?
                             and a.academic_year = ?";
         try
@@ -663,7 +664,7 @@ public class Course
         try
         {
             SqlStatement stmt = SqlStatement.FromString(sql, SqlConnString.CSM_APP);
-            stmt.SetParameters(c.vacation_code, c.class_id, c.academic_year);
+            stmt.SetParameters(c.vacation_code, c.classroom_id, c.academic_year);
             return Parse(stmt.ExecuteReader());
         }
         catch (Exception ex)
@@ -836,9 +837,9 @@ public class Course
                             and c.classroom_id = b.Id_Class
                             and c.vacation_status = 1";
 
-        if (c.class_id != 0)
+        if (c.classroom_id != 0)
         {
-            sql += @" and c.classroom_id = " + c.class_id + " ";
+            sql += @" and c.classroom_id = " + c.classroom_id + " ";
         }
 
         sql += @" group by a.id,a.name";
@@ -866,7 +867,7 @@ public class Course
         try
         {
             SqlStatement stmt = SqlStatement.FromString(sql, SqlConnString.CSM_APP);
-            stmt.SetParameters(c.class_id, c.academic_year, c.vacation_code);
+            stmt.SetParameters(c.classroom_id, c.academic_year, c.vacation_code);
             return Parse(stmt.ExecuteReader());
         }
         catch (Exception ex)
@@ -1048,7 +1049,7 @@ public class Course
         string sql = @"select c.name as cours_name, ccm.coefficient
                         from cours c 
                         inner join classroom_cours_management ccm on ccm.cours_id = c.Id
-                        where ccm.class_id = ?
+                        where ccm.classroom_id = ?
                         order by c.name";
 
         try

@@ -9,9 +9,9 @@
 
 
 
-<%--<asp:Content ID="titleContent" ContentPlaceHolderID="TitleContentPlaceHolder" runat="Server">
+<asp:Content ID="titleContent" ContentPlaceHolderID="TitleContentPlaceHolder" runat="Server">
     Acceuil
-</asp:Content>--%>
+</asp:Content>
 
 <%--<asp:Content ID="HeaderContent" ContentPlaceHolderID="HeaderContentPlaceHolder" runat="Server">
     <art:DefaultHeader ID="DefaultHeader" runat="server" />

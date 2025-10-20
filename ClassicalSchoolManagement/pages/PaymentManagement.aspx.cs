@@ -233,7 +233,7 @@ public partial class PaymentManagement : System.Web.UI.Page
                     //Fill the form 
                     ddlType.Enabled = true;
                     txtStudentFullname.Text = listStudent[0].last_name.ToUpper() + " " + listStudent[0].first_name.ToUpper();
-                    int classroom_id = listStudent[0].class_id;
+                    int classroom_id = listStudent[0].classroom_id;
                     int academic_year_id = listStudent[0].academic_year;
                     Session["id_classe"] = classroom_id;
                     Session["academic_year_id"] = academic_year_id;
@@ -247,7 +247,7 @@ public partial class PaymentManagement : System.Web.UI.Page
                     txtVacation.Text = listStudent[0].vacation.ToUpper();
                     txtStatus.Text = listStudent[0].status == 1 ? "ACTIVE" : "DESACTIVE";
                     txtSexe.Text = listStudent[0].sex.ToUpper();
-                    string vacation_id = listStudent[0].vacation_code;
+                    string vacation_id = listStudent[0].vacation;
                     string payment_type = ddlType.SelectedValue;
                 }
                 else

@@ -214,7 +214,7 @@ public partial class AddPersonal : System.Web.UI.Page
 
 
             // documents
-            Session["list_documents_attach"] = Documents.getListDocumentsByStaffCode(staffCode);
+            Session["list_documents_attach"] = StaffDocuments.getListDocumentsByStaffCode(staffCode);
             gridAttachDocuments.Rebind();
             //pnlDocuments.Visible = true;
 
@@ -323,7 +323,11 @@ public partial class AddPersonal : System.Web.UI.Page
                     if (Session["list_documents_attach"] != null)
                     {
                         listDocumentsAttach = Session["list_documents_attach"] as List<StaffDocuments>;
+<<<<<<< HEAD
                         //StaffDocuments.uploadSudentDocuments(listDocumentsAttach,code_staff);
+=======
+                        StaffDocuments.uploadStaffDocuments(listDocumentsAttach, st.id);
+>>>>>>> b02b50ee24732fd29850475ab5d1a2de5a61cf91
                     }
                     // clear fields
                     emptyFields();
@@ -357,12 +361,22 @@ public partial class AddPersonal : System.Web.UI.Page
     private void loadDocumentTypes()
     {
         List<StaffDocuments> listResult = StaffDocuments.getListDocumentType();
+<<<<<<< HEAD
         ddlDocumentType.DataValueField = "id";
         ddlDocumentType.DataTextField = "description";
         ddlDocumentType.DataSource = listResult;
         ddlDocumentType.DataBind();
         ddlDocumentType.Items.Insert(0, new DropDownListItem("--Sélectionner--", "-1"));
         ddlDocumentType.SelectedValue = "-1";
+=======
+        ddlDocumentCategory.DataValueField = "description";
+        ddlDocumentCategory.DataTextField = "description";
+        ddlDocumentCategory.DataSource = listResult;
+        ddlDocumentCategory.DataBind();
+        //
+        ddlDocumentCategory.Items.Insert(0, new DropDownListItem("--Sélectionner--", "-1"));
+        ddlDocumentCategory.SelectedValue = "-1";
+>>>>>>> b02b50ee24732fd29850475ab5d1a2de5a61cf91
     }
 
 
@@ -409,10 +423,15 @@ public partial class AddPersonal : System.Web.UI.Page
                             string filepath = "~/staff_uploaded_documents/" + fileName;
                             userPostedFile.SaveAs(Server.MapPath(filepath)); //save file to folder
                             StaffDocuments doc = new StaffDocuments();
+<<<<<<< HEAD
 
                             doc.document_name = fileName;
                             doc.document_type_def = ddlDocumentType.SelectedItem.Text;
                             doc.document_type_id = int.Parse(ddlDocumentType.SelectedValue);
+=======
+                            doc.staff_id = _code;
+                            doc.document_name = ddlDocumentCategory.SelectedValue;
+>>>>>>> b02b50ee24732fd29850475ab5d1a2de5a61cf91
                             doc.upload_time = DateTime.Now;
                             listDocumentsAttach.Add(doc);
                             Session["list_documents_attach"] = listDocumentsAttach;

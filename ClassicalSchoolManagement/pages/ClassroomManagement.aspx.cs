@@ -43,42 +43,12 @@ public partial class ClassroomManagement : System.Web.UI.Page
         }
         else
         {
-            //// VERIFY USER ACCESS LEVEL
-            //List<Users> listResult = Users.getListUserAccessLevel(user.role_id, menu_code);
-            //if (listResult != null && listResult.Count > 0)
-            //{
-            //    Users userAccess = listResult[0];
-            //    int notGranted = (int)Users.ACCESS.NO;
-
-            //    radGridClassroom.Rebind();
-
-            //    // edit
-            //    if (userAccess.edit_access == notGranted)
-            //    {
-            //        disableEditOption();
-            //    }
-
-            //    // delete
-            //    if (userAccess.delete_access == notGranted)
-            //    {
-            //        disableDeleteOption();
-            //    }
-            //}
-            //else
-            //{
-            //    Response.Redirect("~/Pages/NoPrivilegeWarningPage.aspx");
-            //}
+            verifyAccessLevel();
         }
 
 
         if (!Page.IsPostBack)
         {
-            if (Session["user"] == null)
-            {
-                Response.Redirect("~/Error.aspx");
-            }
-            else
-            {
                 // SHOW ITEMS
                 //pnlSearchClassroom.Visible = true;
                 //pnlClassroomConfiguration.Visible = true;
@@ -90,8 +60,36 @@ public partial class ClassroomManagement : System.Web.UI.Page
                 loadListAcademicYear(ddlAcademicYear);
                 // load all classrooms
                 //  BindDataGridClass();
+        }
+    }
+
+
+    private void verifyAccessLevel()
+    {
+        Users user = Session["user"] as Users;
+
+        // VERIFY USER ACCESS LEVEL
+        List<Users> listResult = Users.getListUserAccessLevel(user.role_id, menu_code);
+        if (listResult != null && listResult.Count > 0)
+        {
+            Users userAccess = listResult[0];
+            int notGranted = (int)Users.ACCESS.NO;
+
+            // edit
+            if (userAccess.edit_access == notGranted)
+            {
+                disableEditOption();
             }
 
+            // delete
+            if (userAccess.delete_access == notGranted)
+            {
+                disableDeleteOption();
+            }
+        }
+        else
+        {
+            Response.Redirect("~/Pages/NoPrivilegeWarningPage.aspx");
         }
     }
 
@@ -321,8 +319,9 @@ public partial class ClassroomManagement : System.Web.UI.Page
         {
             int classId = int.Parse(ddlClassroom.SelectedValue);
             int currentStatus = int.Parse(ddlClassroomCurrentStatus.SelectedValue);
+            int accYearId = int.Parse(ddlAcademicYear.SelectedValue);
             //
-            List<ClassRoom> listResult = ClassRoom.getListClassroom(classId, currentStatus);
+            List<ClassRoom> listResult = ClassRoom.getListClassroom(classId, currentStatus, accYearId);
             radGridClassroom.DataSource = listResult;
         }
         catch (Exception ex)
@@ -521,7 +520,7 @@ public partial class ClassroomManagement : System.Web.UI.Page
             // load active classroom
             loadClassroomListForPrice();
 
-            HiddenField hiddenClassName = (HiddenField)dataItem.FindControl("hiddenClassroomName");
+            HiddenField hiddenClassroomName = (HiddenField)dataItem.FindControl("hiddenClassroomName");
             HiddenField hiddenStatus = (HiddenField)dataItem.FindControl("hiddenStatus");
             //
             int classId = int.Parse(dataItem.GetDataKeyValue("id").ToString());
@@ -594,13 +593,13 @@ public partial class ClassroomManagement : System.Web.UI.Page
                     listCourseInfo = new List<Course>();
                     foreach (GridDataItem item in radGridAffectedCourse.Items)
                     {
-                        HiddenField hiddenClassId = (HiddenField)item.FindControl("hiddenClassId");
+                        HiddenField hiddenClassRoomId = (HiddenField)item.FindControl("hiddenClassRoomId");
                         HiddenField hiddenCourseId = (HiddenField)item.FindControl("hiddenCourseId");
                         RadNumericTextBox txtCoefficient = (RadNumericTextBox)item.FindControl("txtCoefficient");
                         //RadNumericTextBox txtPricePerHour = (RadNumericTextBox)item.FindControl("txtPricePerHour");
                         //
                         Course c = new Course();
-                        c.class_id = int.Parse(hiddenClassId.Value);
+                        c.classroom_id = int.Parse(hiddenClassRoomId.Value);
                         c.cours_id = int.Parse(hiddenCourseId.Value);
                         c.coefficient = int.Parse(txtCoefficient.Value.ToString());
                         //c.course_price = double.Parse(txtPricePerHour.Value.ToString());
@@ -621,7 +620,7 @@ public partial class ClassroomManagement : System.Web.UI.Page
                         Course c = new Course();
                         if (item.Checked)
                         {
-                            c.class_id = int.Parse(ddlClassroomPrice.SelectedValue);
+                            c.classroom_id = int.Parse(ddlClassroomPrice.SelectedValue);
                             c.cours_id = int.Parse(item.Value);
                             c.coefficient = 0;
                             c.amount = 0;
@@ -663,6 +662,7 @@ public partial class ClassroomManagement : System.Web.UI.Page
             int classId = int.Parse(ddlClassroomPrice.SelectedValue);
             listResult = Course.getListAffectedCoursePrice(classId);
         }
+
         radGridAffectedCourse.DataSource = listResult;
 
 

@@ -56,7 +56,7 @@
                     <div class="form">
                         <asp:ScriptManager runat="server"></asp:ScriptManager>
                         <div class="col-xs-12">
-                            <%--<img src="../images/logos/csm_logo.png" class="img-responsive img-circle imgCenter" />--%>
+                            <img src="../images/logos/csm_logo.png" class="img-responsive img-circle imgCenter" />
                         </div>
                         <div class="form-group">
                             <div class="input-group">
